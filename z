@@ -1,0 +1,440 @@
+[33mcommit cc7e40bebe3293e1102867867952b3024fabb211[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m)[m
+Author: Eduar <83920925+eduarchilon@users.noreply.github.com>
+Date:   Sun May 22 19:53:20 2022 -0300
+
+    feat/controller
+
+[33mcommit 5a3ac6b7afce705317f0a1a3186a40ba03459ce3[m[33m ([m[1;31morigin/dev[m[33m, [m[1;31morigin/S01F03[m[33m, [m[1;31morigin/S01F02[m[33m, [m[1;31morigin/S01F01[m[33m, [m[1;32mS01F03[m[33m, [m[1;32mS01F02[m[33m, [m[1;32mS01F01[m[33m)[m
+Author: Eduar <83920925+eduarchilon@users.noreply.github.com>
+Date:   Sat May 21 20:44:08 2022 -0300
+
+    feat/clases plato y cliente
+
+[33mcommit b44d4b0a29a4e0732703010c8188fe090450b8db[m
+Author: Eduar <83920925+eduarchilon@users.noreply.github.com>
+Date:   Sun May 15 22:03:18 2022 -0300
+
+    Inicio controlador plato
+
+[33mcommit 5cadfdcb633a86802762b5d780fcab9c6829f94b[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Sep 2 21:09:10 2021 -0300
+
+    Agrega controlador registrarme
+
+[33mcommit 3cfeaf52cfa2d918412aca05c08a72e9998510e1[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Sep 2 19:19:35 2021 -0300
+
+    agrega mails para notificacion de builds
+
+[33mcommit b37d3110b94366a4da02ead88d026e71e82ed531[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Sep 2 19:16:53 2021 -0300
+
+    agrega mails para notificacion de builds
+
+[33mcommit 2cf2209d9d11738dfccabe902124e971f57d13e1[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Sep 2 19:15:28 2021 -0300
+
+    arregla el build
+
+[33mcommit 6fa403c5710ad4cdbbd51f5664139d9836111258[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Sep 2 19:09:08 2021 -0300
+
+    rompe el build a proposito
+
+[33mcommit d53e1d24b28a008fcbf9bea7485bf117797bf33a[m
+Merge: 54ddec9 a7f2458
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Fri Aug 27 10:08:29 2021 -0300
+
+    Merge branch 'dependabot/maven/classes/artifacts/proyecto_limpio_spring_jar/META-INF/maven/com.sun.istack/istack-commons-runtime/junit-junit-4.13.1'
+
+[33mcommit a7f24581e180a9162881f445e62ef7e2167d9b1a[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Fri Aug 27 10:06:52 2021 -0300
+
+    mm
+
+[33mcommit 54ddec99afb98fb6e968a8a02d09ed2f1d0dbbd6[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Aug 26 20:24:57 2021 -0300
+
+    cambio para que se dispare el build
+
+[33mcommit 78597cd7dcfe1e5edb81f5356e43459fd4d59008[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Aug 26 10:21:27 2021 -0300
+
+    agrega los archivos ocultos de mac al ignore
+
+[33mcommit b5a005071d0e3fc2d58c0f40e4c2921c05d48b3e[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Fri May 28 15:06:52 2021 -0300
+
+    cambia a java 11
+
+[33mcommit a0a6ec2d33161dee8e70bcfafd5824e1c25ad196[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Fri May 28 14:40:29 2021 -0300
+
+    cambia bo por dto
+
+[33mcommit 7d840bf8667ebf810db31ae7057caa367537bdf9[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Fri May 28 14:40:12 2021 -0300
+
+    cambia bo por dto
+
+[33mcommit c9a94f4e25f5140fe0c48ea97283ff01a8c91d89[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Fri May 28 14:26:54 2021 -0300
+
+    mejora comments
+
+[33mcommit a586c2d1b133fada3035a03cf380f4c3364a65ca[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Fri May 28 14:24:30 2021 -0300
+
+    cambia a java 11
+
+[33mcommit 6819b36a67350724869c1db143e0bf77d437a4ab[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Fri May 28 14:23:36 2021 -0300
+
+    alimina acentos
+
+[33mcommit dc9ea871f835e3db97980a2265741cf2897542fd[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Apr 15 19:16:18 2021 -0300
+
+    agrega el hibernate context
+
+[33mcommit ba5f59fc44093c059447fb60eeaf6363910c289b[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Apr 15 19:13:48 2021 -0300
+
+    elimina el hibernate context
+
+[33mcommit b5f1457f635036043420c12ff7c3a9d9d841d812[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Apr 15 19:11:58 2021 -0300
+
+    ejemplito de tdd
+
+[33mcommit ef3fd0d56cd93e5cc2fa84a15390d666085183d0[m
+Author: Sebastian Ismael <sebastian.ismael@etermax.com>
+Date:   Thu Apr 8 11:33:29 2021 -0300
+
+    elimina cosas que no tienen que estar pusheadas
+
+[33mcommit 3f27756ae6f432983cf0815cd212f9e5cac9d883[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Tue Oct 13 21:27:22 2020 +0000
+
+    Bump junit
+    
+    Bumps [junit](https://github.com/junit-team/junit4) from 3.8.2 to 4.13.1.
+    - [Release notes](https://github.com/junit-team/junit4/releases)
+    - [Changelog](https://github.com/junit-team/junit4/blob/main/doc/ReleaseNotes4.13.1.md)
+    - [Commits](https://github.com/junit-team/junit4/compare/r3.8.2...r4.13.1)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 24ce009efe581b0284abb7246d758dc34376445c[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Thu Apr 23 20:27:05 2020 -0300
+
+    arregla el build
+
+[33mcommit 906d35303a3bad5e201a8750495a7f44fd4b5386[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Thu Apr 23 20:22:43 2020 -0300
+
+    rompo el build a ṕroposito
+
+[33mcommit b0208320d2a51775d692b52b3c321ebaaae575c4[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Thu Apr 23 20:20:22 2020 -0300
+
+    prueba de travis
+
+[33mcommit 233b1ee8fe9391a9f74ab693f46b1c2d33cd303a[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Sun Dec 22 20:48:13 2019 -0300
+
+    pasa a inyeccion de dependencias por constructor
+
+[33mcommit 2f2454cb602f790274187256c2c3c7592b7a602c[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Sun Dec 22 20:34:26 2019 -0300
+
+    cambia de dao a repositorio
+
+[33mcommit 1bb23c24506a24cdc3566adba5b3dc1d0615bfc9[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Fri Jul 19 15:14:20 2019 -0300
+
+    actualiza dependencias para mysql y agrega un test
+
+[33mcommit 8a7bf8ec7402549984aea0daebc637907b502a2b[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Fri Jul 19 13:55:49 2019 -0300
+
+    agrega travis
+
+[33mcommit 67093e056057cafd0f6698ae359c8072ee46387a[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Fri Jul 19 13:52:30 2019 -0300
+
+    update dependencies
+
+[33mcommit 1615aa6a5b97e4d184753f6d17c150dda97a0e85[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Fri Jul 19 13:44:06 2019 -0300
+
+    limpia archivos que nodeberian estar en el proyecto
+
+[33mcommit a810304372f2a8f8ca91c266894e241fd4a95cd6[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Thu Aug 17 14:22:30 2017 -0300
+
+    Actualiza contexto de hibernate
+
+[33mcommit dca5935b38f697d9e88aae175471327066633b8c[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Thu Jun 22 18:58:02 2017 -0300
+
+    Agrega manejo de sesion para cuando demos mocking
+
+[33mcommit 15d0683925012f456bb2ff08b90381e3a64dd5c9[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 13:43:05 2017 -0300
+
+    cambia e datasource a mysql!
+
+[33mcommit 839d3aa28b4914eb0f3a15c60824a165981e319d[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 13:42:44 2017 -0300
+
+    cambia e datasource a mysql!
+
+[33mcommit e06a36d4d5c4149d42aed8d8329cbf8b64694d33[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 13:41:58 2017 -0300
+
+    COrrige el model attribute
+
+[33mcommit 57f8c40a797ab7e62ca0e9d04fec3bf01315180b[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 13:18:12 2017 -0300
+
+    Agrega al gitignore
+
+[33mcommit 740dbc1161c71284a4a20b57f56ef46774e6a33c[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 13:16:50 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit 26c06cba94e9eade92c86fa3573341b81b09c5cb[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 11:46:47 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit ada16b19d98a9493b17bf22b77f4dffd4eb0d3b4[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 11:39:15 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit 710b2c819a416031929e8e3c15579919a044c899[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 11:30:37 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit 5340d273f959efc8925c7c2e14b82f54574765a5[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 11:27:59 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit 8e417381d699fe2070aa457c81549f501f89dd8f[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 10:49:44 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit 2d601f87d6ae4a9bb7ca6e641c934cf0d1204ee1[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 10:30:06 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit af81bc154360a7d8251a8fbaa39ab28d1f99f2d0[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 09:30:55 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit c0d44d6beb86550fefe73f7ba88564964e5c4280[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 09:30:26 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit 2b3fa9af2755ea8fb8baddd80aea90ffbfc0e8a5[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 09:29:37 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit 332cd86fe721bcb0269a59540331642812d16af4[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 09:26:50 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit 5d2dfd9e1dc81ee82996c164665685c9b77b11ae[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 09:26:20 2017 -0300
+
+    Comenta todo el codigo
+
+[33mcommit e0a7f2ca7dad9eb4559350dd84e7a0b7dee68703[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 09:15:52 2017 -0300
+
+    Alimina lineas no usadas
+
+[33mcommit 8481770a1c0e1c3f61973629ba0b07059735075c[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 09:14:47 2017 -0300
+
+    Cambia la anotacion del dao a repository
+
+[33mcommit 7994a5416a27a5971b2798298f8857bafbfdc8c2[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 09:12:54 2017 -0300
+
+    Agrega files de intellij
+
+[33mcommit 5cd9702425e4ecb8ef207f11ca074ed53dfdc7e5[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Mon Jun 19 09:12:25 2017 -0300
+
+    Agrega files de intellij
+
+[33mcommit 5ad06b5fae61dcfb4405cb2a37361136d9ad3a17[m
+Author: aborgeat <andresborgeat@hotmail.com>
+Date:   Wed Feb 8 15:49:40 2017 -0300
+
+    Version para distribuir como proyecto inicial de taller web 1
+
+[33mcommit 4ee6d39ac1b60e9a329d495f583b4e7e01d48abd[m
+Author: aborgeat <andresborgeat@hotmail.com>
+Date:   Wed Feb 8 14:55:36 2017 -0300
+
+    Login completo
+
+[33mcommit ddd539899eb2a6acd021e7b9dac384d07cc59883[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Tue Feb 7 16:05:09 2017 -0300
+
+    code review
+
+[33mcommit e24d953d8e98a310f04edfa90d7719d94c514bab[m
+Author: aborgeat <andresborgeat@hotmail.com>
+Date:   Mon Feb 6 23:03:02 2017 -0300
+
+    login sin estilos
+
+[33mcommit 0d227c81015ff4cc85edb1ce516df8158ceeb08d[m
+Author: aborgeat <andresborgeat@hotmail.com>
+Date:   Fri Feb 3 11:05:39 2017 -0300
+
+    agregar usuario
+
+[33mcommit 5a994602cda2c412a82cf0f9d166520d0d56069d[m
+Merge: 0403d41 86c3935
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Fri Jan 20 10:55:47 2017 -0300
+
+    Agrega una anotacion que faltaba en un dao y mejora los nombres de algunas cosas
+
+[33mcommit 86c39350c97e37d468cd5198e3585b6bcc0ba420[m
+Author: aborgeat <andresborgeat@hotmail.com>
+Date:   Wed Jan 18 15:58:04 2017 -0300
+
+    prueba andres
+
+[33mcommit db4b800a02651f7c9f5588658f39135890d3f90d[m
+Author: aborgeat <andresborgeat@hotmail.com>
+Date:   Wed Jan 18 15:45:16 2017 -0300
+
+    registro de usuario
+
+[33mcommit 0403d4136b42f764d63d088f57506b5bc6faeb07[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Tue Dec 27 13:03:31 2016 -0300
+
+    Cambia el password de root
+
+[33mcommit 69f90f2b36946be566761866eca2751578114ba4[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Thu Dec 15 20:15:53 2016 -0300
+
+    pasa a mysql
+
+[33mcommit 25964dda921da67a38a29ed97ae28d657cc0cd0b[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Thu Dec 15 20:04:48 2016 -0300
+
+    agrega clases vacias
+
+[33mcommit e9a6d6b1c36108e9fee7483170e25bdbebb63499[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Thu Dec 15 20:01:13 2016 -0300
+
+    agrega clases vacias
+
+[33mcommit 49e7fd0305bc9ca2745244617af30f24f00d7d2c[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Thu Dec 15 19:47:09 2016 -0300
+
+    dummy
+
+[33mcommit bc7e1ba0c86823e0541b2de3bf286701fb94c3a3[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Thu Dec 15 19:43:31 2016 -0300
+
+    dummy
+
+[33mcommit fc4c05a844036ef5f1e9be9ed87782401363a9f2[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Thu Dec 15 19:42:54 2016 -0300
+
+    dummy
+
+[33mcommit a66cbc8678becd9ec297c652e18f81007f6d1ea0[m
+Author: Sebastian Ismael <sebastianismael@gmail.com>
+Date:   Thu Dec 15 19:42:31 2016 -0300
+
+    dummy
+
+[33mcommit 182c9e1f4159ef71ea1b88e68172306e44ba12d7[m
+Author: Sebastian Ismael <sebastian.ismael@grupoesfera.com.ar>
+Date:   Thu Dec 15 19:30:18 2016 -0300
+
+    commit inicial
+
+[33mcommit db5b5266f4313defd6fc899d0b405ea7443be88c[m
+Author: sebastianismael <sebastianismael@gmail.com>
+Date:   Thu Dec 15 19:06:14 2016 -0300
+
+    Initial commit
