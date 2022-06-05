@@ -10,6 +10,10 @@ public class Restaurante {
     @Column(name = "id_restaurante", nullable = false)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "id_localidad")
+    private Localidad localidad;
+
     @Column(name = "Nombre")
     private String nombre;
 
@@ -24,9 +28,6 @@ public class Restaurante {
 
     @Column(name = "Calificacion")
     private Integer calificacion;
-
-    @Column(name = "Localidad")
-    private String localidad;
 
 
     @Column(name = "Numero_de_mesas")
@@ -90,11 +91,4 @@ public class Restaurante {
         this.numeroDeMesas = numeroDeMesas;
     }
 
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
 }
