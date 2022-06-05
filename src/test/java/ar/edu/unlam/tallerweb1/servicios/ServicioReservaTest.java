@@ -31,9 +31,9 @@ public class ServicioReservaTest {
     }
 
     @Test
-    public void seCreaUnaReservaConUnPato(){
+    public void seCreaUnaReserva(){
         tengoEstaCantidadDePlatos(1);
-        Reserva reserva = new Reserva(new Cliente(),tengoEstaCantidadDePlatos(1),new Mesa());
+        Reserva reserva = new Reserva(new Cliente(),new Mesa());
         obtengoUnaReserva(reserva);
     }
 
