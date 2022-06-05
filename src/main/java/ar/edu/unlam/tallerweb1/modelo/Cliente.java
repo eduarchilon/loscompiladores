@@ -3,7 +3,7 @@ package ar.edu.unlam.tallerweb1.modelo;
 import javax.persistence.*;
 
 @Entity
-public class Cliente extends Usuario{
+public class Cliente{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +22,22 @@ public class Cliente extends Usuario{
     @Column(name = "Telefono")
     private String telefono;
 
-    @OneToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+    public Cliente(Long id, String nombre, String apellido, String dni, String telefono) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+    }
 
-    @Override
+    public Cliente(){
+
+    }
+
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -68,11 +74,4 @@ public class Cliente extends Usuario{
         this.telefono = telefono;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 }

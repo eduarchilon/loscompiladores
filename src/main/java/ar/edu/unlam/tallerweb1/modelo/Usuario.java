@@ -16,6 +16,11 @@ public class Usuario {
 	// para el resto de los atributo no se usan anotaciones entonces se usa el default de hibernate: la columna se llama igual que
 	// el atributo, la misma admite nulos, y el tipo de dato se deduce del tipo de dato de java.
 	private String email;
+
+	@ManyToOne
+	@JoinColumn(name = "id_localidad")
+	private Localidad localidad;
+
 	private String password;
 	private String rol;
 	private Boolean activo = false;

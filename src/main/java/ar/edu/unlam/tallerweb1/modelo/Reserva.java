@@ -18,9 +18,7 @@ public class Reserva {
     @OneToOne
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;
-    @OneToMany
-    @JoinColumn(name = "id_plato")
-    private List<Plato> listPlatos;
+
 
     private Date fecha;
 
@@ -28,9 +26,8 @@ public class Reserva {
 
     }
 
-    public Reserva(Cliente cliente, List<Plato> plato, Mesa mesa) {
+    public Reserva(Cliente cliente, Mesa mesa) {
         this.cliente = cliente;
-        this.listPlatos = plato;
         this.mesa = mesa;
     }
 
@@ -50,13 +47,6 @@ public class Reserva {
         this.cliente = cliente;
     }
 
-    public List<Plato> getListPlatos() {
-        return listPlatos;
-    }
-
-    public void setListPlatos(List<Plato> listPlatos) {
-        this.listPlatos = listPlatos;
-    }
 
     public Mesa getMesa() {
         return mesa;
