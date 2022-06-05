@@ -22,6 +22,9 @@ public class Cliente{
     @Column(name = "Telefono")
     private String telefono;
 
+    public Cliente() {
+    }
+
     public Cliente(Long id, String nombre, String apellido, String dni, String telefono) {
         this.id = id;
         this.nombre = nombre;
