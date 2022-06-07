@@ -26,10 +26,13 @@ public class ControladorRestaurante {
 
     private ServicioBusqueda servicioBusqueda;
 
+    private ClienteService clienteService;
+
 
     @Autowired
-    public ControladorRestaurante(ServicioBusqueda servicioBusqueda){
+    public ControladorRestaurante(ServicioBusqueda servicioBusqueda, ClienteService clienteService){
         this.servicioBusqueda = servicioBusqueda;
+        this.clienteService=clienteService;
     }
 
     @RequestMapping(path = "/carta-personalizada", method = RequestMethod.GET)
@@ -46,6 +49,14 @@ public class ControladorRestaurante {
         }
         modelo.put("platos", carta);
         return new ModelAndView("cartaPersonalizada", modelo);
+    }
+
+    @RequestMapping(path = "/ver-clientes", method = RequestMethod.GET)
+    public ModelAndView verClientes(){
+        ModelMap modelo = new ModelMap();
+        List<Cliente> clientes = clienteService.verClientes();
+        modelo.put("clientes", clientes);
+        return new ModelAndView("clientes", modelo);
     }
 
 }

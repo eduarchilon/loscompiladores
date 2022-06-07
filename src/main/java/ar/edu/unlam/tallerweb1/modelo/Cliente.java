@@ -33,10 +33,6 @@ public class Cliente{
         this.telefono = telefono;
     }
 
-    public Cliente(){
-
-    }
-
     public Long getId() {
         return id;
     }
