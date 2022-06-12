@@ -22,8 +22,8 @@ public class Cliente{
     @Column(name = "Telefono")
     private String telefono;
 
-    @ManyToOne
-    private Localidad localidad;
+    @Column(name = "Localidad")
+    private String localidad;
 
     public Cliente() {
     }

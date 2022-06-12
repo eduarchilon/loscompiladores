@@ -10,9 +10,6 @@ public class Restaurante {
     @Column(name = "id_restaurante", nullable = false)
     private Long id;
 
-    @ManyToOne
-//    @JoinColumn(name = "id_localidad")
-    private Localidad localidad;
 
     @Column(name = "Nombre")
     private String nombre;
@@ -33,6 +30,8 @@ public class Restaurante {
     @Column(name = "Numero_de_mesas")
     private Integer numeroDeMesas;
 
+    @Column(name = "Localidad")
+    private String localidad;
 
 
     public Long getId() {
