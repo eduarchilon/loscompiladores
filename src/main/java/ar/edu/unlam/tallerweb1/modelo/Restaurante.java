@@ -10,8 +10,6 @@ public class Restaurante {
     @Column(name = "id_restaurante", nullable = false)
     private Long id;
 
-    @Column(name = "Localidad")
-    private String localidad;
 
     @Column(name = "Nombre")
     private String nombre;
@@ -32,6 +30,8 @@ public class Restaurante {
     @Column(name = "Numero_de_mesas")
     private Integer numeroDeMesas;
 
+    @Column(name = "Localidad")
+    private String localidad;
 
 
     public Long getId() {
@@ -90,11 +90,4 @@ public class Restaurante {
         this.numeroDeMesas = numeroDeMesas;
     }
 
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
 }

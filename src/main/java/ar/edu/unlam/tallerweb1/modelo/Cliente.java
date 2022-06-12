@@ -22,6 +22,9 @@ public class Cliente{
     @Column(name = "Telefono")
     private String telefono;
 
+    @Column(name = "Localidad")
+    private String localidad;
+
     public Cliente() {
     }
 
@@ -32,8 +35,6 @@ public class Cliente{
         this.dni = dni;
         this.telefono = telefono;
     }
-
-
 
     public Long getId() {
         return id;

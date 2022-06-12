@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ClienteServiceImpl implements ClienteService{
@@ -28,6 +30,12 @@ public class ClienteServiceImpl implements ClienteService{
     public Usuario obtenerClientePorNombre(Cliente cliente) {
         Usuario buscado = repositorioCliente.buscarPorNombre(cliente.getNombre());
         return  buscado;
+    }
+
+    @Override
+    public List<Cliente> verClientes(){
+        List<Cliente> clientes = repositorioCliente.buscarCliente();
+        return clientes;
     }
 
 }
