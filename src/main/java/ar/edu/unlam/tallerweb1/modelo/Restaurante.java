@@ -11,7 +11,7 @@ public class Restaurante {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_localidad")
+//    @JoinColumn(name = "id_localidad")
     private Localidad localidad;
 
     @Column(name = "Nombre")

@@ -6,13 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>PLATOS</title>
 </head>
 <body>
-    <h1>TIPO DE PLATO:</h1>
-    <br>
-    <p>Soy ${tipo}</p>
+<c:forEach items="${plato}" var="plato">
+
+    <article class="card comida shadow">
+        <p>${plato.nombre}</p>
+    </article>
+</c:forEach>
+
+
+<h3>${cantidadPlatos}</h3>
 </body>
 </html>

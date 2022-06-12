@@ -13,13 +13,12 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
-
+<h1>Clientes</h1>
 
   <c:forEach items="${clientes}" var="cliente">
 
     <article class="card comida shadow">
-      <h1>${cliente.nombre}</h1>
+      <p>${cliente.nombre} ${cliente.apellido}</p>
     </article>
   </c:forEach>
   </body>

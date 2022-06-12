@@ -33,4 +33,6 @@ public class ControladorPlatos {
         return new ModelAndView("platos", modelo);
     }
 
+
+
 }
