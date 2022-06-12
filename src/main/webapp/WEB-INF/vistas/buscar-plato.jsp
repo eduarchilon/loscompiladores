@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div  style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <form:form action="buscarPlato" method="POST" modelAttribute="formBuscarPlato">
             <h3 class="form-busqueda-heading">Buscar Comida</h3>
             <hr class="colorgraph">
@@ -35,10 +36,14 @@
             </br><hr class="colorgraph"><br>
         </form:form>
 
-        <c:if test="${not empty error}">
+        <c:if test="${not empty pedido}">
+
+        </c:if>
+        </br><hr class="colorgraph"><br>
+            <c:if test="${not empty error}">
             <h4><span>${error}</span></h4>
             <br>
-        </c:if>
+            </c:if>
         <section>
             <c:if test="${empty formBuscarPlato.precio && not empty formBuscarPlato.nombrePlato && empty formBuscarPlato.localidadRestaurante}">
                 <form:form action="" method="POST">

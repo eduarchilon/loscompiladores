@@ -18,4 +18,14 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
+
+    public Pedido(Long id, List<Plato> listPlatos, Cliente cliente) {
+        this.id = id;
+        this.listPlatos = listPlatos;
+        this.cliente = cliente;
+    }
+
+    public Pedido() {
+
+    }
 }
