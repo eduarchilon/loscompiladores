@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +22,17 @@ public class Reserva {
     private Mesa mesa;
 
 
-    private Date fecha;
+
+    private LocalDateTime fecha;
 
     public Reserva() {
 
+    }
+
+    public Reserva(Cliente cliente, Mesa mesa,LocalDateTime fecha) {
+        this.cliente = cliente;
+        this.mesa = mesa;
+        this.fecha = fecha;
     }
 
     public Reserva(Cliente cliente, Mesa mesa) {
@@ -56,11 +65,11 @@ public class Reserva {
         this.mesa = mesa;
     }
 
-    public Date getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 

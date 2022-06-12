@@ -32,5 +32,31 @@ public class RepositorioReservaImpl implements RepositorioReserva {
                 .setMaxResults(2)
                 .list();
     }
+
+    @Override
+    public List<Reserva> buscarTodasLasReservas() {
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Reserva.class)
+                .list();
+    }
+
+    @Override
+    public List<Reserva> buscarUnaReservas() {
+        return null;
+        //plato.add(Restrictions.le("precio", precio))
+        //                .add(Restrictions.like("nombre", "%"+nombrePlato+"%"))
+        //                .add(Restrictions.eq("restaurante.localidad", localidadRestaurante))
+        //                .list();
+    }
+
+    @Override
+    public List<Reserva> buscarReservasCliente(Cliente cliente) {
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Reserva.class)
+                .add(Restrictions.eq("id_cliente", cliente))
+                .setMaxResults(1)
+                .list();
+    }
+
 }
 
