@@ -22,6 +22,9 @@ public class Cliente{
     @Column(name = "Telefono")
     private String telefono;
 
+    @ManyToOne
+    private Localidad localidad;
+
     public Cliente() {
     }
 
@@ -31,10 +34,6 @@ public class Cliente{
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
-    }
-
-    public Cliente(){
-
     }
 
     public Long getId() {

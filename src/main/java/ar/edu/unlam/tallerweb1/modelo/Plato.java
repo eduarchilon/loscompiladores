@@ -29,8 +29,8 @@ public class Plato {
     private Integer cantVentas;
 
     @ManyToOne
-    @JoinColumn(name = "id_restaurante")
     private Restaurante restaurante;
+
 
     public Plato(Long id, Enum TIPO_PLATO, String descripcion) {
         this.id = id;

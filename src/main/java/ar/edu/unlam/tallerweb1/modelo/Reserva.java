@@ -11,7 +11,7 @@ public class Reserva {
     @Column(name = "id_Reserva", nullable = false)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
@@ -21,6 +21,9 @@ public class Reserva {
 
 
     private Date fecha;
+
+    @ManyToMany
+    private List<Plato> plato;
 
     public Reserva() {
 

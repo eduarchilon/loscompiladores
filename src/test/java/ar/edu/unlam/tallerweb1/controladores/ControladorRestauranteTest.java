@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Plato;
+import ar.edu.unlam.tallerweb1.servicios.ClienteService;
 import ar.edu.unlam.tallerweb1.servicios.ServicioBusqueda;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,12 +18,13 @@ public class ControladorRestauranteTest {
     private static final String VISTA_CARTA = "cartaPersonalizada";
     private ControladorRestaurante controladorRestaurante;
     private ServicioBusqueda servicioBusqueda;
-
+    private ClienteService clienteService;
 
     @Before
     public void init(){
         servicioBusqueda = mock(ServicioBusqueda.class);
-        controladorRestaurante = new ControladorRestaurante(servicioBusqueda);
+        clienteService = mock(ClienteService.class);
+        controladorRestaurante = new ControladorRestaurante(servicioBusqueda, clienteService);
 
     }
 

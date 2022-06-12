@@ -11,11 +11,9 @@ public class Mesa {
     @Column(name = "id_mesa", nullable = false)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_restaurante")
     private Restaurante restaurante;
-
-    private Integer numero;
 
     private Integer capacidad;
 
@@ -37,14 +35,6 @@ public class Mesa {
 
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
     }
 
     public Integer getCapacidad() {
