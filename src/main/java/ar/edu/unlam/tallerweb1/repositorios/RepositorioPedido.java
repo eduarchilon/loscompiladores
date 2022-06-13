@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cliente;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
+import ar.edu.unlam.tallerweb1.modelo.Plato;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public interface RepositorioPedido {
 
     List<Pedido> buscarPedidosCliente(Cliente id);
 
-    
+    List<Pedido> verPedidos();
 
+    List<Plato> verPlatosDelPedido(Long pedido);
 }

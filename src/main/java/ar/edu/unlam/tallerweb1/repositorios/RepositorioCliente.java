@@ -17,7 +17,8 @@ public interface RepositorioCliente {
 
     Usuario buscarPorUsuario(Usuario usuarioCliente);
 
-    Usuario buscarPorNombre(String nombre);
 
     List<Cliente> buscarCliente();
+
+    Cliente buscarPorNombre(String nombre);
 }

@@ -12,7 +12,7 @@ public class Pedido {
     @Column(name = "id_Pedido", nullable = false)
     private Long id;
 
-    @OneToMany
+    @ManyToMany
     private List<Plato> listPlatos = new LinkedList<>();
 
     @ManyToOne

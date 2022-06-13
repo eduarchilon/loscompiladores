@@ -1,13 +1,11 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Cliente;
+import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCliente;
-import ar.edu.unlam.tallerweb1.servicios.ClienteService;
-import ar.edu.unlam.tallerweb1.servicios.PlatoService;
-import ar.edu.unlam.tallerweb1.servicios.ServicioBusqueda;
-import ar.edu.unlam.tallerweb1.servicios.ServicioReserva;
+import ar.edu.unlam.tallerweb1.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,6 +25,9 @@ public class ControladorRestaurante {
     private ServicioBusqueda servicioBusqueda;
 
     private ClienteService clienteService;
+
+    @Autowired
+    private PedidoService pedidoService;
 
 
     @Autowired
@@ -56,6 +57,24 @@ public class ControladorRestaurante {
         ModelMap modelo = new ModelMap();
         List<Cliente> clientes = clienteService.verClientes();
         modelo.put("clientes", clientes);
+        return new ModelAndView("clientes", modelo);
+    }
+
+    @RequestMapping(path = "/ver-pedido-cliente/{nombre}", method = RequestMethod.GET)
+    public ModelAndView verPedidosDeClientes(@PathVariable("nombre") String nombre){
+        ModelMap modelo = new ModelMap();
+        Cliente buscado = clienteService.obtenerClientePorNombre(nombre);
+        modelo.put("buscado", buscado);
+        List<Pedido> pedidos = pedidoService.verPedidosClientes(buscado);
+        modelo.put("pedidos", pedidos); 
+        return new ModelAndView("clientes", modelo);
+    }
+
+    @RequestMapping(path = "/ver-platos-del-pedido/{pedido}", method = RequestMethod.GET)
+    public ModelAndView verPlatosDelPedido(@PathVariable("pedido") Long pedido){
+        ModelMap modelo = new ModelMap();
+        List<Plato> platos = pedidoService.verPlatosDelPedido(pedido);
+        modelo.put("platosPedidos", platos);
         return new ModelAndView("clientes", modelo);
     }
 

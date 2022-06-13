@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cliente;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
+import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,13 @@ public class PedidoServiceImpl implements PedidoService{
 
     @Override
     public List<Pedido> verTodosLosPedidos() {
-        return null;
+        return repositorioPedido.verPedidos();
+    }
+
+    @Override
+    public List<Plato> verPlatosDelPedido(Long pedido) {
+        List<Plato> platos =repositorioPedido.verPlatosDelPedido(pedido);
+        return platos;
     }
 
 

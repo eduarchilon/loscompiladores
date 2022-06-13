@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cliente;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
+import ar.edu.unlam.tallerweb1.modelo.Plato;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,6 +38,21 @@ public class RepositorioPedidoImpl implements RepositorioPedido{
         return (List<Pedido>) session.createCriteria(Pedido.class)
 //                .createAlias("cliente", "cli", Criteria.FULL_JOIN)
                 .add(Restrictions.eq("cliente",  id))
+                .list();
+    }
+
+    @Override
+    public List<Pedido> verPedidos() {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Pedido>) session.createCriteria(Pedido.class)
+                .list();
+    }
+
+    @Override
+    public List<Plato> verPlatosDelPedido(Long pedido) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Plato>) session.createCriteria(Plato.class)
+                .add(Restrictions.eq("id_Pedido", pedido))
                 .list();
     }
 
