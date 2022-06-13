@@ -57,7 +57,7 @@ public class ControladorBusqueda {
             }
         }
 
-        if(busqueda.getNombrePlato() != null && busqueda.getPrecio() != null && busqueda.getLocalidadRestaurante().equals("")){
+        if(!busqueda.getNombrePlato().equals("") && busqueda.getPrecio() != null && busqueda.getLocalidadRestaurante().equals("")){
             List<Plato> platosConFiltroPrecioYNombre = servicioBusqueda.buscar(busqueda.getNombrePlato(), busqueda.getPrecio());
             model.put("platosConFiltroPrecioYNombre", platosConFiltroPrecioYNombre);
 
