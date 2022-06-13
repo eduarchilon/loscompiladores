@@ -90,4 +90,11 @@ public class Restaurante {
         this.numeroDeMesas = numeroDeMesas;
     }
 
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
 }
