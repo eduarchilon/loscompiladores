@@ -1,9 +1,9 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,15 +21,13 @@ public class Reserva {
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;
 
-
-
-    private LocalDateTime fecha;
+    private Date fecha;
 
     public Reserva() {
 
     }
 
-    public Reserva(Cliente cliente, Mesa mesa,LocalDateTime fecha) {
+    public Reserva(Cliente cliente, Mesa mesa,Date fecha) {
         this.cliente = cliente;
         this.mesa = mesa;
         this.fecha = fecha;
@@ -65,11 +63,11 @@ public class Reserva {
         this.mesa = mesa;
     }
 
-    public LocalDateTime getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
