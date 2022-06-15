@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,8 +20,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RepositorioReservaTest extends SpringTest {
     Cliente cliente = new Cliente(1L);
     Restaurante resto = new Restaurante();
-    LocalDateTime fechaReserva = LocalDateTime.of(2023,03,03,12,0,0);
-    Date date = Date.valueOf(String.valueOf(fechaReserva));
+//    LocalDateTime fechaReserva = LocalDateTime.of(2023,03,03,12,0,0);
+//    Date date = new Date();
+    Date date = new Date(2023,03,03,12,0,0);
     @Autowired
     RepositorioReserva RepositorioReserva;
 

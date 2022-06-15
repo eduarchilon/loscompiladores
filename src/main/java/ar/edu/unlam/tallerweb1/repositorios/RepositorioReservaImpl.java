@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -72,11 +72,14 @@ public class RepositorioReservaImpl implements RepositorioReserva {
     @Override
     public List<Mesa> buscaMesasDisponiblesSegunHorario(Restaurante resto, Date fechaReserva) {
         final Session session = sessionFactory.getCurrentSession();
-        Query q = session.createQuery(
-                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha = :fechaReserva)"
-        );
-        q.setTimestamp("fechaReserva", fechaReserva);
-        List<Mesa> mesas = q.list();
+        List<Mesa> mesas = session.createQuery(
+                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha = TIMESTAMP("+fechaReserva+"))"
+        ).list();
+//        Query q = session.createQuery(
+//                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha = TIMESTAMP("+fechaReserva+"))"
+//        );
+//        List<Mesa> mesas = q.list();
+
         //select * from Reserva where fecha = TIMESTAMP('2023-06-13 00:11:12');
 //        List mesas = session.createQuery(
 //                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha = DATE('"+String.format(String.valueOf(fechaReserva))+"'))"
