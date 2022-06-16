@@ -10,7 +10,7 @@ public interface ClienteService {
 
     Cliente verCliente(Cliente id);
 
-    Usuario obtenerClientePorNombre(Cliente cliente);
+    Cliente obtenerClientePorNombre(String cliente);
 
     List<Cliente> verClientes();
 }

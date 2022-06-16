@@ -18,11 +18,6 @@ public class PlatoServiceImpl implements PlatoService{
 
 
 
-    Plato plato1 = new Plato(1L, TipoPlato.VEGANO, "Solo verduras");
-
-    Plato plato2 = new Plato(2L, TipoPlato.VEGETARIANO, "verduras y huevo");
-
-    Plato plato3 = new Plato(3L, TipoPlato.TIPICA, "Milanesa y pure de papa");
 
     private List<Plato> platos = new ArrayList<>();
 

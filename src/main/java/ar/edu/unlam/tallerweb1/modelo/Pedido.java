@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import org.springframework.context.annotation.EnableMBeanExport;
+
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +14,8 @@ public class Pedido {
     @Column(name = "id_Pedido", nullable = false)
     private Long id;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name ="id_plato")
     private List<Plato> listPlatos = new LinkedList<>();
 
     @ManyToOne
@@ -37,6 +40,10 @@ public class Pedido {
 
     public List<Plato> getListPlatos() {
         return listPlatos;
+    }
+
+    public void addPlato(Plato plato){
+        listPlatos.add(plato);
     }
 
     public void setListPlatos(List<Plato> listPlatos) {

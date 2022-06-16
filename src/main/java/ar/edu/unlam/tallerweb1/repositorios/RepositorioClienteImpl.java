@@ -40,10 +40,11 @@ public class RepositorioClienteImpl implements RepositorioCliente {
     }
 
     @Override
-    public Usuario buscarPorNombre(String nombre) {
+    public Cliente buscarPorNombre(String nombre) {
         final Session session = sessionFactory.getCurrentSession();
-        return (Usuario) session.createCriteria(Usuario.class)
-                .add(Restrictions.eq("Nombre", nombre));
+        return (Cliente) session.createCriteria(Cliente.class)
+                .add(Restrictions.eq("nombre", nombre))
+                .uniqueResult();
     }
 
     @Override
