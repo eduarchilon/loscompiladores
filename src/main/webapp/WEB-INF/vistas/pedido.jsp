@@ -14,7 +14,7 @@
         <h1>Su pedido ha sido realizado!</h1>
         <section>
             <c:if test="${not empty pedido}">
-                <h1>Contenido de su pedido</h1>
+                <h2>Contenido de su pedido</h2>
                     <c:forEach items="${pedido}" var="detallePedido">
                         <article class="card comida shadow">
                             <div class="card-body">
@@ -30,7 +30,7 @@
                         </article>
                     </c:forEach>
             </c:if>
-
+            </br></br><a href="home">Ir a Home</a></br></br>
         </section>
     </div>
 </div>
