@@ -12,7 +12,7 @@ public interface RepositorioDetallePedido {
 
     List<DetallePedido> buscarPorIdCliente(Cliente cliente);
 
-    void eliminarPlatoDelDetallePedido(Plato plato, Cliente cliente);
+    void eliminarPlatoDelDetallePedido(Long idPlato, Cliente cliente);
 
-    DetallePedido buscarDetallePedido(Plato plato, Cliente cliente);
+    DetallePedido buscarDetallePedido(Long idPlato, Cliente cliente);
 }

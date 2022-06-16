@@ -56,11 +56,12 @@ public class ServicioDetallePedidoImpl implements ServicioDetallePedido{
 
     @Override
     public void eliminarPlatoDelDetallePedido(HttpServletRequest request) {
-        Plato platoEncontrado = this.buscarPlato(request);
+//        Plato platoEncontrado = this.buscarPlato(request);
         Long idCliente = Long.valueOf(request.getParameter("idCliente"));
+        Long idDetallePlato = Long.valueOf(request.getParameter("idPlatoElegido"));
         Cliente clienteEncontrado = repositorioCliente.buscarPorId(idCliente);
 
-        repositorioDetallePedido.eliminarPlatoDelDetallePedido(platoEncontrado, clienteEncontrado);
+        repositorioDetallePedido.eliminarPlatoDelDetallePedido(idDetallePlato, clienteEncontrado);
     }
 
     @Override

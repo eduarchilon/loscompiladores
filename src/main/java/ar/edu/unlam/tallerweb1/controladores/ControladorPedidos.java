@@ -52,11 +52,26 @@ public class ControladorPedidos {
     public ModelAndView mostrarDetallePedido(@ModelAttribute("formBuscarPlato") FormBuscarPlato plato, HttpServletRequest request){
         ModelMap model = new ModelMap();
         List<DetallePedido> listaDetalle;
+        if(request.getParameter("nombrePlatoElegido")!=null) {
 
-        listaDetalle = servicioDetallePedido.buscarPorIdCliente(request);
-        model.put("pedido", listaDetalle);
+            servicioDetallePedido.eliminarPlatoDelDetallePedido(request);
+            listaDetalle = servicioDetallePedido.buscarPorIdCliente(request);
+            System.out.println("elimina");
+            model.put("pedido", listaDetalle);
 
+        }else{
+
+            listaDetalle = servicioDetallePedido.buscarPorIdCliente(request);
+
+            for (DetallePedido algo:listaDetalle) {
+                System.out.println(algo.getId_detallePlato());
+            }
+            model.put("pedido", listaDetalle);
+
+        }
         return new ModelAndView("buscarPlato", model);
+
+
     }
 
 
