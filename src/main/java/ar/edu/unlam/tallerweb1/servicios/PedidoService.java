@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.modelo.Cliente;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface PedidoService {
@@ -13,5 +14,7 @@ public interface PedidoService {
     List<Pedido> verTodosLosPedidos();
 
     List<Plato> verPlatosDelPedido(Long pedido);
+
+    void realizarPedido(HttpServletRequest request);
 
 }

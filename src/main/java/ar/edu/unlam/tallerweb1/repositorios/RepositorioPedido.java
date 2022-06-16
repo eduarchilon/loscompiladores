@@ -17,4 +17,6 @@ public interface RepositorioPedido {
 
     List<Plato> verPlatosDelPedido(Long pedido);
 
+    void realizarPedido(List<Plato> listaPlatos, Cliente cliente);
+
 }

@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cliente;
+import ar.edu.unlam.tallerweb1.modelo.DetallePedido;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import org.hibernate.Criteria;
@@ -47,6 +48,7 @@ public class RepositorioPedidoImpl implements RepositorioPedido{
     }
 
     @Override
+
     public List<Pedido> verPedidos() {
         final Session session = sessionFactory.getCurrentSession();
         return (List<Pedido>) session.createCriteria(Pedido.class)
@@ -61,6 +63,14 @@ public class RepositorioPedidoImpl implements RepositorioPedido{
                 .createAlias("listPlatos", "lp")
                 .add(Restrictions.eq("lp.id", pedido))
                 .list();
+    }
+
+
+    public void realizarPedido(List<Plato> listaPlatos, Cliente cliente) {
+        Session session = sessionFactory.openSession();
+        Pedido pedido = new Pedido(listaPlatos,cliente);
+        session.save(pedido);
+        session.close();
     }
 
 

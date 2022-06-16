@@ -94,4 +94,17 @@ public class RepositorioPlatoImpl implements RepositorioPlato{
                 .list();
     }
 
+    @Override
+    public Plato buscarPlatoAAgregarEnDetalle(String nombrePlato, String descripcionPlato, String nombreRestaurante, String localidadRestaurante, Double precio) {
+        final Session session = sessionFactory.getCurrentSession();
+        Criteria plato = session.createCriteria(Plato.class, "plato");
+        plato.createAlias("plato.restaurante","restaurante");
+        return (Plato) plato.add(Restrictions.eq("nombre", nombrePlato))
+                .add(Restrictions.eq("descripcion", descripcionPlato))
+                .add(Restrictions.eq("precio", precio))
+                .add(Restrictions.eq("restaurante.nombre", nombreRestaurante))
+                .add(Restrictions.eq("restaurante.localidad", localidadRestaurante))
+                .uniqueResult();
+    }
+
 }
