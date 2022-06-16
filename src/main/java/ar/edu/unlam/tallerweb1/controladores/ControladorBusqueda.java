@@ -92,6 +92,14 @@ public class ControladorBusqueda {
             }
         }
 
+        if(busqueda.getPrecio() == null && busqueda.getLocalidadRestaurante() != null && busqueda.getNombrePlato().equals("")){
+            List<Plato> platosConFiltroLocalidad = servicioBusqueda.buscarPlatoPorLocalidadRestaurante(busqueda.getLocalidadRestaurante());
+            model.put("platosConFiltroLocalidad", platosConFiltroLocalidad);
+            if(platosConFiltroLocalidad.isEmpty()){
+                model.put("error", "No se encontraron comidas en la localidad seleccionada! :(");
+            }
+        }
+
         return new ModelAndView("buscarPlato", model);
     }
 

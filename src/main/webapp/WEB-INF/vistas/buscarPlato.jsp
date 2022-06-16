@@ -223,6 +223,30 @@
                     </c:forEach>
                 </form:form>
             </c:if>
+            <c:if test="${empty formBuscarPlato.precio && empty formBuscarPlato.nombrePlato &&  not empty formBuscarPlato.localidadRestaurante}">
+                <form:form action="agregar-plato" method="POST">
+                    <c:forEach items="${platosConFiltroLocalidad}" var="plato">
+                        <article class="card comida shadow">
+                            <div class="card-body">
+                                <h3 class="card-title bebas">${plato.nombre}</h3>
+                                <h5>${plato.TIPO_PLATO}</h5>
+                                <p class="card-text">${plato.descripcion}</p>
+                                <h5 class="card-title mt-2"><b>Restaurante: </b>${plato.restaurante.nombre}</h5>
+                                <h5 class="card-title mt-2"><b>Localidad: </b>${plato.restaurante.localidad}</h5>
+                                <h5 class="card-title mt-2"><b>Precio: </b>${plato.precio}</h5>
+
+                                <input type="text" hidden name="nombrePlatoElegido" value="${plato.nombre}">
+                                <input type="text" hidden name="descripcionPlatoElegido" value="${plato.descripcion}">
+                                <input type="text" hidden name="nombreRestauranteElegido" value="${plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido" value="${plato.restaurante.localidad}">
+                                <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
+                                <input type="text" hidden name="idCliente" value="1">
+                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button>
+                            </div>
+                        </article>
+                    </c:forEach>
+                </form:form>
+            </c:if>
         </section>
     </div>
 </div>

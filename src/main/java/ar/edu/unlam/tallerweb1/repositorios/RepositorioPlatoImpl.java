@@ -107,4 +107,13 @@ public class RepositorioPlatoImpl implements RepositorioPlato{
                 .uniqueResult();
     }
 
+    @Override
+    public List<Plato> buscarPlatoPorLocalidadRestaurante(String localidadRestaurante) {
+        final Session session = sessionFactory.getCurrentSession();
+        Criteria plato = session.createCriteria(Plato.class, "plato");
+        plato.createAlias("plato.restaurante","restaurante");
+        return plato.add(Restrictions.eq("restaurante.localidad", localidadRestaurante))
+                .list();
+    }
+
 }

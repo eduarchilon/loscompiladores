@@ -56,6 +56,12 @@ public class ServicioBusquedaImpl implements ServicioBusqueda{
     }
 
     @Override
+    public List<Plato> buscarPlatoPorLocalidadRestaurante(String localidadRestaurante) {
+        List<Plato> platos= repositorioPlato.buscarPlatoPorLocalidadRestaurante(localidadRestaurante);
+        return platos;
+    }
+
+    @Override
     public List<Plato> buscar(String nombrePlato, String localidadRestaurante) {
         List<Plato> platos= repositorioPlato.buscar(nombrePlato, localidadRestaurante);
         return platos;
