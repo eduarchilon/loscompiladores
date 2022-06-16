@@ -42,24 +42,29 @@ public class RepositorioDetallePedidoImpl implements RepositorioDetallePedido {
     }
 
     @Override
-    public void eliminarPlatoDelDetallePedido(Plato plato, Cliente cliente) {
+    public void eliminarPlatoDelDetallePedido(Long idPlato, Cliente cliente) {
         Session session = sessionFactory.openSession();
-        DetallePedido platoEncontrado = this.buscarDetallePedido(plato, cliente);
+        DetallePedido platoEncontrado = this.buscarDetallePedido(idPlato, cliente);
+        System.out.println(platoEncontrado.getId_detallePlato());
         session.delete(platoEncontrado);
         session.close();
     }
 
     @Override
-    public DetallePedido buscarDetallePedido(Plato plato, Cliente cliente) {
+    public DetallePedido buscarDetallePedido(Long idPlato, Cliente cliente) {
         Long idCliente = cliente.getId();
-        Long idPlato = plato.getId();
         final Session session = sessionFactory.getCurrentSession();
-        Criteria detallePedido = session.createCriteria(DetallePedido.class, "detallePedido");
-        detallePedido.createAlias("detallePedido.cliente","cliente");
-        detallePedido.createAlias("detallePedido.plato","plato");
+//        Criteria detallePedido = session.createCriteria(DetallePedido.class, "detallePedido");
+//        detallePedido.createAlias("detallePedido.cliente","cliente");
+//        detallePedido.createAlias("detallePedido.plato","plato");
+//        return (DetallePedido) detallePedido.add(Restrictions.eq("cliente.id", idCliente))
+//                .add(Restrictions.eq("plato.id", idPlato))
+//                .uniqueResult();
+        Criteria detallePedido = session.createCriteria(DetallePedido.class,"detallePedido");
+            detallePedido.createAlias("detallePedido.cliente","cliente");
         return (DetallePedido) detallePedido.add(Restrictions.eq("cliente.id", idCliente))
-                .add(Restrictions.eq("plato.id", idPlato))
-                .uniqueResult();
+            .add(Restrictions.eq("id", idPlato))
+            .uniqueResult();
     }
 
 

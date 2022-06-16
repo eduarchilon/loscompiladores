@@ -14,7 +14,8 @@
 			<ul class="nav nav-pills">
 				<li role="presentation"><a href="buscarPlatosMasVendidos">platos mas vendidos</a></li>
 				<li role="presentation"><a href="ir-a-busqueda-plato">buscar platos</a></li>
-				<li role="presentation"><a href="#">carta personalizada</a></li>
+				<li role="presentation"><a href="carta-personalizada">carta personalizada</a></li>
+				<li role="presentation"><a href="ver-clientes">ver clientes</a></li>
 			</ul>
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->

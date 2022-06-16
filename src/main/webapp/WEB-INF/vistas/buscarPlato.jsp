@@ -42,23 +42,34 @@
 
         <c:if test="${not empty pedido}">
             <h1>Pedido</h1>
-            <form:form action="realizar-pedido" method="POST">
-                <c:forEach items="${pedido}" var="detallePedido">
-                    <article class="card comida shadow">
-                        <div class="card-body">
-                            <h3 class="card-title bebas">${detallePedido.plato.nombre}</h3>
-                            <h5>${detallePedido.plato.TIPO_PLATO}</h5>
-                            <p class="card-text">${detallePedido.plato.descripcion}</p>
-                            <h5 class="card-title mt-2"><b>Restaurante: </b>${detallePedido.plato.restaurante.nombre}
-                            </h5>
-                            <h5 class="card-title mt-2"><b>Localidad: </b>${detallePedido.plato.restaurante.localidad}
-                            </h5>
-                            <h5 class="card-title mt-2"><b>Precio: </b>${detallePedido.plato.precio}</h5>
 
-                            <a href="eliminar-plato">Quitar del pedido</a>
-                        </div>
-                    </article>
+                <c:forEach items="${pedido}" var="detallePedido">
+                    <form:form action="mostrar-pedido" method="POST">
+                        <article class="card comida shadow">
+                            <div class="card-body">
+                                <h3 class="card-title bebas">${detallePedido.plato.nombre}</h3>
+                                <h5>${detallePedido.plato.TIPO_PLATO}</h5>
+                                <p class="card-text">${detallePedido.plato.descripcion}</p>
+                                <h5 class="card-title mt-2"><b>Restaurante: </b>${detallePedido.plato.restaurante.nombre}
+                                </h5>
+                                <h5 class="card-title mt-2"><b>Localidad: </b>${detallePedido.plato.restaurante.localidad}
+                                </h5>
+                                <h5 class="card-title mt-2"><b>Precio: </b>${detallePedido.plato.precio}</h5>
+                                <input type="text" hidden name="idPlatoElegido" value="${detallePedido.getId_detallePlato()}">
+                                <input type="text" hidden name="nombrePlatoElegido" value="${detallePedido.plato.nombre}">
+                                <input type="text" hidden name="descripcionPlatoElegido" value="${detallePedido.plato.descripcion}">
+                                <input type="text" hidden name="nombreRestauranteElegido" value="${detallePedido.plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido" value="${detallePedido.plato.restaurante.localidad}">
+                                <input type="text" hidden name="precioPlatoELegido" value="${detallePedido.plato.precio}">
+                                <input type="text" hidden name="idCliente" value="1">
+                                <button type="submit" class="btn btn-secondary btn-sm">Quitar del pedido</button>
+                            </div>
+                        </article>
+                    </form:form>
                 </c:forEach>
+            <form:form action="realizar-pedido" method="POST">
+                <!-- el controlador va a capturar el id de cliente y confirmar que todos los platos van al pedido. eliminar los datos de
+                detalepedidos correspondientes al pedido -->
                 <input type="text" hidden name="idCliente" value="1">
                 <br>
                 <button type="submit" class="btn btn-secondary btn-sm ">Realizar pedido</button>
@@ -78,8 +89,9 @@
         </c:if>
         <section>
             <c:if test="${empty formBuscarPlato.precio && not empty formBuscarPlato.nombrePlato && empty formBuscarPlato.localidadRestaurante}">
-                <form:form action="agregar-plato" method="POST" modelAttribute="formBuscarPlato">
-                    <c:forEach items="${platos}" var="plato">
+                <c:forEach items="${platos}" var="plato">
+                    <form:form action="agregar-plato" method="POST" modelAttribute="formBuscarPlato">
+
                         <article class="card comida shadow">
                             <div class="card-body">
                                 <h3 class="card-title bebas">${plato.nombre}</h3>
@@ -100,8 +112,8 @@
                             </div>
                             </br>
                         </article>
-                    </c:forEach>
-                </form:form>
+                    </form:form>
+                </c:forEach>
             </c:if>
             <c:if test="${not empty formBuscarPlato.precio && empty formBuscarPlato.nombrePlato && empty formBuscarPlato.localidadRestaurante}">
                 <form:form action="agregar-plato" method="POST">
