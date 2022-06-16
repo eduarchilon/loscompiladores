@@ -10,8 +10,8 @@
 		<div class = "container">
 			<h1>Bienvenidos a Taller Web 1</h1>
 		</div>
-		<div>
-			<ul class="nav nav-pills">
+		<div class="navbar navbar-default">
+			<ul class="nav nav-pills nav-justified">
 				<li role="presentation"><a href="buscarPlatosMasVendidos">platos mas vendidos</a></li>
 				<li role="presentation"><a href="ir-a-busqueda-plato">buscar platos</a></li>
 				<li role="presentation"><a href="carta-personalizada">carta personalizada</a></li>
