@@ -9,6 +9,15 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="navbar navbar-default">
+    <h1>Pedidos</h1>
+    <ul class="nav nav-pills nav-justified">
+        <li role="presentation"><a href="buscarPlatosMasVendidos">platos mas vendidos</a></li>
+        <li role="presentation" class="active"><a href="ir-a-busqueda-plato">buscar platos</a></li>
+        <li role="presentation" ><a href="carta-personalizada">carta personalizada</a></li>
+        <li role="presentation" ><a href="ver-clientes">ver clientes</a></li>
+    </ul>
+</div>
 <div class="container">
     <div style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <form:form action="buscar-plato" method="POST" modelAttribute="formBuscarPlato">

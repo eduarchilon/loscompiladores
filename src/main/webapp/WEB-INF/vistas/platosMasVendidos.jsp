@@ -11,15 +11,28 @@
 <html>
 <head>
     <title>Platos mas Vendidos</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>lISTA DE PLATOS MAS VENDIDOS</h1>
+
+<div class="navbar navbar-default">
+    <h1>lISTA DE PLATOS MAS VENDIDOS</h1>
+    <ul class="nav nav-pills nav-justified">
+        <li role="presentation" class="active"><a href="buscarPlatosMasVendidos">platos mas vendidos</a></li>
+        <li role="presentation"><a href="ir-a-busqueda-plato">buscar platos</a></li>
+        <li role="presentation"><a href="carta-personalizada">carta personalizada</a></li>
+        <li role="presentation"><a href="ver-clientes">ver clientes</a></li>
+    </ul>
+</div>
 <section >
-    <c:forEach items="${platos}" var="plato">
+    <c:forEach items="${platos}" var="plato" varStatus="loop">
 
         <article class="card comida shadow">
-            <div class="card-body">
-                <h3 class="card-title bebas">${plato.nombre}</h3>
+            <div class="container jumbotron pl-5">
+                <h3 class="card-title bebas">${loop.index} - ${plato.nombre}</h3>
                 <p>${plato.TIPO_PLATO}</p>
                 <p class="card-text">${plato.descripcion}</p>
                 <p class="card-title mt-2"><b>Restaurante: </b>${plato.restaurante.nombre}</p>
@@ -29,4 +42,7 @@
     </c:forEach>
 </section>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
 </html>
