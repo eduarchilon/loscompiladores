@@ -21,4 +21,6 @@ public interface RepositorioPlato {
 
     List<Plato> buscarTodos();
 
+    Plato buscarPlatoAAgregarEnDetalle(String nombrePlato, String descripcionPlato, String nombreRestaurante, String localidadRestaurante, Double precio);
+
 }

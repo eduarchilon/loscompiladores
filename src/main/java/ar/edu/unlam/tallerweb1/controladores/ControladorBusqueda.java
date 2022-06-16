@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Plato;
-import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import ar.edu.unlam.tallerweb1.modelo.forms.FormBuscarPlato;
 import ar.edu.unlam.tallerweb1.servicios.ServicioBusqueda;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,23 +28,24 @@ public class ControladorBusqueda {
     public ModelAndView irABuscarPlato(){
         ModelMap model = new ModelMap();
         model.put("formBuscarPlato", new FormBuscarPlato());
-        return new ModelAndView("buscar-plato", model);
+        return new ModelAndView("buscarPlato", model);
     }
 
-    @RequestMapping(path = "buscarPlato", method = RequestMethod.POST)
+    @RequestMapping(path = "buscar-plato", method = RequestMethod.POST)
     public ModelAndView buscar(@ModelAttribute("formBuscarPlato") FormBuscarPlato busqueda) {
         ModelMap model = new ModelMap();
+
 
         List<Plato> platosPorNombre = servicioBusqueda.buscar(busqueda.getNombrePlato());
 
         if(platosPorNombre.isEmpty() && busqueda.getPrecio() == null && busqueda.getLocalidadRestaurante().equals("")){
             model.put("error", "Nombre de comida incorrecto, intenta de nuevo! :)");
-            return new ModelAndView("buscar-plato", model);
+            return new ModelAndView("buscarPlato", model);
         }
 
         if(busqueda.getNombrePlato() != null && busqueda.getPrecio() == null && busqueda.getLocalidadRestaurante().equals("")){
             model.put("platos",platosPorNombre);
-            return new ModelAndView("buscar-plato", model);
+            return new ModelAndView("buscarPlato", model);
         }
 
         if(busqueda.getPrecio() != null && busqueda.getLocalidadRestaurante().equals("") ){
@@ -92,7 +92,7 @@ public class ControladorBusqueda {
             }
         }
 
-        return new ModelAndView("buscar-plato", model);
+        return new ModelAndView("buscarPlato", model);
     }
 
     @RequestMapping(path = "buscarPlatosMasVendidos", method = RequestMethod.GET)

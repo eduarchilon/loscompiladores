@@ -27,6 +27,11 @@ public class Pedido {
     public Pedido(){
     }
 
+    public Pedido(List<Plato> listaPlatos, Cliente cliente) {
+        this.listPlatos = listPlatos;
+        this.cliente = cliente;
+    }
+
     public Long getId() {
         return id;
     }
