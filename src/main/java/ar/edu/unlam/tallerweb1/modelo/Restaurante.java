@@ -40,13 +40,6 @@ public class Restaurante {
     private List<Mesa> listMesa;
 
 
-    public Localidad getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(Localidad localidad) {
-        this.localidad = localidad;
-    }
 
     public List<Mesa> getListMesa() {
         return listMesa;

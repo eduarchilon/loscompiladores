@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Mesa {
 
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_mesa", nullable = false)
@@ -17,6 +18,15 @@ public class Mesa {
 
     private Integer capacidad;
 
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    private  Integer numero;
 
     public Mesa() {
     }
