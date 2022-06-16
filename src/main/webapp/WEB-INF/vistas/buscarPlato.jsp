@@ -78,8 +78,9 @@
         </c:if>
         <section>
             <c:if test="${empty formBuscarPlato.precio && not empty formBuscarPlato.nombrePlato && empty formBuscarPlato.localidadRestaurante}">
-                <form:form action="agregar-plato" method="POST" modelAttribute="formBuscarPlato">
-                    <c:forEach items="${platos}" var="plato">
+                <c:forEach items="${platos}" var="plato">
+                    <form:form action="agregar-plato" method="POST" modelAttribute="formBuscarPlato">
+
                         <article class="card comida shadow">
                             <div class="card-body">
                                 <h3 class="card-title bebas">${plato.nombre}</h3>
@@ -100,8 +101,8 @@
                             </div>
                             </br>
                         </article>
-                    </c:forEach>
-                </form:form>
+                    </form:form>
+                </c:forEach>
             </c:if>
             <c:if test="${not empty formBuscarPlato.precio && empty formBuscarPlato.nombrePlato && empty formBuscarPlato.localidadRestaurante}">
                 <form:form action="agregar-plato" method="POST">
