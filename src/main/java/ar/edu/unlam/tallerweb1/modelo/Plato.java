@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.modelo;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Plato {
@@ -32,10 +33,12 @@ public class Plato {
     private Restaurante restaurante;
 
 
-    public Plato(Long id, Enum TIPO_PLATO, String descripcion) {
+
+    public Plato(Long id, Enum TIPO_PLATO, String descripcion, Integer cantVentas) {
         this.id = id;
         this.descripcion = descripcion;
         this.TIPO_PLATO = TIPO_PLATO;
+        this.cantVentas=cantVentas;
     }
     public Plato( Enum TIPO_PLATO, String nombre, Integer cantVentas) {
         this.nombre = nombre;
@@ -51,7 +54,7 @@ public class Plato {
     }
 
     public Long getId() {
-        return id;
+        return (Long)id;
     }
 
     public void setId(Long id) {

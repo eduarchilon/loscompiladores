@@ -16,4 +16,5 @@ public interface RepositorioPedido {
     List<Pedido> verPedidos();
 
     List<Plato> verPlatosDelPedido(Long pedido);
+
 }
