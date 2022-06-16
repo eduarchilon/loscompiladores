@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Restaurante {
@@ -27,12 +28,33 @@ public class Restaurante {
     private Integer calificacion;
 
 
+    //TO DO: el campo este sobra
     @Column(name = "Numero_de_mesas")
     private Integer numeroDeMesas;
 
     @Column(name = "Localidad")
     private String localidad;
 
+    @OneToMany
+    @JoinColumn(name = "id_mesas")
+    private List<Mesa> listMesa;
+
+
+    public Localidad getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(Localidad localidad) {
+        this.localidad = localidad;
+    }
+
+    public List<Mesa> getListMesa() {
+        return listMesa;
+    }
+
+    public void setListMesa(List<Mesa> listMesa) {
+        this.listMesa = listMesa;
+    }
 
     public Long getId() {
         return id;

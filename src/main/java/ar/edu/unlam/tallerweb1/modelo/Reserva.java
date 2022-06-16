@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,7 +21,6 @@ public class Reserva {
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;
 
-
     private Date fecha;
 
     @ManyToMany
@@ -27,6 +28,12 @@ public class Reserva {
 
     public Reserva() {
 
+    }
+
+    public Reserva(Cliente cliente, Mesa mesa,Date fecha) {
+        this.cliente = cliente;
+        this.mesa = mesa;
+        this.fecha = fecha;
     }
 
     public Reserva(Cliente cliente, Mesa mesa) {
