@@ -17,4 +17,11 @@ public interface PedidoService {
 
     void realizarPedido(HttpServletRequest request);
 
+    Pedido verPedido(Pedido pedido);
+
+    Pedido buscarPedidoPorId(Long pedido);
+
+    List<Plato> verPlatosDelPedido(Pedido pedido);
+
+
 }

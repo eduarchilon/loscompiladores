@@ -41,10 +41,30 @@ public class RepositorioPedidoTest extends SpringTest {
     }
 
     @Test @Transactional @Rollback
-    public void queDevuelvaUnPedidoBuscado(){
+    public void queTraigaLosPlatosDelPedido(){
+
         dadoQueExistenPedidos();
 
         Pedido buscado = repositorioPedido.buscarPedido(pedido3.getId());
+
+        System.out.println(buscado.getListPlatos().get(1).getDescripcion());
+
+        List<Pedido> lista = repositorioPedido.verPedidos();
+
+        System.out.println(lista.size());
+
+    }
+
+
+    @Test @Transactional @Rollback
+    public void queDevuelvaUnPedidoBuscado(){
+        dadoQueExistenPedidos();
+
+        Pedido buscado = repositorioPedido.buscarPedido(pedido1.getId());
+
+        System.out.println("***************************************");
+        System.out.println(buscado);
+        System.out.println("***************************************");
 
 
         assertThat(buscado).isEqualTo(pedido1);
