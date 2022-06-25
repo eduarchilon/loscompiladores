@@ -76,12 +76,18 @@
                         </article>
                     </form:form>
                 </c:forEach>
+            </br></br>
             <form:form action="realizar-pedido" method="POST">
                 <!-- el controlador va a capturar el id de cliente y confirmar que todos los platos van al pedido. eliminar los datos de
                 detalepedidos correspondientes al pedido -->
                 <input type="text" hidden name="idCliente" value="1">
                 <br>
                 <button type="submit" class="btn btn-secondary btn-sm ">Realizar pedido</button>
+            </form:form>
+            <form:form action="cancelar-pedido" method="POST">
+                <input type="text" hidden name="idCliente" value="1">
+                <br>
+                <button type="submit" class="btn btn-secondary btn-sm ">Cancelar pedido</button>
             </form:form>
         </c:if>
 

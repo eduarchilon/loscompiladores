@@ -9,6 +9,7 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioCliente;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioDetallePedido;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPedido;
+import org.springframework.asm.Handle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +59,14 @@ public class PedidoServiceImpl implements PedidoService{
         List<Plato> listaPlatos = new LinkedList();
         for(DetallePedido detalle : listaDetalles){
             listaPlatos.add(detalle.getPlato());
+        }
+
+        for(Plato plato : listaPlatos){
+            Integer cantVentas = plato.getCantVentas();
+            if(cantVentas.equals(null)){
+                cantVentas = 0;
+            }
+            plato.setCantVentas(++cantVentas);
         }
 
 
