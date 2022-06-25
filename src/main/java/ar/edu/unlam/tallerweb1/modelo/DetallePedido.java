@@ -19,6 +19,10 @@ public class DetallePedido {
     private Pedido pedido;
 
     @ManyToOne
+    @JoinColumn(name = "id_restaurante")
+    private Restaurante restaurante;
+
+    @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
