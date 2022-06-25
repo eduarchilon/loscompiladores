@@ -19,7 +19,7 @@
 
 
 <div class="navbar navbar-default">
-  <h1>Clientes</h1>
+  <h1>Pedidos de Clientes</h1>
   <ul class="nav nav-pills nav-justified">
     <li role="presentation"><a href="buscarPlatosMasVendidos">platos mas vendidos</a></li>
     <li role="presentation"><a href="ir-a-busqueda-plato">buscar platos</a></li>
@@ -41,18 +41,12 @@
 
   <article class="card comida shadow">
     <p>PEDIDO NRO: P100${pedido.id}</p>
-    <a href="ver-platos-del-pedido/${pedido.id}">Ver Detalle</a>
+    <a href="${pedido.cliente.nombre}/ver-platos-del-pedido/${pedido.id}">Ver Detalle</a>
     <p>--------</p>
   </article>
 </c:forEach>
 
-<c:forEach items="${platosPedidos}" var="plato">
 
-  <article class="card comida shadow">
-    <p>${plato}</p>
-    <p>--------</p>
-  </article>
-</c:forEach>
 
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

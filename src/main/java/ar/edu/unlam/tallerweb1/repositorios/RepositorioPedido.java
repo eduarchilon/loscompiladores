@@ -11,11 +11,14 @@ public interface RepositorioPedido {
 
     Pedido buscarPedido(Long id);
 
+    Pedido buscarPedidoPorid(Long id);
+
     List<Pedido> buscarPedidosCliente(Cliente id);
 
     List<Pedido> verPedidos();
 
     List<Plato> verPlatosDelPedido(Long pedido);
+
 
     void realizarPedido(List<Plato> listaPlatos, Cliente cliente);
 

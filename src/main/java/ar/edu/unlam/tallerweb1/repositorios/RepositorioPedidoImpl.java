@@ -39,6 +39,14 @@ public class RepositorioPedidoImpl implements RepositorioPedido{
     }
 
     @Override
+    public Pedido buscarPedidoPorid(Long id){
+        final Session session = sessionFactory.getCurrentSession();
+        return (Pedido) session.createCriteria(Pedido.class)
+                .add(Restrictions.eq("id", id))
+                .uniqueResult();
+    }
+
+    @Override
     public List<Pedido> buscarPedidosCliente(Cliente id) {
         final Session session = sessionFactory.getCurrentSession();
         return (List<Pedido>) session.createCriteria(Pedido.class)

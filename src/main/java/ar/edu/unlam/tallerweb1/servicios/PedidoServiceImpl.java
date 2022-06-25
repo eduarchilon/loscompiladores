@@ -45,8 +45,8 @@ public class PedidoServiceImpl implements PedidoService{
 
     @Override
     public List<Plato> verPlatosDelPedido(Long pedido) {
-        List<Plato> platos =repositorioPedido.verPlatosDelPedido(pedido);
-        return platos;
+        Pedido pedidoBuscado =repositorioPedido.buscarPedido(pedido);
+        return pedidoBuscado.getListPlatos();
     }
 
     @Override
@@ -64,7 +64,21 @@ public class PedidoServiceImpl implements PedidoService{
         repositorioPedido.realizarPedido(listaPlatos, clienteEncontrado);
     }
 
+    @Override
+    public Pedido verPedido(Pedido pedido) {
+        return repositorioPedido.buscarPedido(pedido.getId());
+    }
 
+    @Override
+    public Pedido buscarPedidoPorId(Long pedido) {
+        return repositorioPedido.buscarPedido(pedido);
+    }
+
+    @Override
+    public List<Plato> verPlatosDelPedido(Pedido pedido) {
+        Pedido pedidoBuscado = verPedido(pedido);
+        return pedidoBuscado.getListPlatos();
+    }
 
 
 }
