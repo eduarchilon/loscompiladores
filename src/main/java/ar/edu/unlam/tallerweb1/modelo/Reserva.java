@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class Reserva {
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;
 
-    private Date fecha;
+    private Calendar fecha;
 
     @ManyToMany
     private List<Plato> plato;
@@ -30,7 +31,7 @@ public class Reserva {
 
     }
 
-    public Reserva(Cliente cliente, Mesa mesa,Date fecha) {
+    public Reserva(Cliente cliente, Mesa mesa, Calendar fecha) {
         this.cliente = cliente;
         this.mesa = mesa;
         this.fecha = fecha;
@@ -66,11 +67,11 @@ public class Reserva {
         this.mesa = mesa;
     }
 
-    public Date getFecha() {
+    public Calendar getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Calendar fecha) {
         this.fecha = fecha;
     }
 

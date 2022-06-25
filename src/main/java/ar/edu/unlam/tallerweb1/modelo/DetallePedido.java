@@ -22,6 +22,14 @@ public class DetallePedido {
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public DetallePedido(Plato plato, Cliente cliente) {
         this.plato = plato;
         this.cliente = cliente;

@@ -21,6 +21,11 @@ public class Restaurante {
     @Column(name = "Horario")
     private String horario;
 
+    @Column(name = "Horario")
+    private String horarioApertura;
+    @Column(name = "Horario")
+    private String horarioCierre;
+
     @Column(name = "Telefono")
     private String telefono;
 

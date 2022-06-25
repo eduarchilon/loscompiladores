@@ -24,6 +24,7 @@ public class ServicioReservaTest {
 
     @Before
     public void init(){
+        //todo: aplicar mokito
 //        repositorioReserva = mock(RepositorioReserva.class);
 //        repositorioPlato = mock(RepositorioPlato.class);
 //        servicioReserva = new ServicioReservaImpl(repositorioReserva,repositorioPlato);

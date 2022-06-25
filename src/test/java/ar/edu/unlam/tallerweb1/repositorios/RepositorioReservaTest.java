@@ -12,7 +12,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +24,7 @@ public class RepositorioReservaTest extends SpringTest {
     Restaurante resto = new Restaurante();
 //    LocalDateTime fechaReserva = LocalDateTime.of(2023,03,03,12,0,0);
 //    Date date = new Date();
-    Date date = new Date(2023,03,03,12,0,0);
+    Calendar date = new GregorianCalendar(2023,12,12,12,00);
     @Autowired
     RepositorioReserva RepositorioReserva;
 
@@ -47,14 +49,14 @@ public class RepositorioReservaTest extends SpringTest {
     @Test @Transactional @Rollback
     public void muestraDisponibilidadSegunHorario(){
         crearReservas();
-//        LocalDateTime fechaReserva = LocalDateTime.of(2023,03,03,12,0,0);
-
+//        LocalDateTime fechaReserva = LocalDateTime.of(2022,06,18,12,0,0);
+System.out.println(resto.getId());
         List<Mesa> mesas = RepositorioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
         entoncesMesasEncontrados(mesas);
     }
 
     public void crearReservas(){
-
+        //TODO: cambiar crearReservas a inicializarDatos()
         Mesa mesa1 = new Mesa(1L,resto,1,4);
         Mesa mesa2 = new Mesa(1L,resto,2,4);
         Mesa mesa3 = new Mesa(1L,resto,3,4);
