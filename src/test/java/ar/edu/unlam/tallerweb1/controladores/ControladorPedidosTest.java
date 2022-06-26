@@ -41,7 +41,13 @@ public class ControladorPedidosTest {
     }
 
     @Test
+    public void prueba(){
+        System.out.println("Hola");
+    }
+
+    @Test
     public void queSePuedaRealizarYMuestrarUnPedido(){
+        
         dadoQueExistanUnPedidoRealizado(PEDIDO_REALIZADO);
 
         ModelAndView mav = cuandoBuscoUnPedidoRealizadoPorUnCliente();
