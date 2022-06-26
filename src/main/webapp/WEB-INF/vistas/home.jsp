@@ -1,4 +1,5 @@
 <%@ include file="header.jsp"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
     <div class="carousel-indicators">

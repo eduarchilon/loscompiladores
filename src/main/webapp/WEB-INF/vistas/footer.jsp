@@ -1,4 +1,5 @@
 <%--</main>--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <footer class="text-center text-white" style="background-color: #f1f1f1;">
     <!-- Grid container -->
     <div class="container pt-4 container-general">
