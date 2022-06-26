@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 public class ControladorBusquedaTest {
 
-    public static final String VISTA_BUSQUEDA = "buscar-plato";
+    public static final String VISTA_BUSQUEDA = "buscarPlato";
     public static final String NOMBRE_VALIDO = "Empanada";
     public static final String NOMBRE_INVALIDO = "Silla";
 
@@ -81,7 +81,7 @@ public class ControladorBusquedaTest {
     }
 
     private void entoncesRegresoALaVistaBusquedaConMensajeError(String error, ModelAndView mav) {
-    assertThat(mav.getViewName()).isEqualTo("buscar-plato");
+    assertThat(mav.getViewName()).isEqualTo("buscarPlato");
     assertThat(mav.getModel().get("error")).isEqualTo(error);
     }
 
