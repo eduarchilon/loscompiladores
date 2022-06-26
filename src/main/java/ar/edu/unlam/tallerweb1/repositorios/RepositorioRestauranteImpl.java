@@ -43,4 +43,11 @@ public class RepositorioRestauranteImpl implements RepositorioRestaurante {
                 .add(Restrictions.eq("localidad", localidadRestaurante))
                 .list();
     }
+
+    @Override
+    public List<Restaurante> verTodosLosRestaurantes() {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Restaurante>)session.createCriteria(Restaurante.class)
+                .list();
+    }
 }

@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Cliente;
-import ar.edu.unlam.tallerweb1.modelo.Pedido;
-import ar.edu.unlam.tallerweb1.modelo.Plato;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCliente;
 import ar.edu.unlam.tallerweb1.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +24,16 @@ public class ControladorRestaurante {
 
     private ClienteService clienteService;
 
-    @Autowired
     private PedidoService pedidoService;
 
+    private RestauranteService restauranteService;
 
     @Autowired
-    public ControladorRestaurante(ServicioBusqueda servicioBusqueda, ClienteService clienteService){
+    public ControladorRestaurante(ServicioBusqueda servicioBusqueda, ClienteService clienteService, PedidoService pedidoService, RestauranteService restauranteService){
         this.servicioBusqueda = servicioBusqueda;
         this.clienteService=clienteService;
+        this.pedidoService = pedidoService;
+        this.restauranteService = restauranteService;
     }
 
     @RequestMapping(path = "/carta-personalizada", method = RequestMethod.GET)
@@ -82,6 +81,14 @@ public class ControladorRestaurante {
         modelo.put("pedidoBuscado", pedidoBuscado);
         modelo.put("listaPlatos", (List<Plato>) pedidoBuscado.getListPlatos());
         return new ModelAndView("pedidos-clientes", modelo);
+    }
+
+    @RequestMapping(path = "/home", method = RequestMethod.GET)
+    public ModelAndView verRestaurantesMasValorados(){
+        ModelMap modelo = new ModelMap();
+        List<Restaurante> valorados = (List<Restaurante>) restauranteService.getRestaurantesMasCalificados();
+        modelo.put("restosValorados", valorados);
+        return new ModelAndView("home", modelo);
     }
 
 

@@ -56,4 +56,30 @@ public class RepositorioRestauranteTest extends SpringTest {
 
         assertThat(resultado).hasSize(2);
     }
+
+    @Test @Transactional @Rollback
+    public void quemuestreTodosLosRestaurantes(){
+        Restaurante resto1 = new Restaurante();
+        resto1.setNombre("Lo de carlitos");
+        resto1.setCalificacion(5);
+        session().save(resto1);
+
+        Restaurante resto2 = new Restaurante();
+        resto2.setNombre("El noble");
+        resto2.setCalificacion(4);
+        session().save(resto2);
+
+        Restaurante resto3 = new Restaurante();
+        resto3.setNombre("Morita");
+        resto3.setCalificacion(4);
+        session().save(resto3);
+
+        List<Restaurante> lista = repositorioRestaurante.verTodosLosRestaurantes();
+
+        System.out.println("***********************");
+        for (int i = 0; i < lista.size() ; i++) {
+            System.out.println("Restaurante-" + lista.get(i).getId() + ": " + lista.get(i).getNombre());
+        }
+        System.out.println("***********************");
+    }
 }

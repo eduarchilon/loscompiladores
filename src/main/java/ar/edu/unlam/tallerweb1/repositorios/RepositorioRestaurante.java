@@ -12,4 +12,6 @@ public interface RepositorioRestaurante {
     List<Restaurante> buscarPorCalificacion(Integer calificacion);
 
     List<Restaurante> buscarPorLocalidad(String localidadRestaurante);
+
+    List<Restaurante> verTodosLosRestaurantes();
 }

@@ -3,3 +3,59 @@
     font-weight: bold;
     background-color: red;
 }
+
+/*---HOME---*/
+.container-general{
+    max-width: 1440px !important;
+	margin: auto !important;
+	padding: 0 5vw !important;
+}
+
+/*slider*/
+.text-slider{
+    width: 100vw;
+    margin: auto;
+    background-color: #121010;
+    opacity: 0.8;
+    color: white;
+}
+
+ .carousel-caption-bg{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 3.25rem;
+    padding-bottom: 3.25rem;
+    color: #fff;
+    text-align: center;
+}
+
+.resto-container{
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+}
+
+.text-valorado, .title-valorado{
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+.title-valorado, footer{
+    margin-top: 50px;
+}
+
+.text-valorado{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 992px){
+    .container-general{
+        padding: 0 !important;
+    }
+}
