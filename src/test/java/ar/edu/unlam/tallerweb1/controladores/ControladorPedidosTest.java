@@ -41,12 +41,7 @@ public class ControladorPedidosTest {
     }
 
     @Test
-    public void prueba(){
-        System.out.println("Hola");
-    }
-
-    @Test
-    public void queSePuedaRealizarYMuestrarUnPedido(){
+    public void queSeMuestrerElPedidoRealizadoPorElCliente(){
 
         dadoQueExistanUnPedidoRealizado(PEDIDO_REALIZADO);
 
