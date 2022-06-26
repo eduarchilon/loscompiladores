@@ -63,7 +63,7 @@ public class PedidoServiceImpl implements PedidoService{
 
         for(Plato plato : listaPlatos){
             Integer cantVentas = plato.getCantVentas();
-            if(cantVentas.equals(null)){
+            if(cantVentas == null){
                 cantVentas = 0;
             }
             plato.setCantVentas(++cantVentas);
