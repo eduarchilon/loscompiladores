@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioRestaurante;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,17 @@ public class RestauranteServiceImpl implements RestauranteService{
     public List<Restaurante> verTodosLosRestaurantes() {
         List<Restaurante> lista = repositorioRestaurante.verTodosLosRestaurantes();
         return lista;
+    }
+
+    @Override
+    public List<Plato> verPlatosDelRestaurante(Long idRestaurante) {
+        List<Plato> platos = (List<Plato>) repositorioRestaurante.verPlatosDelRestaurante(idRestaurante);
+        return platos;
+    }
+
+    @Override
+    public Restaurante buscarRestaurantePorId(Long idRestaurante) {
+        Restaurante buscado = repositorioRestaurante.verRestaurante(idRestaurante);
+        return buscado;
     }
 }

@@ -40,7 +40,14 @@ public class Restaurante {
     @JoinColumn(name = "id_mesas")
     private List<Mesa> listMesa;
 
+    public Restaurante(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
 
+    public Restaurante(){
+
+    }
 
     public List<Mesa> getListMesa() {
         return listMesa;

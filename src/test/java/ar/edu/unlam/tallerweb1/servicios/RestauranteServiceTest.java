@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
+import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioRestaurante;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +21,13 @@ public class RestauranteServiceTest {
     private Restaurante resto1;
     private Restaurante resto2;
     private Restaurante resto3;
+
+    private Plato plato1;
+    private Plato plato2;
+    private Plato plato3;
+    private Plato plato4;
+    private Plato plato5;
+    private Plato plato6;
 
     @Before
     public void init(){
@@ -50,6 +59,45 @@ public class RestauranteServiceTest {
 
     }
 
+    @Test
+    public void queMuestreLosPlatosDelRestauranteEnServicio(){
+        Restaurante restoA = new Restaurante(1L, "Resto1");
+        Restaurante restoB = new Restaurante(2L, "Resto2");
+
+
+        plato1 = new Plato(1L, TipoPlato.VEGANO, "plato1", restoA);
+        plato2 = new Plato(2L, TipoPlato.VEGANO, "plato2", restoA);
+        plato3 = new Plato(3L, TipoPlato.VEGANO, "plato3", restoA);
+        plato4 = new Plato(4L, TipoPlato.VEGANO, "plato4", restoA);
+        plato5 = new Plato(5L, TipoPlato.VEGANO, "plato5", restoA);
+        plato6 = new Plato(6L, TipoPlato.VEGANO, "plato6", restoA);
+
+        List<Plato> platos = new LinkedList<>();
+        platos.add(plato1);
+        platos.add(plato2);
+        platos.add(plato3);
+        platos.add(plato4);
+        platos.add(plato5);
+        platos.add(plato6);
+
+        cuandoBuscoAlRestaurante(restoA, platos);
+
+        List<Plato> listaPlatos = (List<Plato>) restauranteService.verPlatosDelRestaurante(1L);
+
+        System.out.println("***********************");
+        System.out.println(listaPlatos.size());
+        System.out.println("***********************");
+
+
+
+
+    }
+
+    private void cuandoBuscoAlRestaurante(Restaurante restaurante, List<Plato> platos) {
+        /*Al mockear no importa el resturante que le asigne al plato ya que le di al servicio la lista*/
+        when(restauranteService.verPlatosDelRestaurante(restaurante.getId())).thenReturn(platos);
+    }
+
     private void tengoLaListaDeRestaurtantes(List<Restaurante> lista) {
         when(restauranteService.verTodosLosRestaurantes()).thenReturn(lista);
     }
@@ -68,5 +116,6 @@ public class RestauranteServiceTest {
         resto3.setNombre("Morita");
         resto3.setCalificacion(3);
     }
+
 
 }

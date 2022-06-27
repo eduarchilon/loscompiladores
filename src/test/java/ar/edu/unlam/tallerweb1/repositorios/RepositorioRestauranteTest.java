@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
+import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -12,6 +14,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 public class RepositorioRestauranteTest extends SpringTest {
+
+    private Plato plato1;
+    private Plato plato2;
+    private Plato plato3;
+    private Plato plato4;
+    private Plato plato5;
+    private Plato plato6;
 
     @Autowired
     private RepositorioRestaurante repositorioRestaurante;
@@ -81,5 +90,45 @@ public class RepositorioRestauranteTest extends SpringTest {
             System.out.println("Restaurante-" + lista.get(i).getId() + ": " + lista.get(i).getNombre());
         }
         System.out.println("***********************");
+    }
+
+    @Test @Transactional @Rollback
+    public void quemuestreLosPlatosDelRestaurante(){
+
+        Restaurante restoA = new Restaurante(1L, "Resto1");
+        Restaurante restoB = new Restaurante(2L, "Resto2");
+
+        session().save(restoA);
+        session().save(restoB);
+
+        plato1 = new Plato(1L, TipoPlato.VEGANO, "plato1", restoA);
+        plato2 = new Plato(2L, TipoPlato.VEGANO, "plato2", restoA);
+        plato3 = new Plato(3L, TipoPlato.VEGANO, "plato3", restoB);
+        plato4 = new Plato(4L, TipoPlato.VEGANO, "plato4", restoB);
+        plato5 = new Plato(5L, TipoPlato.VEGANO, "plato5", restoA);
+        plato6 = new Plato(6L, TipoPlato.VEGANO, "plato6", restoB);
+
+        session().save(plato1);
+        session().save(plato2);
+        session().save(plato3);
+        session().save(plato4);
+        session().save(plato5);
+        session().save(plato6);
+
+//        Restaurante restoBuscado = (Restaurante) repositorioRestaurante.verRestaurante(1L);
+//
+//        System.out.println("***********************");
+//        System.out.println(restoBuscado.getNombre());
+//        System.out.println("***********************");
+
+
+        List<Plato> platos = (List<Plato>)repositorioRestaurante.verPlatosDelRestaurante(1L);
+
+        System.out.println("***********************");
+        for (int i = 0; i < platos.size() ; i++) {
+            System.out.println(platos.get(i).getDescripcion());
+        }
+        System.out.println("***********************");
+
     }
 }
