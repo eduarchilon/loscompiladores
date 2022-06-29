@@ -17,9 +17,12 @@
     <title>YourRestoNearYou</title>
 </head>
 <body>
+<style>
+    <%@include file="/css/style.css"%>
+</style>
 <nav class="navbar navbar-expand-lg bg-light container-general">
     <div class="container-fluid">
-        <img src="https://cdn.icon-icons.com/icons2/2419/PNG/512/restaurant_location_icon_146860.png" alt="" width="60px">
+        <img src="https://i.pinimg.com/originals/bd/87/83/bd87839c22ba2ecc577a5c381f168dd4.jpg" alt="" width="70px">
         <a class="navbar-brand" href="/proyecto_limpio_spring_war_exploded/home">YourRestoNearYou</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,6 +33,13 @@
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/ir-a-busqueda-plato">Buscar platos</a>
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/carta-personalizada">Carta personalizada</a>
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/ver-clientes">Clientes</a>
+                <div class="btn-group btn-group-responsive">
+                    <button type="button" class="btn btn-primary rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span>
+                    </button>
+                    <!-- Modal -->
+                    <%@ include file="modal.jsp"%>
+                </div>
             </div>
         </div>
     </div>

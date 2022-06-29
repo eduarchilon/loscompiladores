@@ -11,22 +11,22 @@
         <div class="carousel-item active">
             <img src="https://imagekit.androidphoria.com/wp-content/uploads/platos-veganos.jpg" class="d-block w-100" alt="..." style="height: 550px; object-fit: cover;">
             <div class="carousel-caption-bg d-none d-md-block text-slider">
-                <h5>First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
+                <h5>Los mejores platos</h5>
+                <p>Tenemos los mejores platos para ofrecerte sin importar el gusto que tengas. Vos sos libre de elegir.</p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="https://www.bacanal.com.ar/wp-content/uploads/2017/05/ASADO-VEGGIE-VA2.jpg" class="d-block w-100" alt="..." style="height: 550px; object-fit: cover;">
             <div class="carousel-caption-bg d-none d-md-block text-slider">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
+                <h5>Los mejores locales de comida</h5>
+                <p>Tenemos una lista de los mejores locales de comida para que esten cerca de donde estes</p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="https://saboryestilo.com.mx/wp-content/uploads/2020/03/kit-basico-para-tu-parrillada-1-1200x720.jpg" class="d-block w-100" alt="..." style="height: 550px; object-fit: cover;">
             <div class="carousel-caption-bg d-none d-md-block text-slider">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+                <h5>Los mejores precios</h5>
+                <p>No te preocupes por los precios. Tenemos los mejores precios adaptados a tu bolsillo.</p>
             </div>
         </div>
     </div>

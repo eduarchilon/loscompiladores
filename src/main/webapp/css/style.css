@@ -1,3 +1,4 @@
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 .lower-case{
     text-transform: lowercase;
     font-weight: bold;
@@ -58,8 +59,16 @@
     margin-bottom: 50px;
 }
 
+/*cart*/
+
+
 @media (max-width: 992px){
     .container-general{
         padding: 0 !important;
+    }
+
+    .btn-group-responsive{
+        margin-bottom: 10px;
+        display: block;
     }
 }
