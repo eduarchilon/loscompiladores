@@ -24,9 +24,12 @@ public class ControladorRestauranteTest {
     private ClienteService clienteService;
     private PedidoService pedidoService;
     private RestauranteService restauranteService;
+    private ControladorMenu controladorMenu;
+
 
 
     private static final String VISTA_HOME = "home";
+    private static final String VISTA_MENU = "menu-restaurante";
 
     @Before
     public void init(){
@@ -35,6 +38,8 @@ public class ControladorRestauranteTest {
         pedidoService = mock(PedidoService.class);
         restauranteService = mock(RestauranteService.class);
         controladorRestaurante = new ControladorRestaurante(servicioBusqueda, clienteService, pedidoService, restauranteService);
+
+        controladorMenu = new  ControladorMenu(restauranteService);
     }
 
     @Test
@@ -84,6 +89,39 @@ public class ControladorRestauranteTest {
         entoncesVerEstaCantidad(mav, 5);
 
         entoncesMeLLevaALaVista(VISTA_HOME, mav.getViewName());
+    }
+
+    @Test
+    public void queMuestreLosPlatosDelRestaurante(){
+        Restaurante restoBuscado = new Restaurante(1L, "Resto-Buscado");
+
+        List<Plato> platos = new LinkedList<>();
+        for (int i = 0; i < 3; i++) {
+            platos.add(new Plato());
+        }
+        when(restauranteService.verPlatosDelRestaurante(restoBuscado.getId())).thenReturn(platos);
+
+        dadoQueTengaUnrestauranteValorado(restoBuscado);
+
+        ModelAndView mav = cuandoBuscoPlatosDelRestaurante(restoBuscado.getId());
+
+        entoncesEncuentroEnLaVistaDelMenu(mav, platos.size());
+
+        entoncesMeLLevaALaVista(VISTA_MENU, mav.getViewName());
+
+    }
+
+    private void entoncesEncuentroEnLaVistaDelMenu(ModelAndView mav, int cantidad) {
+        List<Plato> platosRestaurante = (List<Plato>) mav.getModel().get("platosRestaurante");
+        assertThat(platosRestaurante).hasSize(cantidad);
+    }
+
+    private ModelAndView cuandoBuscoPlatosDelRestaurante(Long idRestaurante) {
+        return controladorMenu.verCartaDelRestaurante(idRestaurante);
+    }
+
+    private void dadoQueTengaUnrestauranteValorado(Restaurante restaurante) {
+        when(restauranteService.buscarRestaurantePorId(restaurante.getId())).thenReturn(restaurante);
     }
 
     private void entoncesVerEstaCantidad(ModelAndView mav, int cantidadEsperada) {
