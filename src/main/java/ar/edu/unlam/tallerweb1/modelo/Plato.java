@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,7 +31,9 @@ public class Plato {
     @Column(name ="cantVentas")
     private Integer cantVentas;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name ="id_restaurante")
     private Restaurante restaurante;
 
 
@@ -44,6 +48,13 @@ public class Plato {
         this.nombre = nombre;
         this.TIPO_PLATO = TIPO_PLATO;
         this.cantVentas = cantVentas;
+    }
+
+    public Plato(Long id, Enum TIPO_PLATO, String descripcion, Restaurante restaurante){
+        this.id = id;
+        this.descripcion = descripcion;
+        this.TIPO_PLATO = TIPO_PLATO;
+        this.restaurante=restaurante;
     }
     public Plato(){
 

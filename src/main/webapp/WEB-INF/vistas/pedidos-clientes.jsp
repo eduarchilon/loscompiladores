@@ -1,32 +1,20 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Eduar
-  Date: 19/6/2022
-  Time: 16:31
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ include file="header.jsp"%>
 
-<h3>${pedidoBuscado.cliente.nombre}</h3>
-<h3>${pedidoBuscado.id}</h3>
+<style>
+    <%@include file="/css/style.css"%>
+</style>
 
-
+<h3 class="title-valorado">${pedidoBuscado.cliente.nombre} ${pedidoBuscado.cliente.apellido}</h3>
+<div class="resto-container">
   <c:forEach items="${listaPlatos}" var="lista">
-
-    <article class="container jumbotron">}
-        <p>${lista.descripcion}</p>
-        <p>--------</p>
-    </article>
-
+      <div class="card" style="width: 18rem;">
+          <img src="https://i.blogs.es/1d2f94/1366_2000-15-/450_1000.webp" class="card-img-top" alt="...">
+          <div class="card-body">
+              <h5 class="card-title">${lista.nombre}</h5>
+              <p class="card-text">${lista.descripcion}</p>
+              <p class="card-text">Precio: $${lista.precio}</p>
+          </div>
+      </div>
 </c:forEach>
-
-
-</body>
-</html>
+</div>
+<%@ include file="footer.jsp"%>
