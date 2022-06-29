@@ -2,15 +2,18 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 
 import ar.edu.unlam.tallerweb1.modelo.Cliente;
+import ar.edu.unlam.tallerweb1.modelo.DetallePedido;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCliente;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioDetallePedido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPedido;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioPlato;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.LinkedList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +26,10 @@ public class PedidoServiceTest {
     private RepositorioPedido repositorioPedido;
     private RepositorioDetallePedido repositorioDetallePedido;
     private RepositorioCliente repositorioCliente;
+    private RepositorioPlato repositorioPlato;
     private PedidoService pedidoService;
+    private ServicioDetallePedido servicioDetallePedido;
+    private HttpServletRequest request;
 
     private Pedido pedido1;
     private Pedido pedido2;
@@ -43,7 +49,10 @@ public class PedidoServiceTest {
         repositorioPedido = mock(RepositorioPedido.class);
         repositorioCliente = mock(RepositorioCliente.class);
         repositorioDetallePedido = mock(RepositorioDetallePedido.class);
+        repositorioPlato = mock(RepositorioPlato.class);
         pedidoService = new PedidoServiceImpl(repositorioPedido, repositorioDetallePedido, repositorioCliente);
+        servicioDetallePedido = new ServicioDetallePedidoImpl(repositorioDetallePedido, repositorioPlato, repositorioCliente);
+
 
 
         ironMan = new Cliente(1L, "Tony", "Stark", "20145236", "116589542");
@@ -127,6 +136,8 @@ public class PedidoServiceTest {
         entoncesMeDiceSiLoEncontro(pedido2, 2L);
 
     }
+
+
 
 
     private void entoncesMeDiceSiLoEncontro(Pedido idPedido, Long id) {
