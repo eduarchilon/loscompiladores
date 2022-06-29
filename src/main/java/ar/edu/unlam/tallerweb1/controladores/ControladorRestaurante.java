@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Cliente;
-import ar.edu.unlam.tallerweb1.modelo.Pedido;
-import ar.edu.unlam.tallerweb1.modelo.Plato;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCliente;
 import ar.edu.unlam.tallerweb1.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,14 +24,16 @@ public class ControladorRestaurante {
 
     private ClienteService clienteService;
 
-    @Autowired
     private PedidoService pedidoService;
 
+    private RestauranteService restauranteService;
 
     @Autowired
-    public ControladorRestaurante(ServicioBusqueda servicioBusqueda, ClienteService clienteService){
+    public ControladorRestaurante(ServicioBusqueda servicioBusqueda, ClienteService clienteService, PedidoService pedidoService, RestauranteService restauranteService){
         this.servicioBusqueda = servicioBusqueda;
         this.clienteService=clienteService;
+        this.pedidoService = pedidoService;
+        this.restauranteService = restauranteService;
     }
 
     @RequestMapping(path = "/carta-personalizada", method = RequestMethod.GET)
@@ -66,16 +66,29 @@ public class ControladorRestaurante {
         Cliente buscado = clienteService.obtenerClientePorNombre(nombre);
         modelo.put("buscado", buscado);
         List<Pedido> pedidos = pedidoService.verPedidosClientes(buscado);
-        modelo.put("pedidos", pedidos); 
+        HashSet<Pedido> pedidosBuscados = new HashSet<>();
+        for (int i = 0; i < pedidos.size(); i++) {
+            pedidosBuscados.add(pedidos.get(i));
+        }
+        modelo.put("pedidos", pedidosBuscados);
         return new ModelAndView("clientes", modelo);
     }
 
-    @RequestMapping(path = "/ver-platos-del-pedido/{pedido}", method = RequestMethod.GET)
-    public ModelAndView verPlatosDelPedido(@PathVariable("pedido") Long pedido){
+    @RequestMapping(path = "/ver-pedido-cliente/{nombre}/ver-platos-del-pedido/{pedido}", method = RequestMethod.GET)
+    public ModelAndView verPlatosDelPedido(@PathVariable("pedido")  Long pedido){
         ModelMap modelo = new ModelMap();
-        List<Plato> platos = pedidoService.verPlatosDelPedido(pedido);
-        modelo.put("platosPedidos", platos);
-        return new ModelAndView("clientes", modelo);
+        Pedido pedidoBuscado = (Pedido)pedidoService.buscarPedidoPorId(pedido);
+        modelo.put("pedidoBuscado", pedidoBuscado);
+        modelo.put("listaPlatos", (List<Plato>) pedidoBuscado.getListPlatos());
+        return new ModelAndView("pedidos-clientes", modelo);
+    }
+
+    @RequestMapping(path = "/home", method = RequestMethod.GET)
+    public ModelAndView verRestaurantesMasValorados(){
+        ModelMap modelo = new ModelMap();
+        List<Restaurante> valorados = (List<Restaurante>) restauranteService.getRestaurantesMasCalificados();
+        modelo.put("restosValorados", valorados);
+        return new ModelAndView("home", modelo);
     }
 
 

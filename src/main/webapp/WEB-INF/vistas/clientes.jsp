@@ -1,61 +1,36 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Eduar
-  Date: 7/6/2022
-  Time: 01:29
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-  <head>
-    <title>$Title$</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-  </head>
-  <body>
+<%@ include file="header.jsp"%>
 
 
+<style>
+  <%@include file="/css/style.css"%>
+</style>
 
-<div class="navbar navbar-default">
-  <h1>Clientes</h1>
-  <ul class="nav nav-pills nav-justified">
-    <li role="presentation"><a href="buscarPlatosMasVendidos">platos mas vendidos</a></li>
-    <li role="presentation"><a href="ir-a-busqueda-plato">buscar platos</a></li>
-    <li role="presentation"><a href="carta-personalizada">carta personalizada</a></li>
-    <li role="presentation" class="active"><a href="ver-clientes">ver clientes</a></li>
-  </ul>
+
+<div class="container-general resto-container mt-1">
+  <h3 class="title-valorado">Nuestros Clientes</h3>
+<c:forEach items="${clientes}" var="cliente">
+  <div class="card" style="width: 18rem;">
+    <img src="https://i.giphy.com/media/JApxkdelkzBIY/giphy.gif" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${cliente.nombre} ${cliente.apellido}</h5>
+      <p class="card-text">Localidad: Buenos Aires</p>
+      <a href="ver-pedido-cliente/${cliente.nombre}" class="btn btn-primary">Ver pedidos</a>
+    </div>
+  </div>
+</c:forEach>
 </div>
 
-  <c:forEach items="${clientes}" var="cliente">
+  <h5 class="title-valorado">${buscado.nombre} ${buscado.apellido}</h5>
 
-    <article class="container jumbotron">
-      <a href="ver-pedido-cliente/${cliente.nombre}">${cliente.nombre} ${cliente.apellido}</a>
-    </article>
-
+<div class="resto-container">
+  <c:forEach items="${pedidos}" var="pedido">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Pedido nro: P100${pedido.id}</h5>
+      <a href="${pedido.cliente.nombre}/ver-platos-del-pedido/${pedido.id}" class="card-link">Ver detalle</a>
+    </div>
+  </div>
   </c:forEach>
+</div>
 
-  <h1>${buscado.nombre}</h1>
-<c:forEach items="${pedidos}" var="pedido">
-
-  <article class="card comida shadow">
-    <p>PEDIDO NRO: P100${pedido.id}</p>
-    <a href="ver-platos-del-pedido/${pedido.id}">Ver Detalle</a>
-    <p>--------</p>
-  </article>
-</c:forEach>
-
-<c:forEach items="${platosPedidos}" var="plato">
-
-  <article class="card comida shadow">
-    <p>${plato}</p>
-    <p>--------</p>
-  </article>
-</c:forEach>
-
-  </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-  <script src="js/bootstrap.min.js" type="text/javascript"></script>
-</html>
+<%@ include file="footer.jsp"%>

@@ -4,12 +4,11 @@ import ar.edu.unlam.tallerweb1.modelo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -59,7 +58,7 @@ public class RepositorioReservaImpl implements RepositorioReserva {
     }
 
     @Override
-    public List<Mesa> buscaMesasDisponibles(Restaurante resto, Date fechaReserva) {
+    public List<Mesa> buscaMesasDisponibles(Restaurante resto, Calendar fechaReserva) {
         final Session session = sessionFactory.getCurrentSession();
         List<Mesa> mesas = session.createQuery(
                 "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva )"
@@ -70,22 +69,21 @@ public class RepositorioReservaImpl implements RepositorioReserva {
     }
 
     @Override
-    public List<Mesa> buscaMesasDisponiblesSegunHorario(Restaurante resto, Date fechaReserva) {
-        final Session session = sessionFactory.getCurrentSession();
-        List<Mesa> mesas = session.createQuery(
-                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha = TIMESTAMP("+fechaReserva+"))"
-        ).list();
-//        Query q = session.createQuery(
-//                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha = TIMESTAMP("+fechaReserva+"))"
-//        );
-//        List<Mesa> mesas = q.list();
+    public List<Mesa> buscaMesasDisponiblesSegunHorario(Restaurante resto, Calendar fechaReserva) {
+        Session session = sessionFactory.getCurrentSession();
 
-        //select * from Reserva where fecha = TIMESTAMP('2023-06-13 00:11:12');
-//        List mesas = session.createQuery(
-//                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha = DATE('"+String.format(String.valueOf(fechaReserva))+"'))"
-//        ).list();
-        //+" and Mesa.id NOT IN (select Mesa.id from Reserva )
-        //select * from Mesa where id_mesa NOT IN (select id_mesa from Reserva R) and id_restaurante=1;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar startDate = fechaReserva;
+        startDate.set(startDate.MINUTE,00);
+        startDate.set(startDate.SECOND,00);
+        Calendar endDate = fechaReserva;
+        endDate.set(endDate.MINUTE,59);
+        endDate.set(endDate.SECOND,59);
+        List mesas = session.createQuery(
+                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha BETWEEN :stDate AND :edDate )"
+        ).setParameter("stDate", startDate)
+         .setParameter("edDate", endDate)
+         .list();
         return mesas;
     }
 

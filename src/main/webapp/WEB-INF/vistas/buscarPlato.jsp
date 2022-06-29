@@ -9,15 +9,6 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="navbar navbar-default">
-    <h1>Pedidos</h1>
-    <ul class="nav nav-pills nav-justified">
-        <li role="presentation"><a href="buscarPlatosMasVendidos">platos mas vendidos</a></li>
-        <li role="presentation" class="active"><a href="ir-a-busqueda-plato">buscar platos</a></li>
-        <li role="presentation" ><a href="carta-personalizada">carta personalizada</a></li>
-        <li role="presentation" ><a href="ver-clientes">ver clientes</a></li>
-    </ul>
-</div>
 <div class="container">
     <div style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <form:form action="buscar-plato" method="POST" modelAttribute="formBuscarPlato">
@@ -40,7 +31,8 @@
                 <form:option value="Ciudadela" label="Ciudadela"/>
             </form:select>
             <br>
-            <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Buscar</button>
+            <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>
+            Buscar</button>
             </br><hr class="colorgraph"><br>
         </form:form>
 
@@ -52,36 +44,42 @@
         <c:if test="${not empty pedido}">
             <h1>Pedido</h1>
 
-                <c:forEach items="${pedido}" var="detallePedido">
-                    <form:form action="mostrar-pedido" method="POST">
-                        <article class="card comida shadow">
-                            <div class="card-body">
-                                <h3 class="card-title bebas">${detallePedido.plato.nombre}</h3>
-                                <h5>${detallePedido.plato.TIPO_PLATO}</h5>
-                                <p class="card-text">${detallePedido.plato.descripcion}</p>
-                                <h5 class="card-title mt-2"><b>Restaurante: </b>${detallePedido.plato.restaurante.nombre}
-                                </h5>
-                                <h5 class="card-title mt-2"><b>Localidad: </b>${detallePedido.plato.restaurante.localidad}
-                                </h5>
-                                <h5 class="card-title mt-2"><b>Precio: </b>${detallePedido.plato.precio}</h5>
-                                <input type="text" hidden name="idPlatoElegido" value="${detallePedido.getId_detallePlato()}">
-                                <input type="text" hidden name="nombrePlatoElegido" value="${detallePedido.plato.nombre}">
-                                <input type="text" hidden name="descripcionPlatoElegido" value="${detallePedido.plato.descripcion}">
-                                <input type="text" hidden name="nombreRestauranteElegido" value="${detallePedido.plato.restaurante.nombre}">
-                                <input type="text" hidden name="localidadRestauranteElegido" value="${detallePedido.plato.restaurante.localidad}">
-                                <input type="text" hidden name="precioPlatoELegido" value="${detallePedido.plato.precio}">
-                                <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm">Quitar del pedido</button>
-                            </div>
-                        </article>
-                    </form:form>
-                </c:forEach>
+            <c:forEach items="${pedido}" var="detallePedido">
+                <form:form action="mostrar-pedido" method="POST">
+                    <article class="card comida shadow">
+                        <div class="card-body">
+                            <h3 class="card-title bebas">${detallePedido.plato.nombre}</h3>
+                            <h5>${detallePedido.plato.TIPO_PLATO}</h5>
+                            <p class="card-text">${detallePedido.plato.descripcion}</p>
+                            <h5 class="card-title mt-2"><b>Restaurante: </b>${detallePedido.plato.restaurante.nombre}
+                            </h5>
+                            <h5 class="card-title mt-2"><b>Localidad: </b>${detallePedido.plato.restaurante.localidad}
+                            </h5>
+                            <h5 class="card-title mt-2"><b>Precio: </b>${detallePedido.plato.precio}</h5>
+                            <input type="text" hidden name="idPlatoElegido" value="${detallePedido.getId_detallePlato()}">
+                            <input type="text" hidden name="nombrePlatoElegido" value="${detallePedido.plato.nombre}">
+                            <input type="text" hidden name="descripcionPlatoElegido" value="${detallePedido.plato.descripcion}">
+                            <input type="text" hidden name="nombreRestauranteElegido" value="${detallePedido.plato.restaurante.nombre}">
+                            <input type="text" hidden name="localidadRestauranteElegido" value="${detallePedido.plato.restaurante.localidad}">
+                            <input type="text" hidden name="precioPlatoELegido" value="${detallePedido.plato.precio}">
+                            <input type="text" hidden name="idCliente" value="1">
+                            <button type="submit" class="btn btn-secondary btn-sm">Quitar del pedido</button>
+                        </div>
+                    </article>
+                </form:form>
+            </c:forEach>
+            </br> </br>
             <form:form action="realizar-pedido" method="POST">
                 <!-- el controlador va a capturar el id de cliente y confirmar que todos los platos van al pedido. eliminar los datos de
                 detalepedidos correspondientes al pedido -->
                 <input type="text" hidden name="idCliente" value="1">
-                <br>
+                </br>
                 <button type="submit" class="btn btn-secondary btn-sm ">Realizar pedido</button>
+            </form:form>
+            <form:form action="cancelar-pedido" method="POST">
+                <input type="text" hidden name="idCliente" value="1">
+                <br>
+                <button type="submit" class="btn btn-secondary btn-sm ">Cancelar pedido</button>
             </form:form>
         </c:if>
 
@@ -100,7 +98,6 @@
             <c:if test="${empty formBuscarPlato.precio && not empty formBuscarPlato.nombrePlato && empty formBuscarPlato.localidadRestaurante}">
                 <c:forEach items="${platos}" var="plato">
                     <form:form action="agregar-plato" method="POST" modelAttribute="formBuscarPlato">
-
                         <article class="card comida shadow">
                             <div class="card-body">
                                 <h3 class="card-title bebas">${plato.nombre}</h3>
@@ -113,11 +110,13 @@
 
                                 <input type="text" hidden name="nombrePlatoElegido" value="${plato.nombre}">
                                 <input type="text" hidden name="descripcionPlatoElegido" value="${plato.descripcion}">
-                                <input type="text" hidden name="nombreRestauranteElegido" value="${plato.restaurante.nombre}">
-                                <input type="text" hidden name="localidadRestauranteElegido" value="${plato.restaurante.localidad}">
+                                <input type="text" hidden name="nombreRestauranteElegido"
+                                       value="${plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido"
+                                       value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm">Agregar al pedido</button>
+                                <button type="submit" class="btn btn-secondary btn-sm">Agregar al pedido</button></br></br>
                             </div>
                             </br>
                         </article>
@@ -125,8 +124,8 @@
                 </c:forEach>
             </c:if>
             <c:if test="${not empty formBuscarPlato.precio && empty formBuscarPlato.nombrePlato && empty formBuscarPlato.localidadRestaurante}">
-                <form:form action="agregar-plato" method="POST">
-                    <c:forEach items="${platosConFiltroPrecio}" var="plato">
+                <c:forEach items="${platosConFiltroPrecio}" var="plato">
+                    <form:form action="agregar-plato" method="POST">
                         <article class="card comida shadow">
                             <div class="card-body">
                                 <h3 class="card-title bebas">${plato.nombre}</h3>
@@ -138,19 +137,21 @@
 
                                 <input type="text" hidden name="nombrePlatoElegido" value="${plato.nombre}">
                                 <input type="text" hidden name="descripcionPlatoElegido" value="${plato.descripcion}">
-                                <input type="text" hidden name="nombreRestauranteElegido" value="${plato.restaurante.nombre}">
-                                <input type="text" hidden name="localidadRestauranteElegido" value="${plato.restaurante.localidad}">
+                                <input type="text" hidden name="nombreRestauranteElegido"
+                                       value="${plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido"
+                                       value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button>
+                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
                             </div>
                         </article>
-                    </c:forEach>
-                </form:form>
+                    </form:form>
+                </c:forEach>
             </c:if>
             <c:if test="${not empty formBuscarPlato.precio && not empty formBuscarPlato.nombrePlato && empty formBuscarPlato.localidadRestaurante}">
-                <form:form action="agregar-plato" method="POST">
-                    <c:forEach items="${platosConFiltroPrecioYNombre}" var="plato">
+                <c:forEach items="${platosConFiltroPrecioYNombre}" var="plato">
+                    <form:form action="agregar-plato" method="POST">
                         <article class="card comida shadow">
                             <div class="card-body">
                                 <h3 class="card-title bebas">${plato.nombre}</h3>
@@ -162,19 +163,21 @@
 
                                 <input type="text" hidden name="nombrePlatoElegido" value="${plato.nombre}">
                                 <input type="text" hidden name="descripcionPlatoElegido" value="${plato.descripcion}">
-                                <input type="text" hidden name="nombreRestauranteElegido" value="${plato.restaurante.nombre}">
-                                <input type="text" hidden name="localidadRestauranteElegido" value="${plato.restaurante.localidad}">
+                                <input type="text" hidden name="nombreRestauranteElegido"
+                                       value="${plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido"
+                                       value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button>
+                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
                             </div>
                         </article>
-                    </c:forEach>
-                </form:form>
+                    </form:form>
+                </c:forEach>
             </c:if>
             <c:if test="${not empty formBuscarPlato.precio && not empty formBuscarPlato.nombrePlato && not empty formBuscarPlato.localidadRestaurante}">
-                <form:form action="agregar-plato" method="POST">
-                    <c:forEach items="${platosConFiltroPrecioNombreYLocalidad}" var="plato">
+                <c:forEach items="${platosConFiltroPrecioNombreYLocalidad}" var="plato">
+                    <form:form action="agregar-plato" method="POST">
                         <article class="card comida shadow">
                             <div class="card-body">
                                 <h3 class="card-title bebas">${plato.nombre}</h3>
@@ -186,19 +189,21 @@
 
                                 <input type="text" hidden name="nombrePlatoElegido" value="${plato.nombre}">
                                 <input type="text" hidden name="descripcionPlatoElegido" value="${plato.descripcion}">
-                                <input type="text" hidden name="nombreRestauranteElegido" value="${plato.restaurante.nombre}">
-                                <input type="text" hidden name="localidadRestauranteElegido" value="${plato.restaurante.localidad}">
+                                <input type="text" hidden name="nombreRestauranteElegido"
+                                       value="${plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido"
+                                       value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button>
+                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
                             </div>
                         </article>
-                    </c:forEach>
-                </form:form>
+                    </form:form>
+                </c:forEach>
             </c:if>
             <c:if test="${empty formBuscarPlato.precio && not empty formBuscarPlato.nombrePlato &&  not empty formBuscarPlato.localidadRestaurante}">
-                <form:form action="agregar-plato" method="POST">
-                    <c:forEach items="${platosConFiltroNombreYLocalidad}" var="plato">
+                <c:forEach items="${platosConFiltroNombreYLocalidad}" var="plato">
+                    <form:form action="agregar-plato" method="POST">
                         <article class="card comida shadow">
                             <div class="card-body">
                                 <h3 class="card-title bebas">${plato.nombre}</h3>
@@ -210,19 +215,21 @@
 
                                 <input type="text" hidden name="nombrePlatoElegido" value="${plato.nombre}">
                                 <input type="text" hidden name="descripcionPlatoElegido" value="${plato.descripcion}">
-                                <input type="text" hidden name="nombreRestauranteElegido" value="${plato.restaurante.nombre}">
-                                <input type="text" hidden name="localidadRestauranteElegido" value="${plato.restaurante.localidad}">
+                                <input type="text" hidden name="nombreRestauranteElegido"
+                                       value="${plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido"
+                                       value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button>
+                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
                             </div>
                         </article>
-                    </c:forEach>
-                </form:form>
+                    </form:form>
+                </c:forEach>
             </c:if>
             <c:if test="${not empty formBuscarPlato.precio && empty formBuscarPlato.nombrePlato &&  not empty formBuscarPlato.localidadRestaurante}">
-                <form:form action="agregar-plato" method="POST">
-                    <c:forEach items="${platosConFiltroPrecioYLocalidad}" var="plato">
+                <c:forEach items="${platosConFiltroPrecioYLocalidad}" var="plato">
+                    <form:form action="agregar-plato" method="POST">
                         <article class="card comida shadow">
                             <div class="card-body">
                                 <h3 class="card-title bebas">${plato.nombre}</h3>
@@ -234,19 +241,47 @@
 
                                 <input type="text" hidden name="nombrePlatoElegido" value="${plato.nombre}">
                                 <input type="text" hidden name="descripcionPlatoElegido" value="${plato.descripcion}">
-                                <input type="text" hidden name="nombreRestauranteElegido" value="${plato.restaurante.nombre}">
-                                <input type="text" hidden name="localidadRestauranteElegido" value="${plato.restaurante.localidad}">
+                                <input type="text" hidden name="nombreRestauranteElegido"
+                                       value="${plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido"
+                                       value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button>
+                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
                             </div>
                         </article>
-                    </c:forEach>
-                </form:form>
+                    </form:form>
+                </c:forEach>
+            </c:if>
+            <c:if test="${not empty formBuscarPlato.precio && empty formBuscarPlato.nombrePlato &&  not empty formBuscarPlato.localidadRestaurante}">
+                <c:forEach items="${platosConFiltroPrecioYLocalidad}" var="plato">
+                    <form:form action="agregar-plato" method="POST">
+                        <article class="card comida shadow">
+                            <div class="card-body">
+                                <h3 class="card-title bebas">${plato.nombre}</h3>
+                                <h5>${plato.TIPO_PLATO}</h5>
+                                <p class="card-text">${plato.descripcion}</p>
+                                <h5 class="card-title mt-2"><b>Restaurante: </b>${plato.restaurante.nombre}</h5>
+                                <h5 class="card-title mt-2"><b>Localidad: </b>${plato.restaurante.localidad}</h5>
+                                <h5 class="card-title mt-2"><b>Precio: </b>${plato.precio}</h5>
+
+                                <input type="text" hidden name="nombrePlatoElegido" value="${plato.nombre}">
+                                <input type="text" hidden name="descripcionPlatoElegido" value="${plato.descripcion}">
+                                <input type="text" hidden name="nombreRestauranteElegido"
+                                       value="${plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido"
+                                       value="${plato.restaurante.localidad}">
+                                <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
+                                <input type="text" hidden name="idCliente" value="1">
+                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
+                            </div>
+                        </article>
+                    </form:form>
+                </c:forEach>
             </c:if>
             <c:if test="${empty formBuscarPlato.precio && empty formBuscarPlato.nombrePlato &&  not empty formBuscarPlato.localidadRestaurante}">
-                <form:form action="agregar-plato" method="POST">
-                    <c:forEach items="${platosConFiltroLocalidad}" var="plato">
+                <c:forEach items="${platosConFiltroLocalidad}" var="plato">
+                    <form:form action="agregar-plato" method="POST">
                         <article class="card comida shadow">
                             <div class="card-body">
                                 <h3 class="card-title bebas">${plato.nombre}</h3>
@@ -258,15 +293,17 @@
 
                                 <input type="text" hidden name="nombrePlatoElegido" value="${plato.nombre}">
                                 <input type="text" hidden name="descripcionPlatoElegido" value="${plato.descripcion}">
-                                <input type="text" hidden name="nombreRestauranteElegido" value="${plato.restaurante.nombre}">
-                                <input type="text" hidden name="localidadRestauranteElegido" value="${plato.restaurante.localidad}">
+                                <input type="text" hidden name="nombreRestauranteElegido"
+                                       value="${plato.restaurante.nombre}">
+                                <input type="text" hidden name="localidadRestauranteElegido"
+                                       value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button>
+                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
                             </div>
                         </article>
-                    </c:forEach>
-                </form:form>
+                    </form:form>
+                </c:forEach>
             </c:if>
         </section>
     </div>

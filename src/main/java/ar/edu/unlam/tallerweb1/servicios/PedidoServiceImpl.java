@@ -9,6 +9,7 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioCliente;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioDetallePedido;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPedido;
+import org.springframework.asm.Handle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,8 +46,8 @@ public class PedidoServiceImpl implements PedidoService{
 
     @Override
     public List<Plato> verPlatosDelPedido(Long pedido) {
-        List<Plato> platos =repositorioPedido.verPlatosDelPedido(pedido);
-        return platos;
+        Pedido pedidoBuscado =repositorioPedido.buscarPedido(pedido);
+        return pedidoBuscado.getListPlatos();
     }
 
     @Override
@@ -60,11 +61,33 @@ public class PedidoServiceImpl implements PedidoService{
             listaPlatos.add(detalle.getPlato());
         }
 
+        for(Plato plato : listaPlatos){
+            Integer cantVentas = plato.getCantVentas();
+            if(cantVentas == null){
+                cantVentas = 0;
+            }
+            plato.setCantVentas(++cantVentas);
+        }
+
 
         repositorioPedido.realizarPedido(listaPlatos, clienteEncontrado);
     }
 
+    @Override
+    public Pedido verPedido(Pedido pedido) {
+        return repositorioPedido.buscarPedido(pedido.getId());
+    }
 
+    @Override
+    public Pedido buscarPedidoPorId(Long pedido) {
+        return repositorioPedido.buscarPedido(pedido);
+    }
+
+    @Override
+    public List<Plato> verPlatosDelPedido(Pedido pedido) {
+        Pedido pedidoBuscado = verPedido(pedido);
+        return pedidoBuscado.getListPlatos();
+    }
 
 
 }

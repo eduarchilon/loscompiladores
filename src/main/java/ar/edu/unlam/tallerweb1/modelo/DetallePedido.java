@@ -19,8 +19,20 @@ public class DetallePedido {
     private Pedido pedido;
 
     @ManyToOne
+    @JoinColumn(name = "id_restaurante")
+    private Restaurante restaurante;
+
+    @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public DetallePedido(Plato plato, Cliente cliente) {
         this.plato = plato;

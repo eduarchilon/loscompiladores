@@ -26,17 +26,12 @@ public class PlatoTest extends SpringTest {
         assertThat(plato1.getId()).isNotNull();
     }
 
-    /*@Test @Transactional @Rollback
+    @Test @Transactional @Rollback
     public void queSePuedaEliminarUnPlato(){
         Plato plato1 = new Plato();
-        plato1.setNombre("Salmon con Roquefort");
-        plato1.setDescripcion("Salmon grille con salsa de roquefort y guarnicion");
-        plato1.setPrecio(800.00);
-        plato1.setTIPO_PLATO(TipoPlato.TIPICA);
-        session().save(plato1);
         session().delete(plato1);
         assertThat(plato1.getId()).isNull();
-    }*/
+    }
 
 
 
