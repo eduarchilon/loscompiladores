@@ -1,7 +1,10 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Plato;
+import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import ar.edu.unlam.tallerweb1.servicios.ClienteService;
+import ar.edu.unlam.tallerweb1.servicios.PedidoService;
+import ar.edu.unlam.tallerweb1.servicios.RestauranteService;
 import ar.edu.unlam.tallerweb1.servicios.ServicioBusqueda;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,13 +22,19 @@ public class ControladorRestauranteTest {
     private ControladorRestaurante controladorRestaurante;
     private ServicioBusqueda servicioBusqueda;
     private ClienteService clienteService;
+    private PedidoService pedidoService;
+    private RestauranteService restauranteService;
+
+
+    private static final String VISTA_HOME = "home";
 
     @Before
     public void init(){
         servicioBusqueda = mock(ServicioBusqueda.class);
         clienteService = mock(ClienteService.class);
-        controladorRestaurante = new ControladorRestaurante(servicioBusqueda, clienteService);
-
+        pedidoService = mock(PedidoService.class);
+        restauranteService = mock(RestauranteService.class);
+        controladorRestaurante = new ControladorRestaurante(servicioBusqueda, clienteService, pedidoService, restauranteService);
     }
 
     @Test
@@ -63,4 +72,36 @@ public class ControladorRestauranteTest {
         }
         when(servicioBusqueda.listaPlatosMasVendidos()).thenReturn(lista);
     }
+
+
+    @Test
+    public void muestraLosRestaurantesMasValorados(){
+
+        dadoQueExistanRestaurantesMasValorados(5);
+
+        ModelAndView mav = cuandoBuscoRestaurantesMasValorados();
+
+        entoncesVerEstaCantidad(mav, 5);
+
+        entoncesMeLLevaALaVista(VISTA_HOME, mav.getViewName());
+    }
+
+    private void entoncesVerEstaCantidad(ModelAndView mav, int cantidadEsperada) {
+
+        List<Restaurante> restaurantes = (List<Restaurante>) mav.getModel().get("restosValorados");
+        assertThat(restaurantes).hasSize(cantidadEsperada);
+    }
+
+    private ModelAndView cuandoBuscoRestaurantesMasValorados() {
+        return controladorRestaurante.verRestaurantesMasValorados();
+    }
+
+    private void dadoQueExistanRestaurantesMasValorados(int cantidad) {
+        List<Restaurante> valorados = new LinkedList<>();
+        for (int i = 0; i < cantidad; i++) {
+            valorados.add(new Restaurante());
+        }
+        when(restauranteService.getRestaurantesMasCalificados()).thenReturn(valorados);
+    }
+
 }

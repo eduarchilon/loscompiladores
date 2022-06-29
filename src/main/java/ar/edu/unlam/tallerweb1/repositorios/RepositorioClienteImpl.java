@@ -2,7 +2,9 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Cliente;
+import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -26,9 +28,9 @@ public class RepositorioClienteImpl implements RepositorioCliente {
     @Override
     public Cliente buscarPorId(Long idCliente) {
         final Session session = sessionFactory.getCurrentSession();
-        return (Cliente) session.createCriteria(Cliente.class)
-                .add(Restrictions.eq("id", idCliente));
-
+        Criteria cliente = session.createCriteria(Cliente.class, "cliente");
+        return (Cliente) cliente.add(Restrictions.eq("id", idCliente))
+                .uniqueResult();
     }
 
 
@@ -40,10 +42,11 @@ public class RepositorioClienteImpl implements RepositorioCliente {
     }
 
     @Override
-    public Usuario buscarPorNombre(String nombre) {
+    public Cliente buscarPorNombre(String nombre) {
         final Session session = sessionFactory.getCurrentSession();
-        return (Usuario) session.createCriteria(Usuario.class)
-                .add(Restrictions.eq("Nombre", nombre));
+        return (Cliente) session.createCriteria(Cliente.class)
+                .add(Restrictions.eq("nombre", nombre))
+                .uniqueResult();
     }
 
     @Override

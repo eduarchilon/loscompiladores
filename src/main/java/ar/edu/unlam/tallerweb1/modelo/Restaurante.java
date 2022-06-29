@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Restaurante {
@@ -10,9 +11,6 @@ public class Restaurante {
     @Column(name = "id_restaurante", nullable = false)
     private Long id;
 
-    @ManyToOne
-//    @JoinColumn(name = "id_localidad")
-    private Localidad localidad;
 
     @Column(name = "Nombre")
     private String nombre;
@@ -23,6 +21,7 @@ public class Restaurante {
     @Column(name = "Horario")
     private String horario;
 
+
     @Column(name = "Telefono")
     private String telefono;
 
@@ -30,10 +29,33 @@ public class Restaurante {
     private Integer calificacion;
 
 
+    //TO DO: el campo este sobra
     @Column(name = "Numero_de_mesas")
     private Integer numeroDeMesas;
 
+    @Column(name = "Localidad")
+    private String localidad;
 
+    @OneToMany
+    @JoinColumn(name = "id_mesas")
+    private List<Mesa> listMesa;
+
+    public Restaurante(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    public Restaurante(){
+
+    }
+
+    public List<Mesa> getListMesa() {
+        return listMesa;
+    }
+
+    public void setListMesa(List<Mesa> listMesa) {
+        this.listMesa = listMesa;
+    }
 
     public Long getId() {
         return id;
@@ -91,4 +113,11 @@ public class Restaurante {
         this.numeroDeMesas = numeroDeMesas;
     }
 
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
 }

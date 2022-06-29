@@ -21,5 +21,6 @@ public interface ServicioBusqueda {
 
     List<Plato> buscar(String nombrePlato, Double precio, String localidadRestaurante);
 
+    List<Plato> buscarPlatoPorLocalidadRestaurante(String localidadRestaurante);
 
 }

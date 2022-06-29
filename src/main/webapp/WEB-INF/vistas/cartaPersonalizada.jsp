@@ -1,32 +1,26 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Eduar
-  Date: 31/5/2022
-  Time: 22:05
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Carta personalizada</title>
-</head>
-<body>
+<%@ include file="header.jsp"%>
 
+<style>
+    <%@include file="/css/style.css"%>
+</style>
+
+    <h3 class="title-valorado">Nuestra carta personalizada para vos</h3>
+<div class="resto-container">
 <c:forEach items="${platos}" var="plato">
 
-    <article class="card comida shadow">
+
+    <div class="card" style="width: 18rem;">
+        <img src="https://i0.wp.com/www.recetaslily.com/wp-content/uploads/2019/09/01c87a16290b45c5b8eb75d3d1b52c6b.jpg?resize=525%2C351&ssl=1" class="card-img-top" alt="...">
         <div class="card-body">
-            <h3 class="card-title bebas">${plato.nombre}</h3>
-            <p>${plato.TIPO_PLATO}</p>
+            <h5 class="card-title">${plato.nombre}</h5>
+            <p class="card-text">${plato.TIPO_PLATO}</p>
             <p class="card-text">${plato.descripcion}</p>
-            <p class="card-title mt-2"><b>Restaurante: </b>${plato.restaurante.nombre}</p>
-            <p class="card-title mt-2"><b>Precio: </b>${plato.precio}</p>
+            <p class="card-text">Restaurante: ${plato.restaurante.nombre}</p>
+            <p class="card-text">Precio: ${plato.precio}</p>
+            <a href="#" class="btn btn-primary">Agregar al pedido</a>
         </div>
-    </article>
+    </div>
+
 </c:forEach>
-
-
-</body>
-</html>
+</div>
+<%@ include file="footer.jsp"%>

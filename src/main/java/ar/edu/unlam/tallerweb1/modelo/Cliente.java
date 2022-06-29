@@ -22,10 +22,14 @@ public class Cliente{
     @Column(name = "Telefono")
     private String telefono;
 
-    @ManyToOne
-    private Localidad localidad;
+    @Column(name = "Localidad")
+    private String localidad;
 
     public Cliente() {
+    }
+
+    public Cliente(Long id) {
+        this.id = id;
     }
 
     public Cliente(Long id, String nombre, String apellido, String dni, String telefono) {

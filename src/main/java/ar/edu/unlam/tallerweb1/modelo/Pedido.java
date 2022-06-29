@@ -1,5 +1,9 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.context.annotation.EnableMBeanExport;
+
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +16,9 @@ public class Pedido {
     @Column(name = "id_Pedido", nullable = false)
     private Long id;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name ="id_plato")
     private List<Plato> listPlatos = new LinkedList<>();
 
     @ManyToOne
@@ -27,6 +33,11 @@ public class Pedido {
     public Pedido(){
     }
 
+    public Pedido(List<Plato> listaPlatos, Cliente cliente) {
+        this.listPlatos = listPlatos;
+        this.cliente = cliente;
+    }
+
     public Long getId() {
         return id;
     }
@@ -37,6 +48,10 @@ public class Pedido {
 
     public List<Plato> getListPlatos() {
         return listPlatos;
+    }
+
+    public void addPlato(Plato plato){
+        listPlatos.add(plato);
     }
 
     public void setListPlatos(List<Plato> listPlatos) {

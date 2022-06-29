@@ -27,9 +27,9 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public Usuario obtenerClientePorNombre(Cliente cliente) {
-        Usuario buscado = repositorioCliente.buscarPorNombre(cliente.getNombre());
-        return  buscado;
+    public Cliente obtenerClientePorNombre(String cliente) {
+        Cliente clienteBuscado = repositorioCliente.buscarPorNombre(cliente);
+        return clienteBuscado;
     }
 
     @Override
