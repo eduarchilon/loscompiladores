@@ -3,6 +3,7 @@ import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
+import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
@@ -31,6 +32,21 @@ public class PlatoTest extends SpringTest {
         Plato plato1 = new Plato();
         session().delete(plato1);
         assertThat(plato1.getId()).isNull();
+    }
+
+    @Test @Transactional @Rollback()
+    public void modificaUnPlatoYLaBuscaPorNombrePlato(){
+        Plato plato = new Plato();
+        plato.setNombre("arroz");
+        plato.setPrecio(60.00);
+        final Session session = session();
+        session.save(plato);
+        plato.setPrecio(100.00);
+
+        session.update(plato);
+
+        Plato buscado = session.get(Plato.class, plato.getId());
+        assertThat(buscado.getPrecio()).isEqualTo(100.00);
     }
 
 
