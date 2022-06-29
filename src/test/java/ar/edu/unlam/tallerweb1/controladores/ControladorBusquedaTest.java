@@ -23,6 +23,9 @@ public class ControladorBusquedaTest {
     public static final String VISTA_BUSQUEDA = "buscarPlato";
     public static final String NOMBRE_VALIDO = "Empanada";
     public static final String NOMBRE_INVALIDO = "Silla";
+    public static final Double PRECIO_VALIDO = 1000.00;
+    public static final Double PRECIO_INVALIDO = 10.00;
+
 
     private ControladorBusqueda controladorBusqueda;
     private ServicioBusqueda servicioBusqueda;
@@ -45,7 +48,7 @@ public class ControladorBusquedaTest {
     }
 
     @Test
-    public void retornaErrorSiNoEncuentraPlatoBuscado(){
+    public void retornaErrorSiNoEncuentraPlatoConNombreBuscado(){
         dadoQueNoExisteUnPlatoConNombre(NOMBRE_INVALIDO);
 
         ModelAndView mav = cuandoBuscoUnPlatoConNombre(NOMBRE_INVALIDO);
@@ -54,6 +57,29 @@ public class ControladorBusquedaTest {
 
     }
 
+    @Test
+    public void retornaListaDePlatosQueCoincidanConElPrecioBuscado(){
+        dadoQueExisteUnPlatoConPrecio(PRECIO_VALIDO);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConPrecio(PRECIO_VALIDO);
+
+        entoncesRegresoALaVistaBusquedaConPlatos(VISTA_BUSQUEDA, mav);
+    }
+
+    @Test
+    public void retornaErrorSiNoEncuentraPlatoConPrecioBuscado(){
+        dadoQueNoExisteUnPlatoConPrecio(PRECIO_INVALIDO);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConPrecio(PRECIO_INVALIDO);
+
+        entoncesRegresoALaVistaBusquedaConMensajeError("No se encontraron comidas con ese precio! :(", mav);
+
+    }
+
+
+    private void dadoQueNoExisteUnPlatoConPrecio(Double precioInvalido) {
+        when(servicioBusqueda.buscar(precioInvalido)).thenReturn(new LinkedList());
+    }
 
 
     private void dadoQueExisteUnPlatoConNombre(String nombrePlato) {
@@ -65,10 +91,23 @@ public class ControladorBusquedaTest {
         when(servicioBusqueda.buscar(nombrePlato)).thenReturn(new LinkedList());
     }
 
+    private void dadoQueExisteUnPlatoConPrecio(Double precio) {
+        List <Plato> platos = new LinkedList<>();
+        when(servicioBusqueda.buscar(precio)).thenReturn(platos);
+    }
+
 
     private ModelAndView cuandoBuscoUnPlatoConNombre(String nombrePlato) {
         FormBuscarPlato form = new FormBuscarPlato();
         form.setNombrePlato(nombrePlato);
+        form.setLocalidadRestaurante("");
+        return controladorBusqueda.buscar(form);
+    }
+
+    private ModelAndView cuandoBuscoUnPlatoConPrecio(Double precio) {
+        FormBuscarPlato form = new FormBuscarPlato();
+        form.setNombrePlato("");
+        form.setPrecio(precio);
         form.setLocalidadRestaurante("");
         return controladorBusqueda.buscar(form);
     }
