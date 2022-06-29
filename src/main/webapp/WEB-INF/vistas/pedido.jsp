@@ -11,9 +11,12 @@
 <body>
 <div class="container">
     <div style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <h1>Su pedido ha sido realizado!</h1>
+        <c:if test="${empty pedido}">
+         <h1>Su pedido ha sido Cancelado!</h1>
+        </c:if>
         <section>
             <c:if test="${not empty pedido}">
+                <h1>Su pedido ha sido realizado!</h1>
                 <h2>Contenido de su pedido</h2>
                     <c:forEach items="${pedido}" var="detallePedido">
                         <article class="card comida shadow">

@@ -87,6 +87,11 @@ public class ControladorPedidos {
         return new ModelAndView("pedido", model);
     }
 
+    @RequestMapping(path = "cancelar-pedido", method = RequestMethod.POST)
+    public ModelAndView cancelarPedido(HttpServletRequest request){
+        return new ModelAndView("pedido");
+    }
+
     @RequestMapping(path = "eliminar-plato")
     public ModelAndView eliminarPlatoAlDetallePedido(@ModelAttribute("formBuscarPlato") FormBuscarPlato plato, HttpServletRequest request){
         ModelMap model = new ModelMap();
