@@ -33,13 +33,7 @@
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/ir-a-busqueda-plato">Buscar platos</a>
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/carta-personalizada">Carta personalizada</a>
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/ver-clientes">Clientes</a>
-                <div class="btn-group btn-group-responsive">
-                    <button type="button" class="btn btn-primary rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span>
-                    </button>
-                    <!-- Modal -->
-                    <%@ include file="modal.jsp"%>
-                </div>
+                <%@ include file="modal.jsp"%>
             </div>
         </div>
     </div>
