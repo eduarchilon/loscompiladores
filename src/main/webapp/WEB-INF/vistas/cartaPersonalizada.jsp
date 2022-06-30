@@ -4,7 +4,7 @@
     <%@include file="/css/style.css"%>
 </style>
 
-    <h3 class="title-valorado">Nuestra carta personalizada para vos</h3>
+<h3 class="title-valorado">Nuestra carta personalizada para vos</h3>
 <div class="resto-container">
 <c:forEach items="${platos}" var="plato">
 

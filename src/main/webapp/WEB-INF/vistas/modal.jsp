@@ -2,7 +2,11 @@
     <%@include file="/css/style.css"%>
 </style>
 
-<!-- Modal -->
+<div class="btn-group btn-group-responsive">
+    <button type="button" class="btn btn-primary rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa fa-shopping-cart"></i> Cart <span class="badge">0</span>
+    </button>
+    <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -19,4 +23,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
