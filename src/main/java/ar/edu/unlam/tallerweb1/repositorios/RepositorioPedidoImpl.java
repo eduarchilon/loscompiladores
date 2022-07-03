@@ -74,6 +74,8 @@ public class RepositorioPedidoImpl implements RepositorioPedido{
     }
 
 
+
+
     public void realizarPedido(List<Plato> listaPlatos, Cliente cliente) {
         Session session = sessionFactory.openSession();
         Pedido pedido = new Pedido(listaPlatos,cliente);
