@@ -17,4 +17,7 @@ public interface RepositorioCarrito {
     Restaurante detalleDelResturante(Long idRestaurante);
 
     Carrito verCarrito(Long idCarrito);
+
+    /*Nuevo*/
+    List<Carrito> verTodosLosPlatos();
 }

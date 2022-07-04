@@ -16,15 +16,15 @@ public class Carrito {
     private Long id;
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name ="id_plato")
-    private List<Plato> platos =  new LinkedList<>();
+    private Plato plato;
 
 
-    public Carrito(Long id, List<Plato> platos) {
+    public Carrito(Long id, Plato plato) {
         this.id = id;
-        this.platos = platos;
+        this.plato = plato;
     }
 
     public Carrito(){
@@ -43,22 +43,31 @@ public class Carrito {
         this.id = id;
     }
 
-    public List<Plato> getPlatos() {
-        return platos;
+    public Plato getPlato() {
+        return plato;
     }
 
-    public void setPlatos(List<Plato> platos) {
-        this.platos = platos;
+    public void setPlato(Plato plato) {
+        this.plato = plato;
     }
 
-    public Boolean agregarPlatoAlPedido(Plato plato) {
-        Boolean resultado = false;
-        resultado = this.platos.add(plato);
-        return resultado;
-    }
-
-    public Boolean eliminarPlatoDelCarrito(Plato plato){
-        return this.platos.remove(plato);
-    }
+    //
+//    public List<Plato> getPlatos() {
+//        return platos;
+//    }
+//
+//    public void setPlatos(List<Plato> platos) {
+//        this.platos = platos;
+//    }
+//
+//    public Boolean agregarPlatoAlPedido(Plato plato) {
+//        Boolean resultado = false;
+//        resultado = this.platos.add(plato);
+//        return resultado;
+//    }
+//
+//    public Boolean eliminarPlatoDelCarrito(Plato plato){
+//        return this.platos.remove(plato);
+//    }
 }
 

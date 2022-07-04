@@ -55,4 +55,14 @@ public class RepositorioCarritoImpl implements RepositorioCarrito{
                 .add(Restrictions.eq("id", idCarrito))
                 .uniqueResult();
     }
+
+    /*Nuevo*/
+
+    @Override
+    public List<Carrito> verTodosLosPlatos() {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Carrito>) sessionFactory.getCurrentSession()
+                .createCriteria(Carrito.class)
+                .list();
+    }
 }

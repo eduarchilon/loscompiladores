@@ -33,7 +33,10 @@ public class ControladorCarrito {
         ModelMap modelo = new ModelMap();
         /*Hardcodeado ya que no hay login*/
         Carrito carrito =(Carrito) carritoService.verPlatosDelCarrito(1L);
-        List<Plato> platosCarrito = (List<Plato>) carrito.getPlatos();
+        List<Carrito> platosCarrito = (List<Carrito>) carritoService.verListDePlatosDelCarrito();
+        System.out.println("/**********************/");
+        System.out.println(platosCarrito);
+        System.out.println("/**********************/");
         modelo.put("platosCarrito", platosCarrito);
         modelo.put("carritoModal", carrito);
         return new ModelAndView("carrito", modelo);
