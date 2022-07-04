@@ -22,14 +22,14 @@
 <style>
     <%@include file="/css/style.css"%>
 </style>
-<nav class="navbar navbar-expand-lg bg-light container-general">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-light navBar-ancho">
+    <div class="container-fluid  container-general">
         <img src="https://i.pinimg.com/originals/bd/87/83/bd87839c22ba2ecc577a5c381f168dd4.jpg" alt="" width="70px">
         <a class="navbar-brand" href="/proyecto_limpio_spring_war_exploded/home">YourRestoNearYou</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse navbar-style" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/buscarPlatosMasVendidos">Platos mas vendidos</a>
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/ir-a-busqueda-plato">Buscar platos</a>
