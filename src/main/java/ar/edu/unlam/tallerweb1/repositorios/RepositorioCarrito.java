@@ -20,4 +20,6 @@ public interface RepositorioCarrito {
 
     /*Nuevo*/
     List<Carrito> verTodosLosPlatos();
+
+    Boolean borrarPlato(Long idPlatoCarrito);
 }

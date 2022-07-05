@@ -43,7 +43,7 @@ public class RepositorioCarritoTest extends SpringTest {
 
     @Test
     @Transactional
-    @Rollback
+    @Rollback(false)
     public void queMeMuestreLosPlatosDelCarrito() {
         dadoQueExistenPlatos();
 
@@ -124,6 +124,9 @@ public class RepositorioCarritoTest extends SpringTest {
         session().save(carrito1);
         session().save(carrito2);
         session().save(carrito3);
+//        session().delete(carrito1);
+
+        Boolean result = repositorioCarrito.borrarPlato(1L);
 
     }
 

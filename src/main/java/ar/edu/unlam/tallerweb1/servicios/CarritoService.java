@@ -10,4 +10,6 @@ public interface CarritoService {
     Carrito verPlatosDelCarrito(Long idCarrito);
 
     List<Carrito> verListDePlatosDelCarrito();
+
+    Boolean borrarPlatoDelCarrito(Long idPlatoCarrito);
 }

@@ -6,7 +6,9 @@ import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -64,5 +66,26 @@ public class RepositorioCarritoImpl implements RepositorioCarrito{
         return (List<Carrito>) sessionFactory.getCurrentSession()
                 .createCriteria(Carrito.class)
                 .list();
+    }
+
+    @Override
+    public Boolean borrarPlato(Long idPlatoCarrito) {
+        final Session session = sessionFactory.getCurrentSession();
+        Carrito carrito = (Carrito) sessionFactory.getCurrentSession()
+                .createCriteria(Carrito.class)
+                .add(Restrictions.eq("id", idPlatoCarrito))
+                .uniqueResult();
+                session.delete(carrito);
+                session.flush();
+        return true;
+//        Session session = sessionFactory.openSession();
+//        Transaction tx = session.beginTransaction();
+//        String hql = "DELETE FROM Carrito car "  +
+//                "WHERE car.id = :id";
+//        Query query = session.createQuery(hql);
+//        query.setParameter("id", idPlatoCarrito);
+//        int result = query.executeUpdate();
+//        System.out.println("Rows affected: " + result);
+//        return true;
     }
 }

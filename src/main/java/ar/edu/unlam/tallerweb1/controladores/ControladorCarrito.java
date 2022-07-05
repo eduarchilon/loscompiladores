@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -27,19 +29,28 @@ public class ControladorCarrito {
         this.carritoService = carritoService;
     }
 
-    @RequestMapping(path = "/cart", method = RequestMethod.GET)
+    @RequestMapping(path = "/cart", method = { RequestMethod.GET })
     @ResponseBody
     public ModelAndView verCarritoModal(HttpServletRequest request) {
         ModelMap modelo = new ModelMap();
-        /*Hardcodeado ya que no hay login*/
-        Carrito carrito =(Carrito) carritoService.verPlatosDelCarrito(1L);
         List<Carrito> platosCarrito = (List<Carrito>) carritoService.verListDePlatosDelCarrito();
-        System.out.println("/**********************/");
-        System.out.println(platosCarrito);
-        System.out.println("/**********************/");
         modelo.put("platosCarrito", platosCarrito);
-        modelo.put("carritoModal", carrito);
         return new ModelAndView("carrito", modelo);
+    }
+
+    @RequestMapping(value = "cart/{idCart}", method = RequestMethod.POST)
+    public ModelAndView borrarPlatoModall(@PathVariable("idCart")  Long idCart, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        ModelMap modelo = new ModelMap();
+        Boolean resultado = carritoService.borrarPlatoDelCarrito(idCart);
+        String mensaje = "Borrado";
+        modelo.put("mensajeDel", mensaje);
+        return new ModelAndView("redirect:/cart", modelo);
+    }
+
+    @RequestMapping(value = "cart/{idCart}", method = RequestMethod.GET)
+    public ModelAndView redirect(@PathVariable Long idCart) throws IOException {
+
+        return new ModelAndView("redirect:/cart");
     }
 
 }

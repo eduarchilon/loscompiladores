@@ -5,6 +5,7 @@
 </style>
 
 <h3 class="title-valorado">Carrito de compras</h3>
+<%@ include file="mensajeDelete.jsp"%>
 <div class="resto-container">
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -42,7 +43,9 @@
                                                         <div style="width: 80px;">
                                                             <h5 class="mb-0">${carrito.plato.precio}</h5>
                                                         </div>
-                                                        <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                                        <form action="/proyecto_limpio_spring_war_exploded/cart/${carrito.id}" method="post">
+                                                            <button type="submit"  style="color: #cecece;"><i class="fas fa-trash-alt"></i></button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

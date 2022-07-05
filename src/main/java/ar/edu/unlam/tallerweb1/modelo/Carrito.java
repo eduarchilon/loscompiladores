@@ -16,7 +16,8 @@ public class Carrito {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    /*saque el cascade all para     que no afecte al resto*/
+    @ManyToOne(fetch = FetchType.EAGER)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name ="id_plato")
     private Plato plato;
