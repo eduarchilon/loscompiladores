@@ -115,6 +115,15 @@ body{
     margin-top: 36px;
 }
 
+.btn-style{
+    background-color: transparent;
+    border: none;
+}
+
+.btn-style:hover{
+    color: red !important;
+}
+
 @media screen and (max-width: 996px){
     .container-general{
         padding: 0 !important;

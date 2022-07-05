@@ -42,14 +42,11 @@ public class ControladorCarrito {
     public ModelAndView borrarPlatoModall(@PathVariable("idCart")  Long idCart, HttpServletResponse response, HttpServletRequest request) throws IOException {
         ModelMap modelo = new ModelMap();
         Boolean resultado = carritoService.borrarPlatoDelCarrito(idCart);
-        String mensaje = "Borrado";
-        modelo.put("mensajeDel", mensaje);
         return new ModelAndView("redirect:/cart", modelo);
     }
 
     @RequestMapping(value = "cart/{idCart}", method = RequestMethod.GET)
     public ModelAndView redirect(@PathVariable Long idCart) throws IOException {
-
         return new ModelAndView("redirect:/cart");
     }
 
