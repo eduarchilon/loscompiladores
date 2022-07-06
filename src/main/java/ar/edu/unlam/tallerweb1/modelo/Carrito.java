@@ -52,6 +52,12 @@ public class Carrito {
         this.plato = plato;
     }
 
+    public void setPlatoId(Long plato){
+        Plato platoN = new Plato();
+        platoN.setId(plato);
+        setPlato(platoN);
+    }
+
     //
 //    public List<Plato> getPlatos() {
 //        return platos;

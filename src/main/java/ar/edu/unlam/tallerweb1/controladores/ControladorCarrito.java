@@ -50,4 +50,10 @@ public class ControladorCarrito {
         return new ModelAndView("redirect:/cart");
     }
 
+    @RequestMapping(value = "/agregar-plato/{plato}", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView alumnosSinCurso(@PathVariable("plato") Long plato) {
+        ModelMap modelo = new ModelMap();
+        carritoService.agregarPlatoAlCarrito(plato);
+        return new ModelAndView("redirect:/cart", modelo);
+    }
 }

@@ -37,4 +37,9 @@ public class CarritoServiceImpl implements CarritoService{
     public Boolean borrarPlatoDelCarrito(Long idPlatoCarrito) {
         return repositorioCarrito.borrarPlato(idPlatoCarrito);
     }
+
+    @Override
+    public void agregarPlatoAlCarrito(Long plato) {
+        repositorioCarrito.cargarAlCarrito(plato);
+    }
 }

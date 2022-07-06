@@ -22,4 +22,6 @@ public interface RepositorioCarrito {
     List<Carrito> verTodosLosPlatos();
 
     Boolean borrarPlato(Long idPlatoCarrito);
+
+    void cargarAlCarrito(Long plato);
 }

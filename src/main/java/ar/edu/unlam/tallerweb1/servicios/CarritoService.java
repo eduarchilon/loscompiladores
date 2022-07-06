@@ -12,4 +12,6 @@ public interface CarritoService {
     List<Carrito> verListDePlatosDelCarrito();
 
     Boolean borrarPlatoDelCarrito(Long idPlatoCarrito);
+
+    void agregarPlatoAlCarrito(Long plato);
 }

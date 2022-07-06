@@ -124,9 +124,10 @@ public class RepositorioCarritoTest extends SpringTest {
         session().save(carrito1);
         session().save(carrito2);
         session().save(carrito3);
-//        session().delete(carrito1);
 
         Boolean result = repositorioCarrito.borrarPlato(1L);
+
+//        Boolean guardado = repositorioCarrito.cargarAlCarrito(plato4);
 
     }
 

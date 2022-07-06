@@ -1,10 +1,10 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Carrito;
-import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import org.hibernate.Session;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -18,6 +18,12 @@ import java.util.List;
 public class RepositorioCarritoImpl implements RepositorioCarrito{
 
     private SessionFactory sessionFactory;
+
+    JdbcTemplate template;
+
+    public void setTemplate(JdbcTemplate template) {
+        this.template = template;
+    }
 
     @Autowired
     public RepositorioCarritoImpl(SessionFactory sessionFactory) {
@@ -78,14 +84,16 @@ public class RepositorioCarritoImpl implements RepositorioCarrito{
                 session.delete(carrito);
                 session.flush();
         return true;
-//        Session session = sessionFactory.openSession();
-//        Transaction tx = session.beginTransaction();
-//        String hql = "DELETE FROM Carrito car "  +
-//                "WHERE car.id = :id";
-//        Query query = session.createQuery(hql);
-//        query.setParameter("id", idPlatoCarrito);
-//        int result = query.executeUpdate();
-//        System.out.println("Rows affected: " + result);
-//        return true;
+    }
+
+    @Override
+    public void cargarAlCarrito(Long plato) {
+        Session session = sessionFactory.openSession();
+        Transaction trans = session.beginTransaction();
+        Carrito c = session.load(Carrito.class, plato);
+
+        Carrito car = new Carrito();
+        car.setPlatoId(plato);
+        session.save(car);
     }
 }

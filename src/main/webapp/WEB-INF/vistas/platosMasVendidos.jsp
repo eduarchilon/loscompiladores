@@ -16,7 +16,9 @@
                     <p class="card-text">${plato.descripcion}</p>
                     <p class="card-text">Restaurante: ${plato.restaurante.nombre}</p>
                     <p class="card-text">Precio: ${plato.precio}</p>
-                    <a href="#" class="btn btn-primary">Agregar al pedido</a>
+                    <form action="" method="post">
+                        <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+                    </form>
                 </div>
             </div>
         </c:forEach>
