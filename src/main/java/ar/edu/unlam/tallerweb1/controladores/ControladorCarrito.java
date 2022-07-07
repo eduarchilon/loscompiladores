@@ -34,6 +34,10 @@ public class ControladorCarrito {
     public ModelAndView verCarritoModal(HttpServletRequest request) {
         ModelMap modelo = new ModelMap();
         List<Carrito> platosCarrito = (List<Carrito>) carritoService.verListDePlatosDelCarrito();
+        Double subtotal = (Double)carritoService.getSubtotal(platosCarrito);
+        Double total = (Double) carritoService.getTotal(subtotal, 15.0);
+        modelo.put("subtotal", subtotal);
+        modelo.put("total", total);
         modelo.put("platosCarrito", platosCarrito);
         return new ModelAndView("carrito", modelo);
     }

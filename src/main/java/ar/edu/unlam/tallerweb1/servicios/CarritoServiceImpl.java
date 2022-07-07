@@ -42,4 +42,21 @@ public class CarritoServiceImpl implements CarritoService{
     public void agregarPlatoAlCarrito(Long plato) {
         repositorioCarrito.cargarAlCarrito(plato);
     }
+
+    @Override
+    public Double getSubtotal(List<Carrito> platos) {
+        Double total = 0.0;
+        for (int i = 0; i <platos.size() ; i++) {
+            total += platos.get(i).getPlato().getPrecio();
+        }
+        return total;
+    }
+
+    @Override
+    public Double getTotal(Double subtotal, Double descuento) {
+        Double total = subtotal - descuento;
+        return total;
+    }
+
+
 }
