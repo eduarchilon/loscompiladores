@@ -70,8 +70,8 @@
                 </br>
                 <button type="submit" class="btn btn-secondary btn-sm ">Realizar pedido</button>
             </form:form>
-            <form:form action="cancelar-pedido" method="POST">
-                <input type="text" hidden name="idCliente" value="1">
+            <form:form action="cancelar-pedido" method="get">
+                <input type="search" hidden name="idCliente" value="1">
                 <br>
                 <button type="submit" class="btn btn-secondary btn-sm ">Cancelar pedido</button>
             </form:form>

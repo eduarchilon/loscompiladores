@@ -14,4 +14,8 @@ public interface CarritoService {
     Boolean borrarPlatoDelCarrito(Long idPlatoCarrito);
 
     void agregarPlatoAlCarrito(Long plato);
+
+    Double getSubtotal(List<Carrito> platos);
+
+    Double getTotal(Double subtotal, Double descuento);
 }

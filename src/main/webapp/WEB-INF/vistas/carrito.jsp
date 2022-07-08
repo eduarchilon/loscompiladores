@@ -1,4 +1,5 @@
 <%@ include file="header.jsp"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <style>
     <%@include file="/css/style.css"%>
@@ -36,9 +37,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="d-flex flex-row align-items-center">
-                                                        <div style="width: 50px;">
-                                                            <h5 class="fw-normal mb-0">${carrito.plato.cantVentas}</h5>
-                                                        </div>
                                                         <div style="width: 80px;">
                                                             <h5 class="mb-0">${carrito.plato.precio}</h5>
                                                         </div>
@@ -66,33 +64,33 @@
                                         </div>
 
 
-
-                                        <form class="mt-4">
-                                            <div class="form-outline form-white">
-                                                <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
-                                                       placeholder="Ingrese cupo de descuento" />
-                                                <label class="form-label d-none" for="typeName"></label>
+                                      <form:form action="/proyecto_limpio_spring_war_exploded/cart/${searchString}" method="get" class="mt-4">
+                                            <div class="form-outline form-white mb-2">
+                                                <input type="text" id="searchString" class="form-control form-control-lg" siez="17"
+                                                       placeholder="Ingrese cupon de descuento"  name="searchString"/>
+                                                <label class="form-label d-none" for="searchString"></label>
                                             </div>
+                                            <button type="submit" class="btn btn-warning btn-block">
+                                                    <span>Aplicar</span>
+                                            </button>
 
-
-
-                                        </form>
-
+                                            </form:form>
+                                        <p>${mensajeCupon}</p>
                                         <hr class="my-4">
 
                                         <div class="d-flex justify-content-between">
                                             <p class="mb-2">Subtotal</p>
-                                            <p class="mb-2">$4798.00</p>
+                                            <p class="mb-2">$${subtotal}</p>
                                         </div>
 
                                         <div class="d-flex justify-content-between">
                                             <p class="mb-2">Desuento</p>
-                                            <p class="mb-2">$20.00</p>
+                                            <p class="mb-2">-${subtotal * cupon.descuento} (${cupon.descuento*100}%)</p>
                                         </div>
 
                                         <div class="d-flex justify-content-between mb-4">
                                             <p class="mb-2">Total(Incl. taxes)</p>
-                                            <p class="mb-2">$4818.00</p>
+                                            <p class="mb-2">$${(subtotal) + (subtotal * searchResult.descuento)}</p>
                                         </div>
 
                                         <button type="button" class="btn btn-info btn-block btn-lg">
