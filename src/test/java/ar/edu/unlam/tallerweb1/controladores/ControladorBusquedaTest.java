@@ -23,6 +23,8 @@ public class ControladorBusquedaTest {
     public static final String VISTA_BUSQUEDA = "buscarPlato";
     public static final String NOMBRE_VALIDO = "Empanada";
     public static final String NOMBRE_INVALIDO = "Silla";
+    public static final String LOCALIDAD_VALIDA = "Ciudadela";
+    public static final String LOCALIDAD_INVALIDA = "Castelar";
     public static final Double PRECIO_VALIDO = 1000.00;
     public static final Double PRECIO_INVALIDO = 10.00;
 
@@ -76,9 +78,157 @@ public class ControladorBusquedaTest {
 
     }
 
+    @Test
+    public void retornaListaDePlatosQueCoincidanConElNombreYPrecioBuscado(){
+        dadoQueExisteUnPlatoConPrecioYNombre(PRECIO_VALIDO, NOMBRE_VALIDO);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConPrecioYNombre(PRECIO_INVALIDO, NOMBRE_INVALIDO);
+
+        entoncesRegresoALaVistaBusquedaConPlatos(VISTA_BUSQUEDA, mav);
+    }
+
+    @Test
+    public void retornaErrorSiNoEncuentraPlatoConPrecioYNombreBuscado(){
+        dadoQueNoExisteUnPlatoConPrecioYNombre(PRECIO_INVALIDO, NOMBRE_INVALIDO);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConPrecioYNombre(PRECIO_INVALIDO, NOMBRE_INVALIDO);
+
+        entoncesRegresoALaVistaBusquedaConMensajeError("No se encontraron comidas con ese nombre y precio! :(", mav);
+
+    }
+
+    @Test
+    public void retornaListaDePlatosQueCoincidanConElNombrePrecioYLocalidadBuscado(){
+        dadoQueExisteUnPlatoConPrecioNombreYLocalidad(PRECIO_VALIDO, NOMBRE_VALIDO,LOCALIDAD_VALIDA);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConPrecioNombreYLocalidad(PRECIO_VALIDO, NOMBRE_VALIDO, LOCALIDAD_VALIDA);
+
+        entoncesRegresoALaVistaBusquedaConPlatos(VISTA_BUSQUEDA, mav);
+    }
+
+    @Test
+    public void retornaErrorSiNoEncuentraPlatoConPrecioNombreYLocalidadBuscado(){
+        dadoQueNoExisteUnPlatoConPrecioNombreYLocalidad(PRECIO_INVALIDO, NOMBRE_INVALIDO, LOCALIDAD_INVALIDA);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConPrecioNombreYLocalidad(PRECIO_INVALIDO, NOMBRE_INVALIDO, LOCALIDAD_INVALIDA);
+
+        entoncesRegresoALaVistaBusquedaConMensajeError("No se encontraron comidas con ese nombre y precio en la localidad seleccionada! :(", mav);
+
+    }
+
+    @Test
+    public void retornaListaDePlatosQueCoincidanConElNombreYLocalidadBuscado(){
+        dadoQueExisteUnPlatoConNombreYLocalidad(NOMBRE_VALIDO,LOCALIDAD_VALIDA);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConNombreYLocalidad(NOMBRE_VALIDO, LOCALIDAD_VALIDA);
+
+        entoncesRegresoALaVistaBusquedaConPlatos(VISTA_BUSQUEDA, mav);
+    }
+
+    @Test
+    public void retornaErrorSiNoEncuentraPlatoConNombreYLocalidadBuscado(){
+        dadoQueNoExisteUnPlatoConNombreYLocalidad(NOMBRE_INVALIDO, LOCALIDAD_INVALIDA);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConNombreYLocalidad(NOMBRE_INVALIDO, LOCALIDAD_INVALIDA);
+
+        entoncesRegresoALaVistaBusquedaConMensajeError("No se encontraron comidas con ese nombre en la localidad seleccionada! :(", mav);
+
+    }
+
+    @Test
+    public void retornaListaDePlatosQueCoincidanConElPrecioYLocalidadBuscado(){
+        dadoQueExisteUnPlatoConPrecioYLocalidad(PRECIO_VALIDO,LOCALIDAD_VALIDA);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConPrecioYLocalidad(PRECIO_VALIDO, LOCALIDAD_VALIDA);
+
+        entoncesRegresoALaVistaBusquedaConPlatos(VISTA_BUSQUEDA, mav);
+    }
+
+    @Test
+    public void retornaErrorSiNoEncuentraPlatoConPrecioYLocalidadBuscado(){
+        dadoQueNoExisteUnPlatoConPrecioYLocalidad(PRECIO_INVALIDO, LOCALIDAD_INVALIDA);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConPrecioYLocalidad(PRECIO_INVALIDO, LOCALIDAD_INVALIDA);
+
+        entoncesRegresoALaVistaBusquedaConMensajeError("No se encontraron comidas con ese precio en la localidad seleccionada! :(", mav);
+
+    }
+
+    @Test
+    public void retornaListaDePlatosQueCoincidanConLocalidadBuscado(){
+        dadoQueExisteUnPlatoConLocalidad(LOCALIDAD_VALIDA);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConLocalidad(LOCALIDAD_VALIDA);
+
+        entoncesRegresoALaVistaBusquedaConPlatos(VISTA_BUSQUEDA, mav);
+    }
+
+    @Test
+    public void retornaErrorSiNoEncuentraLocalidadBuscado(){
+        dadoQueNoExisteUnPlatoConLocalidad(LOCALIDAD_INVALIDA);
+
+        ModelAndView mav = cuandoBuscoUnPlatoConLocalidad(LOCALIDAD_INVALIDA);
+
+        entoncesRegresoALaVistaBusquedaConMensajeError("No se encontraron comidas en la localidad seleccionada! :(", mav);
+
+    }
+
+    private void dadoQueNoExisteUnPlatoConLocalidad(String localidadInvalida) {
+        when(servicioBusqueda.buscar(localidadInvalida, localidadInvalida)).thenReturn(new LinkedList());
+    }
+
+
+    private void dadoQueExisteUnPlatoConLocalidad(String localidadValida) {
+        List <Plato> platos = new LinkedList<>();
+        when(servicioBusqueda.buscar(localidadValida)).thenReturn(platos);
+    }
+
+
+    private void dadoQueNoExisteUnPlatoConPrecioYLocalidad(Double precioInvalido, String localidadInvalida) {
+        when(servicioBusqueda.buscar(precioInvalido, localidadInvalida)).thenReturn(new LinkedList());
+    }
+
+    private void dadoQueExisteUnPlatoConPrecioYLocalidad(Double precioValido, String localidadValida) {
+        List <Plato> platos = new LinkedList<>();
+        when(servicioBusqueda.buscar(precioValido,localidadValida)).thenReturn(platos);
+    }
+
+
+    private void dadoQueNoExisteUnPlatoConNombreYLocalidad(String nombreInvalido, String localidadInvalida) {
+        when(servicioBusqueda.buscar(nombreInvalido, localidadInvalida)).thenReturn(new LinkedList());
+    }
+
+
+    private void dadoQueExisteUnPlatoConNombreYLocalidad(String nombreValido, String localidadValida) {
+        List <Plato> platos = new LinkedList<>();
+        when(servicioBusqueda.buscar(nombreValido,localidadValida)).thenReturn(platos);
+    }
+
+
+    private void dadoQueNoExisteUnPlatoConPrecioNombreYLocalidad(Double precioInvalido, String nombreInvalido, String localidadInvalida) {
+        when(servicioBusqueda.buscar(nombreInvalido,precioInvalido, localidadInvalida)).thenReturn(new LinkedList());
+    }
+
+
+    private void dadoQueExisteUnPlatoConPrecioNombreYLocalidad(Double precioValido, String nombreValido, String localidadValida) {
+        List <Plato> platos = new LinkedList<>();
+        when(servicioBusqueda.buscar(nombreValido,precioValido, localidadValida)).thenReturn(platos);
+    }
+
+
+
+    private void dadoQueExisteUnPlatoConPrecioYNombre(Double precioValido, String nombreValido) {
+        List <Plato> platos = new LinkedList<>();
+        when(servicioBusqueda.buscar(nombreValido,precioValido)).thenReturn(platos);
+    }
+
 
     private void dadoQueNoExisteUnPlatoConPrecio(Double precioInvalido) {
         when(servicioBusqueda.buscar(precioInvalido)).thenReturn(new LinkedList());
+    }
+
+    private void dadoQueNoExisteUnPlatoConPrecioYNombre(Double precioInvalido, String nombreValido) {
+        when(servicioBusqueda.buscar(precioInvalido, nombreValido)).thenReturn(new LinkedList());
     }
 
 
@@ -104,12 +254,52 @@ public class ControladorBusquedaTest {
         return controladorBusqueda.buscar(form);
     }
 
+    private ModelAndView cuandoBuscoUnPlatoConNombreYLocalidad(String nombreValido, String localidadValida) {
+        FormBuscarPlato form = new FormBuscarPlato();
+        form.setNombrePlato(nombreValido);
+        form.setLocalidadRestaurante(localidadValida);
+        return controladorBusqueda.buscar(form);
+    }
+
+    private ModelAndView cuandoBuscoUnPlatoConLocalidad(String localidadValida) {
+        FormBuscarPlato form = new FormBuscarPlato();
+        form.setNombrePlato("");
+        form.setLocalidadRestaurante(localidadValida);
+        return controladorBusqueda.buscar(form);
+    }
+
     private ModelAndView cuandoBuscoUnPlatoConPrecio(Double precio) {
         FormBuscarPlato form = new FormBuscarPlato();
         form.setNombrePlato("");
         form.setPrecio(precio);
         form.setLocalidadRestaurante("");
         return controladorBusqueda.buscar(form);
+    }
+
+
+    private ModelAndView cuandoBuscoUnPlatoConPrecioYLocalidad(Double precioValido, String localidadValida) {
+        FormBuscarPlato form = new FormBuscarPlato();
+        form.setNombrePlato("");
+        form.setPrecio(precioValido);
+        form.setLocalidadRestaurante(localidadValida);
+        return controladorBusqueda.buscar(form);
+    }
+
+    private ModelAndView cuandoBuscoUnPlatoConPrecioNombreYLocalidad(Double precioValido, String nombreValido, String localidadValida) {
+        FormBuscarPlato form = new FormBuscarPlato();
+        form.setNombrePlato(nombreValido);
+        form.setPrecio(precioValido);
+        form.setLocalidadRestaurante(localidadValida);
+        return controladorBusqueda.buscar(form);
+    }
+
+    private ModelAndView cuandoBuscoUnPlatoConPrecioYNombre(Double precioValido, String nombreValido) {
+        FormBuscarPlato form = new FormBuscarPlato();
+        form.setNombrePlato(nombreValido);
+        form.setPrecio(precioValido);
+        form.setLocalidadRestaurante("");
+        return controladorBusqueda.buscar(form);
+
     }
 
 

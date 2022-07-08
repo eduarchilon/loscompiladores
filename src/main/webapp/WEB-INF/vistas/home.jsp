@@ -12,6 +12,7 @@
             <img src="https://imagekit.androidphoria.com/wp-content/uploads/platos-veganos.jpg" class="d-block w-100" alt="..." style="height: 550px; object-fit: cover;">
             <div class="carousel-caption-bg d-none d-md-block text-slider">
                 <h5>Los mejores platos</h5>
+                <a href=""><button type="button" class="btn btn-success px-5 fs-5 fw-bolder my-3">Ver platos de mi gusto</button></a>
                 <p>Tenemos los mejores platos para ofrecerte sin importar el gusto que tengas. Vos sos libre de elegir.</p>
             </div>
         </div>
@@ -19,6 +20,7 @@
             <img src="https://www.bacanal.com.ar/wp-content/uploads/2017/05/ASADO-VEGGIE-VA2.jpg" class="d-block w-100" alt="..." style="height: 550px; object-fit: cover;">
             <div class="carousel-caption-bg d-none d-md-block text-slider">
                 <h5>Los mejores locales de comida</h5>
+                <a href=""><button type="button" class="btn btn-danger px-5 fs-5 fw-bolder my-3">Filtrar reservas</button></a>
                 <p>Tenemos una lista de los mejores locales de comida para que esten cerca de donde estes</p>
             </div>
         </div>
@@ -26,6 +28,7 @@
             <img src="https://saboryestilo.com.mx/wp-content/uploads/2020/03/kit-basico-para-tu-parrillada-1-1200x720.jpg" class="d-block w-100" alt="..." style="height: 550px; object-fit: cover;">
             <div class="carousel-caption-bg d-none d-md-block text-slider">
                 <h5>Los mejores precios</h5>
+                <a href=""><button type="button" class="btn btn-warning px-5 fs-5 fw-bolder my-3">Agregar descuentos</button></a>
                 <p>No te preocupes por los precios. Tenemos los mejores precios adaptados a tu bolsillo.</p>
             </div>
         </div>
@@ -58,7 +61,7 @@
         </ul>
         <div class="card-body">
             <a href="platos-del-restaurante/${valorado.id}" class="card-link">Ver platos</a>
-            <a href="#" class="card-link">Reservar mesas</a>
+            <a href="${valorado.id}/mesas" class="card-link">Reservar mesas</a>
         </div>
     </div>
 
