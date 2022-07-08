@@ -56,16 +56,6 @@ public class RepositorioPlatoTest extends SpringTest{
 
 
     private void dadoQueExistanPlatosConNombre() {
-//        Plato plato1 = new Plato();
-//        plato1.setNombre("Milanesa con pure");
-//        Plato plato2 = new Plato();
-//        plato2.setNombre("Milanesa con papas fritas");
-//        Plato plato3 = new Plato();
-//        plato3.setNombre("Milanesa de berenjena con pure");
-//        Plato plato4 = new Plato();
-//        plato4.setNombre("Arroz al wok con verduras");
-
-//        ( Enum TIPO_PLATO, String descripcion, Integer cantVentas)
         Plato plato1 = new Plato(VEGANO,"Milanesa con pure",1);
         Plato plato2 = new Plato(VEGANO,"Milanesa con papas fritas",2);
         Plato plato3 = new Plato(VEGANO,"Milanesa de berenjena con pure",3);
