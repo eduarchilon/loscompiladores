@@ -35,7 +35,7 @@ public class Plato {
     @JoinColumn(name ="id_tipo")
     private TipoGusto tipo;
 
-    @OneToMany
+    @ManyToMany
     @JoinColumn(name ="id_adicional")
     private List<Adicional> adicionales;
 
