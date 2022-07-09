@@ -38,8 +38,6 @@ public class ControladorCarrito {
 
         modelo.put("searchTerm", pSearchTerm);
         Cupon cupon = cuponService.obetenerCupon(pSearchTerm);
-//        Double porcentaje = cuponService.canjearCuponEnPorcentaje(cupon);
-//        modelo.put("porcentaje", porcentaje);
         modelo.put("cupon", cupon);
 
         Double subtotal = (Double)carritoService.getSubtotal(platosCarrito);
