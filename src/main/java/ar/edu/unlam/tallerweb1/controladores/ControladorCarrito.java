@@ -32,12 +32,14 @@ public class ControladorCarrito {
 
     @RequestMapping(path = "/cart", method = { RequestMethod.GET })
     @ResponseBody
-    public ModelAndView verCarritoModal(String pSearchTerm, HttpServletRequest request, HttpServletResponse response)throws IOException {
+    public ModelAndView verCarritoModal(@RequestParam(value ="searchString", required = false)String pSearchTerm, HttpServletRequest request, HttpServletResponse response)throws IOException {
         ModelMap modelo = new ModelMap();
         List<Carrito> platosCarrito = (List<Carrito>) carritoService.verListDePlatosDelCarrito();
+
         modelo.put("searchTerm", pSearchTerm);
         Cupon cupon = cuponService.obetenerCupon(pSearchTerm);
         modelo.put("cupon", cupon);
+
         Double subtotal = (Double)carritoService.getSubtotal(platosCarrito);
         modelo.put("subtotal", subtotal);
         modelo.put("platosCarrito", platosCarrito);
@@ -63,8 +65,8 @@ public class ControladorCarrito {
         return new ModelAndView("redirect:/cart", modelo);
     }
 
-    @RequestMapping(value="/cart/{searchString}")
-    public ModelAndView Search(@RequestParam(value ="searchString", required = false) String pSearchTerm, HttpServletRequest request, HttpServletResponse response) {
-        return new ModelAndView("redirect:/cart");
-    }
+//    @RequestMapping(value="/cart/{searchString}")
+//    public ModelAndView Search(@RequestParam(value ="searchString", required = false) String pSearchTerm, HttpServletRequest request, HttpServletResponse response) {
+//        return new ModelAndView("redirect:/cart");
+//    }
 }
