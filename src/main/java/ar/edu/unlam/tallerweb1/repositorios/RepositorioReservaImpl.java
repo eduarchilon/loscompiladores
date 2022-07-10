@@ -116,17 +116,7 @@ public class RepositorioReservaImpl implements RepositorioReserva {
         final Session session = sessionFactory.openSession();
         Transaction tx = session.getTransaction();
         session.save(reserva1);
-        tx.commit();
         session.close();
-
-//        Session session = sessionFactory.openSession();
-//        Transaction trans = session.beginTransaction();
-//        Carrito c = session.load(Carrito.class, plato);
-//
-//        Carrito car = new Carrito();
-//        car.setPlatoId(plato);
-//        session.save(car);
-
     }
 
 }

@@ -37,6 +37,10 @@ public class Reserva {
         this.fecha = fecha;
     }
 
+    public Reserva(Long id){
+        this.id=id;
+    }
+
     public Reserva(Cliente cliente, Mesa mesa) {
         this.cliente = cliente;
         this.mesa = mesa;
