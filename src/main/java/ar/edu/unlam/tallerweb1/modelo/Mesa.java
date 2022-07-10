@@ -12,7 +12,7 @@ public class Mesa {
     @Column(name = "id_mesa", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_restaurante")
     private Restaurante restaurante;
 

@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
@@ -130,5 +131,34 @@ public class RepositorioRestauranteTest extends SpringTest {
         }
         System.out.println("***********************");
 
+    }
+
+    @Test @Transactional @Rollback
+    public void queBusqueResturantesPorLocalidad(){
+        dadoQueTengoResturantesConLocalidad();
+
+        /*La localidad 2L es la localidad Moron*/
+        List<Restaurante> resturantesDeLocalidad = repositorioRestaurante.buscarRestuarntesPorLocalidad(2L);
+
+        assertThat(resturantesDeLocalidad.size()).isEqualTo(1);
+    }
+
+    private void dadoQueTengoResturantesConLocalidad() {
+        Localidad localidad1 = new Localidad(1L, "Ciudadela");
+        Localidad localidad2 = new Localidad(2L, "Moron");
+        session().save(localidad1);
+        session().save(localidad2);
+
+        Restaurante resto1 = new Restaurante(1L, localidad1);
+        resto1.setNombre("Uno");
+        session().save(resto1);
+
+        Restaurante resto2 = new Restaurante(2L, localidad2);
+        resto2.setNombre("Dos");
+        session().save(resto2);
+
+        Restaurante resto3 = new Restaurante(3L, localidad1);
+        resto3.setNombre("Tres");
+        session().save(resto3);
     }
 }

@@ -51,4 +51,9 @@ public class RestauranteServiceImpl implements RestauranteService{
         Restaurante buscado = repositorioRestaurante.verRestaurante(idRestaurante);
         return buscado;
     }
+
+    @Override
+    public List<Restaurante> buscarPorLocalidad(Long idLocacion) {
+        return (List<Restaurante>) repositorioRestaurante.buscarRestuarntesPorLocalidad(idLocacion);
+    }
 }

@@ -36,7 +36,7 @@
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/carta-personalizada">Carta personalizada</a>
                 <a class="nav-link" href="/proyecto_limpio_spring_war_exploded/ver-clientes">Clientes</a>
                 <a href="/proyecto_limpio_spring_war_exploded/cart"><button type="button" class="btn btn-primary rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fa fa-shopping-cart"></i> Cart <span class="badge">0</span>
+                    <i class="fa fa-shopping-cart"></i> Cart
                 </button></a>
             </div>
         </div>
