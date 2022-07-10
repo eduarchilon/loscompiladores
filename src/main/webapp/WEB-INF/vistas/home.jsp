@@ -28,7 +28,7 @@
             <img src="https://saboryestilo.com.mx/wp-content/uploads/2020/03/kit-basico-para-tu-parrillada-1-1200x720.jpg" class="d-block w-100" alt="..." style="height: 550px; object-fit: cover;">
             <div class="carousel-caption-bg d-none d-md-block text-slider">
                 <h5>Los mejores precios</h5>
-                <a href=""><button type="button" class="btn btn-warning px-5 fs-5 fw-bolder my-3">Agregar descuentos</button></a>
+                <a href="/proyecto_limpio_spring_war_exploded/restaurantes"><button type="button" class="btn btn-warning px-5 fs-5 fw-bolder my-3">Ver todos los restaurantes</button></a>
                 <p>No te preocupes por los precios. Tenemos los mejores precios adaptados a tu bolsillo.</p>
             </div>
         </div>

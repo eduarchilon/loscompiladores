@@ -63,6 +63,16 @@ public class RepositorioRestauranteImpl implements RepositorioRestaurante {
     }
 
     @Override
+    public List<Restaurante> buscarRestuarntesPorLocalidad(Long idLocalidad) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Restaurante>) sessionFactory.getCurrentSession()
+                .createCriteria(Restaurante.class, "locacion")
+                .createAlias("locacion", "loc")
+                .add(Restrictions.eq("loc.id", idLocalidad))
+                .list();
+    }
+
+    @Override
     public List<Plato> verPlatosDelRestaurante(Long idRestaurante) {
         final Session session = sessionFactory.getCurrentSession();
         return (List<Plato>) sessionFactory.getCurrentSession()
@@ -72,4 +82,6 @@ public class RepositorioRestauranteImpl implements RepositorioRestaurante {
                 .add(Restrictions.eq("resto.id", idRestaurante))
                 .list();
     }
+
+
 }

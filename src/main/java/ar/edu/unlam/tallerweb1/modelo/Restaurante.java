@@ -36,13 +36,22 @@ public class Restaurante {
     @Column(name = "Localidad")
     private String localidad;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_mesas")
     private List<Mesa> listMesa;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_localidad")
+    private Localidad locacion;
 
     public Restaurante(Long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
+    }
+
+    public Restaurante(Long id, Localidad locacion) {
+        this.id = id;
+        this.locacion = locacion;
     }
 
     public Restaurante(){

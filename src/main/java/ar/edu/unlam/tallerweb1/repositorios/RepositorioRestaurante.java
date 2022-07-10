@@ -17,4 +17,6 @@ public interface RepositorioRestaurante {
 
     List<Plato> verPlatosDelRestaurante(Long idRestaurante);
     Restaurante verRestaurante(Long isRestaurante);
+
+    List<Restaurante> buscarRestuarntesPorLocalidad(Long idLocalidad);
 }

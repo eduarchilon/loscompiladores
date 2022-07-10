@@ -15,4 +15,6 @@ public interface RestauranteService {
     List<Plato> verPlatosDelRestaurante(Long idRestaurante);
 
     Restaurante buscarRestaurantePorId(Long idRestaurante);
+
+    List<Restaurante> buscarPorLocalidad(Long idLocacion);
 }
