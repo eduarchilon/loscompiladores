@@ -7,13 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -21,12 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RepositorioReservaTest extends SpringTest {
     Cliente cliente = new Cliente(1L);
-    Restaurante resto = new Restaurante();
+    Restaurante resto = new Restaurante(1L, 9, 23);
 //    LocalDateTime fechaReserva = LocalDateTime.of(2023,03,03,12,0,0);
 //    Date date = new Date();
     Calendar date = new GregorianCalendar(2023,12,12,12,00);
     @Autowired
-    RepositorioReserva RepositorioReserva;
+    private RepositorioReserva repositorioReserva;
+
 
     private Mesa mesa1 ;
     private Mesa mesa2 ;
@@ -46,19 +41,19 @@ public class RepositorioReservaTest extends SpringTest {
     @Test @Transactional @Rollback
     public void buscarReservas(){
         crearReservas();
-        List<Reserva> reservas = RepositorioReserva.buscarTodasLasReservas();
+        List<Reserva> reservas = repositorioReserva.buscarTodasLasReservas();
         entoncesReservasEncontrados(reservas);
     }
     @Test @Transactional @Rollback
     public void buscarUnaReserva(){
         crearReservas();
-        Reserva reservaBuscada = RepositorioReserva.buscarReservaPorId(reserva1.getId());
+        Reserva reservaBuscada = repositorioReserva.buscarReservaPorId(reserva1.getId());
         entoncesReservaEncontrada(reservaBuscada);
     }
     @Test @Transactional @Rollback
     public void buscarReservasPorResto(){
         crearReservas();
-        List<Reserva> reservasBuscadas = RepositorioReserva.buscarTodasLasReservasRestaurante(resto.getId());
+        List<Reserva> reservasBuscadas = repositorioReserva.buscarTodasLasReservasRestaurante(resto.getId());
         entoncesReservasEncontradas(reservasBuscadas);
     }
 
@@ -67,13 +62,13 @@ public class RepositorioReservaTest extends SpringTest {
     @Test @Transactional @Rollback
     public void buscarReservasCliente(){
         crearReservas();
-        List<Reserva> reservas = RepositorioReserva.buscarReservasCliente(cliente);
+        List<Reserva> reservas = repositorioReserva.buscarReservasCliente(cliente);
         entoncesReservasEncontrados(reservas);
     }
     @Test @Transactional @Rollback
     public void muestraDisponibilidad(){
         crearReservas();
-        List<Mesa> mesas = RepositorioReserva.buscaMesasDisponibles(resto,date);
+        List<Mesa> mesas = repositorioReserva.buscaMesasDisponibles(resto,date);
         entoncesMesasEncontrados(mesas);
     }
     @Test @Transactional @Rollback
@@ -81,15 +76,20 @@ public class RepositorioReservaTest extends SpringTest {
         crearReservas();
 //        LocalDateTime fechaReserva = LocalDateTime.of(2022,06,18,12,0,0);
 System.out.println(resto.getId());
-        List<Mesa> mesas = RepositorioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
+        List<Mesa> mesas = repositorioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
         entoncesMesasEncontrados(mesas);
     }
     @Test @Transactional @Rollback
     public void creaUnaReserva(){
-        Reserva reserva5 = new Reserva(cliente,mesa1,date);
-        RepositorioReserva.crearReserva(reserva5);
-        Reserva reservaBuscada = RepositorioReserva.buscarReservaPorId(reserva5.getId());
-        entoncesReservaEncontrada(reservaBuscada);
+        Reserva reservaCreada = new Reserva(1L,date);
+        repositorioReserva.crearReserva(reservaCreada);
+        Reserva buscada = repositorioReserva.buscarReservaPorId(1L);
+        entoncesReservaEncontrada(reservaCreada,buscada);
+
+    }
+
+    private void entoncesReservaEncontrada(Reserva reservaCreada, Reserva buscada) {
+        assertThat(reservaCreada.getId()).isEqualTo(buscada.getId());
     }
 
     public void crearReservas(){
@@ -132,6 +132,10 @@ System.out.println(resto.getId());
     private void entoncesReservaEncontrada(Reserva reserva ) {
         System.out.println(reserva);
         assertThat(reserva).isEqualTo(reserva1);
+    }
+    private void entoncesReservaCreada(Reserva reserva, Reserva reservaBuscada ) {
+        System.out.println(reserva);
+        assertThat(reserva).isEqualTo(reservaBuscada);
     }
     private void entoncesReservasEncontradas(List<Reserva> reservasBuscadas) {
         System.out.println(reservasBuscadas);

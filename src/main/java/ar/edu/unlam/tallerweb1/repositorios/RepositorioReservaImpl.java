@@ -112,11 +112,12 @@ public class RepositorioReservaImpl implements RepositorioReserva {
     }
 
     @Override
-    public void crearReserva(Reserva reserva1) {
+    public Long crearReserva(Reserva reserva1) {
         final Session session = sessionFactory.openSession();
         Transaction tx = session.getTransaction();
-        session.save(reserva1);
+        long id = (long) session.save(reserva1);
         session.close();
+        return id;
     }
 
 }

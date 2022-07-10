@@ -24,5 +24,5 @@ public interface RepositorioReserva {
 
     List<Reserva> buscarTodasLasReservasRestaurante(Long id);
 
-    void crearReserva(Reserva reserva1);
+    Long crearReserva(Reserva reserva1);
 }

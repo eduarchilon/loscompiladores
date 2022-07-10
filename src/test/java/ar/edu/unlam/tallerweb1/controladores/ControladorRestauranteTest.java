@@ -136,7 +136,7 @@ public class ControladorRestauranteTest {
     private void dadoQueExistanRestaurantesMasValorados(int cantidad) {
         List<Restaurante> valorados = new LinkedList<>();
         for (int i = 0; i < cantidad; i++) {
-            valorados.add(new Restaurante());
+            valorados.add(new Restaurante(1L, 9, 23));
         }
         when(restauranteService.getRestaurantesMasCalificados()).thenReturn(valorados);
     }

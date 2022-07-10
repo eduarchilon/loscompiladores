@@ -15,4 +15,6 @@ public interface ServicioReserva {
     Reserva buscarReserva(Long id);
 
     List<Reserva> buscoTodasLasReservas();
+
+    Long creoUnaReserva(Reserva reserva);
 }
