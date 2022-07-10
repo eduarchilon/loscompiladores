@@ -28,6 +28,21 @@ public class RepositorioReservaTest extends SpringTest {
     @Autowired
     RepositorioReserva RepositorioReserva;
 
+    private Mesa mesa1 ;
+    private Mesa mesa2 ;
+    private Mesa mesa3 ;
+    private Mesa mesa4 ;
+    private Mesa mesa5 ;
+    private Mesa mesa6 ;
+    private Mesa mesa7 ;
+
+
+    private Reserva reserva1 ;
+    private Reserva reserva2 ;
+    private Reserva reserva3 ;
+    private Reserva reserva4 ;
+
+
     @Test @Transactional @Rollback
     public void buscarReservas(){
         crearReservas();
@@ -36,6 +51,21 @@ public class RepositorioReservaTest extends SpringTest {
     }
     @Test @Transactional @Rollback
     public void buscarUnaReserva(){
+        crearReservas();
+        Reserva reservaBuscada = RepositorioReserva.buscarReservaPorId(reserva1.getId());
+        entoncesReservaEncontrada(reservaBuscada);
+    }
+    @Test @Transactional @Rollback
+    public void buscarReservasPorResto(){
+        crearReservas();
+        List<Reserva> reservasBuscadas = RepositorioReserva.buscarTodasLasReservasRestaurante(resto.getId());
+        entoncesReservasEncontradas(reservasBuscadas);
+    }
+
+
+
+    @Test @Transactional @Rollback
+    public void buscarReservasCliente(){
         crearReservas();
         List<Reserva> reservas = RepositorioReserva.buscarReservasCliente(cliente);
         entoncesReservasEncontrados(reservas);
@@ -54,44 +84,60 @@ System.out.println(resto.getId());
         List<Mesa> mesas = RepositorioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
         entoncesMesasEncontrados(mesas);
     }
+    @Test @Transactional @Rollback
+    public void creaUnaReserva(){
+        Reserva reserva5 = new Reserva(cliente,mesa1,date);
+        RepositorioReserva.crearReserva(reserva5);
+        Reserva reservaBuscada = RepositorioReserva.buscarReservaPorId(reserva5.getId());
+        entoncesReservaEncontrada(reservaBuscada);
+    }
 
     public void crearReservas(){
-        //TODO: cambiar crearReservas a inicializarDatos()
-        Mesa mesa1 = new Mesa(1L,resto,1,4);
-        Mesa mesa2 = new Mesa(1L,resto,2,4);
-        Mesa mesa3 = new Mesa(1L,resto,3,4);
-        Mesa mesa4 = new Mesa(1L,resto,4,4);
-        Mesa mesa5 = new Mesa(1L,resto,5,4);
-        Mesa mesa6 = new Mesa(1L,resto,6,4);
-        Mesa mesa7 = new Mesa(1L,resto,7,4);
+
+        this.mesa1 = new Mesa(1L,resto,1,4);
+        this.mesa2 = new Mesa(1L,resto,2,4);
+        this.mesa3 = new Mesa(1L,resto,3,4);
+        this.mesa4 = new Mesa(1L,resto,4,4);
+        this.mesa5 = new Mesa(1L,resto,5,4);
+        this.mesa6 = new Mesa(1L,resto,6,4);
+        this.mesa7 = new Mesa(1L,resto,7,4);
 
 
-        Reserva reserva1 = new Reserva(cliente,mesa1,date);
-        Reserva reserva2 = new Reserva(cliente,mesa2,date);
-        Reserva reserva3 = new Reserva(cliente,mesa3,date);
-        Reserva reserva4 = new Reserva(cliente,mesa4,date);
+        this.reserva1 = new Reserva(cliente,mesa1,date);
+        this.reserva2 = new Reserva(cliente,mesa2,date);
+        this.reserva3 = new Reserva(cliente,mesa3,date);
+        this.reserva4 = new Reserva(cliente,mesa4,date);
 
+        session().save(this.mesa1);
+        session().save(this.mesa2);
+        session().save(this.mesa3);
+        session().save(this.mesa4);
+        session().save(this.mesa5);
+        session().save(this.mesa6);
+        session().save(this.mesa7);
 
-        session().save(mesa1);
-        session().save(mesa2);
-        session().save(mesa3);
-        session().save(mesa4);
-        session().save(mesa5);
-        session().save(mesa6);
-        session().save(mesa7);
+        session().save(this.resto);
 
-        session().save(resto);
+        session().save(this.cliente);
 
-        session().save(cliente);
-
-        session().save(reserva1);
-        session().save(reserva2);
-        session().save(reserva3);
-        session().save(reserva4);
+        session().save(this.reserva1);
+        session().save(this.reserva2);
+        session().save(this.reserva3);
+        session().save(this.reserva4);
     }
     private void entoncesReservasEncontrados(List<Reserva> reservas ) {
+        System.out.println(reservas);
         assertThat(reservas).isNotEmpty();
     }
+    private void entoncesReservaEncontrada(Reserva reserva ) {
+        System.out.println(reserva);
+        assertThat(reserva).isEqualTo(reserva1);
+    }
+    private void entoncesReservasEncontradas(List<Reserva> reservasBuscadas) {
+        System.out.println(reservasBuscadas);
+        assertThat(reservasBuscadas).hasSize(4);
+    }
+
     private void entoncesMesasEncontrados(List<Mesa> mesas ) {
         assertThat(mesas).isNotEmpty();
     }
