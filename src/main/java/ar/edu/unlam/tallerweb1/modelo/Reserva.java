@@ -53,6 +53,11 @@ public class Reserva {
         this.fecha = fecha;
     }
 
+    public Reserva(long l, Calendar date) {
+        this.id =l;
+        this.fecha=date;
+    }
+
     public Long getId() {
         return id;
     }

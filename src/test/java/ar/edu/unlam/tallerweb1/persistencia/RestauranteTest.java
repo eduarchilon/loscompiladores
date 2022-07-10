@@ -1,7 +1,5 @@
 package ar.edu.unlam.tallerweb1.persistencia;
-import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
-import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +14,7 @@ public class RestauranteTest extends SpringTest {
 
     @Before
     public void init(){
-        resto1 = new Restaurante();
+        resto1 = new Restaurante(1L, 9, 23);
     }
 
     @Test @Transactional @Rollback
@@ -33,7 +31,7 @@ public class RestauranteTest extends SpringTest {
 
     @Test @Transactional @Rollback()
     public void modificaUnRestauranteYLaBuscaPorDireccion(){
-        Restaurante resto = new Restaurante();
+        Restaurante resto = new Restaurante(1L, 9, 23);
         resto.setNombre("Lo de Jaime");
         resto.setDireccion("Del rio 1542");
         final Session session = session();

@@ -1,10 +1,8 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 
-import ar.edu.unlam.tallerweb1.modelo.Cliente;
-import ar.edu.unlam.tallerweb1.modelo.Plato;
+import ar.edu.unlam.tallerweb1.modelo.*;
 
-import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPlato;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioReserva;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,16 @@ public class ServicioReservaImpl implements ServicioReserva{
     @Override
     public List<Reserva> buscoTodasLasReservas() {
         return repositorioReserva.buscarTodasLasReservas();
+    }
+
+    @Override
+    public Long creoUnaReserva(Reserva reserva) {
+        Mesa mesa = reserva.getMesa();
+        Restaurante resto = mesa.getRestaurante();
+        if (resto.getHorarioApertura() < reserva.getHorario() && reserva.getHorario() < resto.getHorarioCierre()){
+            return repositorioReserva.crearReserva(reserva);
+        }
+        return null;
     }
 }
 

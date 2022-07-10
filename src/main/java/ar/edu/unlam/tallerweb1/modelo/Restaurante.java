@@ -1,8 +1,5 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -41,6 +38,15 @@ public class Restaurante {
     @Column(name = "HorarioApertura")
     private Integer horarioApertura;
 
+    public Restaurante(int horarioApertura, int horarioCierre) {
+        this.horarioApertura = horarioApertura;
+        this.horarioCierre = horarioCierre;
+    }
+
+    public Restaurante() {
+
+    }
+
     public Integer getHorarioApertura() {
         return horarioApertura;
     }
@@ -78,8 +84,10 @@ public class Restaurante {
         this.locacion = locacion;
     }
 
-    public Restaurante(){
-
+    public Restaurante(long l, int i, int i1){
+        this.id = l;
+        this.horarioApertura = i;
+        this.horarioCierre = i1;
     }
 
     public List<Mesa> getListMesa() {

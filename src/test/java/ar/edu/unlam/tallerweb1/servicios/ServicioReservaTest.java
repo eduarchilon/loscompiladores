@@ -22,8 +22,9 @@ public class ServicioReservaTest {
     private ServicioReservaImpl servicioReserva;
 
     Cliente cliente = new Cliente(1L);
-    Restaurante resto = new Restaurante();
+    Restaurante resto = new Restaurante(1L,9,23);
     Calendar date = new GregorianCalendar(2023,12,12,12,00);
+    Calendar dateFueraDeHora = new GregorianCalendar(2023,12,12,8,00);
     private Mesa mesa1 ;
     private Mesa mesa2 ;
     private Mesa mesa3 ;
@@ -65,16 +66,25 @@ public class ServicioReservaTest {
     }
     @Test
     public void seCreaUnaReserva(){
+        crearReservas();
         Reserva reserva = new Reserva(cliente,mesa1,date);
-        //todo: setear horario reserva
-        //todo: setear horario apertura y cierre restaurante
-        if (resto.getHorarioApertura() < reserva.getHorario() && reserva.getHorario() < resto.getHorarioCierre()){
+        when(servicioReserva.creoUnaReserva(reserva)).thenReturn(0L);
+        Long idReserva =servicioReserva.creoUnaReserva(reserva);
 
-        }
+        seCreaUnaReserva(idReserva);
+
     }
+
+
     @Test
     public void noSeCreaUnaReserva(){
 
+        crearReservas();
+        Reserva reserva = new Reserva(cliente,mesa1,dateFueraDeHora);
+
+        when(servicioReserva.creoUnaReserva(reserva)).thenReturn(null);
+        Long idReserva = servicioReserva.creoUnaReserva(reserva);
+        noSeCreaUnaReserva(idReserva);
     }
     @Test
     public void traigoTodasLasReservas(){
@@ -89,7 +99,9 @@ public class ServicioReservaTest {
     private void tengoUnaListaDeReservas(LinkedList<Reserva> listReservas) {
         when(servicioReserva.buscoTodasLasReservas()).thenReturn(listReservas);
     }
-
+    private void crearReserva() {
+        when(servicioReserva.buscoTodasLasReservas()).thenReturn(listReservas);
+    }
 
     private void tengoUnaReserva(Reserva reserva1) {
         when(repositorioReserva.buscarReservaPorId(reserva1.getId())).thenReturn(reserva1);
@@ -102,6 +114,12 @@ public class ServicioReservaTest {
     }
     private void obtengoUnaListaDeReservas(List<Reserva> reservasBuscadas) {
         assertThat(reservasBuscadas).hasSize(4);
+    }
+    public void seCreaUnaReserva(Long idReserva) {
+        assertThat(idReserva).isEqualTo(0);
+    }
+    public void noSeCreaUnaReserva(Long idReserva) {
+        assertThat(idReserva).isNull();
     }
     public void noObtengoUnaReserva(Reserva reserva) {
         assertThat(reserva).isNull();

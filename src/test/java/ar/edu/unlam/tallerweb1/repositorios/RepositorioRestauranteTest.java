@@ -28,15 +28,15 @@ public class RepositorioRestauranteTest extends SpringTest {
 
     @Test @Transactional @Rollback
     public void buscarRestaurantePorNombre(){
-        Restaurante resto1 = new Restaurante();
+        Restaurante resto1 = new Restaurante(1L, 9, 23);
         resto1.setNombre("Lo de carlitos");
         session().save(resto1);
 
-        Restaurante resto2 = new Restaurante();
+        Restaurante resto2 = new Restaurante(1L, 9, 23);
         resto2.setNombre("El noble");
         session().save(resto2);
 
-        Restaurante resto3 = new Restaurante();
+        Restaurante resto3 = new Restaurante(1L, 9, 23);
         resto3.setNombre("Morita");
         session().save(resto3);
 
@@ -47,17 +47,17 @@ public class RepositorioRestauranteTest extends SpringTest {
 
     @Test @Transactional @Rollback
     public void buscarRestaurantePorCalificacion(){
-        Restaurante resto1 = new Restaurante();
+        Restaurante resto1 = new Restaurante(1L, 9, 23);
         resto1.setNombre("Lo de carlitos");
         resto1.setCalificacion(5);
         session().save(resto1);
 
-        Restaurante resto2 = new Restaurante();
+        Restaurante resto2 = new Restaurante(1L, 9, 23);
         resto2.setNombre("El noble");
         resto2.setCalificacion(4);
         session().save(resto2);
 
-        Restaurante resto3 = new Restaurante();
+        Restaurante resto3 = new Restaurante(1L, 9, 23);
         resto3.setNombre("Morita");
         resto3.setCalificacion(4);
         session().save(resto3);
@@ -69,17 +69,17 @@ public class RepositorioRestauranteTest extends SpringTest {
 
     @Test @Transactional @Rollback
     public void quemuestreTodosLosRestaurantes(){
-        Restaurante resto1 = new Restaurante();
+        Restaurante resto1 = new Restaurante(1L, 9, 23);
         resto1.setNombre("Lo de carlitos");
         resto1.setCalificacion(5);
         session().save(resto1);
 
-        Restaurante resto2 = new Restaurante();
+        Restaurante resto2 = new Restaurante(1L, 9, 23);
         resto2.setNombre("El noble");
         resto2.setCalificacion(4);
         session().save(resto2);
 
-        Restaurante resto3 = new Restaurante();
+        Restaurante resto3 = new Restaurante(1L, 9, 23);
         resto3.setNombre("Morita");
         resto3.setCalificacion(4);
         session().save(resto3);

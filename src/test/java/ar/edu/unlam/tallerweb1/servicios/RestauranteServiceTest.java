@@ -149,15 +149,15 @@ public class RestauranteServiceTest {
 
     private void dadoQueExistenRestaurantes() {
 
-        resto1 = new Restaurante();
+        resto1 = new Restaurante(1L, 9, 23);
         resto1.setNombre("Lo de carlitos");
         resto1.setCalificacion(5);;
 
-        resto2 = new Restaurante();
+        resto2 = new Restaurante(1L, 9, 23);
         resto2.setNombre("El noble");
         resto2.setCalificacion(4);
 
-        resto3 = new Restaurante();
+        resto3 = new Restaurante(1L, 9, 23);
         resto3.setNombre("Morita");
         resto3.setCalificacion(3);
     }
