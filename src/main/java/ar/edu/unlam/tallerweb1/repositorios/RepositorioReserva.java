@@ -3,8 +3,6 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import ar.edu.unlam.tallerweb1.modelo.*;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface RepositorioReserva {
@@ -21,4 +19,10 @@ public interface RepositorioReserva {
 
 
     List<Mesa> buscaMesasDisponiblesSegunHorario(Restaurante resto, Calendar fechaReserva);
+
+    Reserva buscarReservaPorId(Long id);
+
+    List<Reserva> buscarTodasLasReservasRestaurante(Long id);
+
+    void crearReserva(Reserva reserva1);
 }

@@ -38,6 +38,27 @@ public class Restaurante {
 
     @Column(name = "Localidad")
     private String localidad;
+    @Column(name = "HorarioApertura")
+    private Integer horarioApertura;
+
+    public Integer getHorarioApertura() {
+        return horarioApertura;
+    }
+
+    public void setHorarioApertura(Integer horarioApertura) {
+        this.horarioApertura = horarioApertura;
+    }
+
+    public Integer getHorarioCierre() {
+        return horarioCierre;
+    }
+
+    public void setHorarioCierre(Integer horarioCierre) {
+        this.horarioCierre = horarioCierre;
+    }
+
+    @Column(name = "HorarioCierre")
+    private Integer horarioCierre;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_mesas")

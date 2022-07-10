@@ -37,9 +37,20 @@ public class Reserva {
         this.fecha = fecha;
     }
 
+    public Reserva(Long id){
+        this.id=id;
+    }
+
     public Reserva(Cliente cliente, Mesa mesa) {
         this.cliente = cliente;
         this.mesa = mesa;
+    }
+
+    public Reserva(long l, Cliente cliente, Mesa mesa, Calendar fecha) {
+        this.id = l;
+        this.cliente = cliente;
+        this.mesa = mesa;
+        this.fecha = fecha;
     }
 
     public Long getId() {
@@ -70,6 +81,8 @@ public class Reserva {
     public Calendar getFecha() {
         return fecha;
     }
+
+    public Integer getHorario() { return fecha.HOUR;}
 
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;

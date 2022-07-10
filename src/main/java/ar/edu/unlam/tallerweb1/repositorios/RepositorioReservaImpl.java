@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -85,6 +86,37 @@ public class RepositorioReservaImpl implements RepositorioReserva {
          .setParameter("edDate", endDate)
          .list();
         return mesas;
+    }
+
+    @Override
+    public Reserva buscarReservaPorId(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        return (Reserva) session.createCriteria(Reserva.class)
+                .add(Restrictions.eq("id", id))
+                .uniqueResult();
+    }
+
+    @Override
+    public List<Reserva> buscarTodasLasReservasRestaurante(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+//        List reserva = session.createQuery(
+//                        "from Reserva R where R.mesa IN  (select mesa from Mesa M where M.restaurante.id = :idResto) "
+//                ).setParameter("idResto", id)
+//                .list();
+
+        return (List<Reserva>) session.createCriteria(Reserva.class,"mesa")
+                .createAlias("mesa","M")
+                .createAlias("M.restaurante","resto")
+                .add(Restrictions.eq("resto.id",id))
+                .list();
+    }
+
+    @Override
+    public void crearReserva(Reserva reserva1) {
+        final Session session = sessionFactory.openSession();
+        Transaction tx = session.getTransaction();
+        session.save(reserva1);
+        session.close();
     }
 
 }
