@@ -16,11 +16,6 @@ import java.util.List;
 @Transactional
 public class PlatoServiceImpl implements PlatoService{
 
-
-
-
-    private List<Plato> platos = new ArrayList<>();
-
     private RepositorioPlato repositorioPlato ;
 
     @Autowired
@@ -34,11 +29,6 @@ public class PlatoServiceImpl implements PlatoService{
         List<Plato> lista = repositorioPlato.buscarTodos();
         return lista;
 
-    }
-
-    @Override
-    public Integer verCantidadDePlatos() {
-        return platos.size();
     }
 
 

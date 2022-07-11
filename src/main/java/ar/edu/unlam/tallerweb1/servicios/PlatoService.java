@@ -7,7 +7,6 @@ import java.util.List;
 public interface PlatoService {
 
     public List<Plato> verPlatos();
-    public Integer verCantidadDePlatos();
 
 
 }

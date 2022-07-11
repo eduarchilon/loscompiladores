@@ -29,7 +29,7 @@ public class ControladorPlatos {
     @RequestMapping(path = "/cantidad-de-platos", method = RequestMethod.GET)
     public ModelAndView iAlaCantidadDePlatos(){
         ModelMap modelo = new ModelMap();
-        modelo.put("cantidadPlatos", platoService.verCantidadDePlatos());
+        modelo.put("cantidadPlatos", platoService.verPlatos().size());
         return new ModelAndView("platos", modelo);
     }
 
