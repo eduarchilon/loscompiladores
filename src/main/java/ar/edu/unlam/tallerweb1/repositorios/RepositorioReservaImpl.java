@@ -120,5 +120,31 @@ public class RepositorioReservaImpl implements RepositorioReserva {
         return id;
     }
 
+    @Override
+    public Boolean borrarReserva(Long idReserva) {
+        final Session session = sessionFactory.getCurrentSession();
+        if(idReserva!=null){
+            Reserva reserva = (Reserva) sessionFactory.getCurrentSession()
+                    .createCriteria(Reserva.class)
+                    .add(Restrictions.eq("id", idReserva))
+                    .uniqueResult();
+            session.delete(reserva);
+            session.flush();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void cargarMesaAlaReserva(Long idMesa) {
+        Session session = sessionFactory.openSession();
+        Transaction trans = session.beginTransaction();
+        Reserva res = session.load(Reserva.class, idMesa);
+
+       Reserva r = new Reserva();
+        r.setMesaId(idMesa);
+        session.save(r);
+    }
+
 }
 

@@ -5,6 +5,7 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioPlato;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioReserva;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -12,8 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ServicioReservaTest {
 
@@ -92,6 +92,21 @@ public class ServicioReservaTest {
         tengoUnaListaDeReservas(this.listReservas);
         List<Reserva> reservasBuscadas = servicioReserva.buscoTodasLasReservas();
         obtengoUnaListaDeReservas(reservasBuscadas);
+    }
+
+    @Test
+    public void quePuedaBorrarReservas(){
+        crearReservas();
+        tengoUnaListaDeReservas(this.listReservas);
+        List<Reserva> reservasBuscadas = servicioReserva.buscoTodasLasReservas();
+
+        when(repositorioReserva.borrarReserva(1L)).thenReturn(true);
+        when(servicioReserva.borrarReservaDeLaLista(1L)).thenReturn(true);
+
+       Boolean resultado =  servicioReserva.borrarReservaDeLaLista(1L);
+
+        assertThat(resultado).isEqualTo(true);
+
     }
 
 

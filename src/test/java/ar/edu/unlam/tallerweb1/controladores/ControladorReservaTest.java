@@ -5,8 +5,13 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioReserva;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +21,8 @@ import static org.mockito.Mockito.when;
 public class ControladorReservaTest {
     private ServicioReserva servicioReserva;
     private ControladorReserva controladorReserva;
+    HttpServletResponse response;
+    HttpServletRequest request;
 
     @Before
     public void init(){
@@ -29,6 +36,24 @@ public class ControladorReservaTest {
         entoncesEncuentro(muestra,3);
         entoncesMeLLevaALaVista("todasLasReservas",muestra.getViewName());
     }
+
+    @Test
+    public void queBorreLasReservasEnLaVista() throws IOException {
+        dadoQueExistenReservas(3);
+        ModelAndView muestra = cuandoBorroUnaReserva(1L, response, request);
+        entoncesEncuentroAhora(muestra,2);
+        entoncesMeLLevaALaVista("redirect:/todasLasReservas",muestra.getViewName());
+    }
+
+    private void entoncesEncuentroAhora(ModelAndView muestra, int cantidad) {
+        List<Reserva> listasEncontradas = (List<Reserva>) muestra.getModel().get("reservas");
+    }
+
+    private ModelAndView cuandoBorroUnaReserva(long idReserva, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        return controladorReserva.borrarReservaDeLaLista(idReserva, response, request);
+    }
+
+
 
     private void entoncesMeLLevaALaVista(String todasLasReservas, String viewName) {
         assertThat(todasLasReservas).isEqualTo(viewName);

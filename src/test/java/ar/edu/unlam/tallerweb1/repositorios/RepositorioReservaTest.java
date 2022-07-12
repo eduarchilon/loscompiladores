@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -86,6 +87,47 @@ System.out.println(resto.getId());
         Reserva buscada = repositorioReserva.buscarReservaPorId(1L);
         entoncesReservaEncontrada(reservaCreada,buscada);
 
+    }
+
+    @Test @Transactional @Rollback
+    public void queSePuedaBorraUnaReserva(){
+
+        daddoQueTengoservasHechasYBorrroUna();
+
+        List<Reserva> list = repositorioReserva.buscarTodasLasReservas();
+
+        assertThat(list).hasSize(3);
+    }
+
+    private void daddoQueTengoservasHechasYBorrroUna() {
+        this.mesa1 = new Mesa(1L);
+        this.mesa2 = new Mesa(2L);
+        this.mesa3 = new Mesa(3L);
+        this.mesa4 = new Mesa(4L);
+
+
+        session().save(this.mesa1);
+        session().save(this.mesa2);
+        session().save(this.mesa3);
+        session().save(this.mesa4);
+
+        List<Mesa>mesasBuscadas = new LinkedList<>();
+
+        mesasBuscadas.add(mesa1);
+        mesasBuscadas.add(mesa2);
+        mesasBuscadas.add(mesa3);
+
+        this.reserva1 = new Reserva(1L, mesa1,date);
+        this.reserva2 = new Reserva(2L, mesa2,date);
+        this.reserva3 = new Reserva(3L, mesa3,date);
+        this.reserva4 = new Reserva(4L, mesa4,date);
+
+        session().save(this.reserva1);
+        session().save(this.reserva2);
+        session().save(this.reserva3);
+        session().save(this.reserva4);
+
+        repositorioReserva.borrarReserva(1L);
     }
 
     private void entoncesReservaEncontrada(Reserva reservaCreada, Reserva buscada) {

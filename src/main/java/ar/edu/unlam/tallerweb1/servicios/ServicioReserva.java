@@ -11,10 +11,15 @@ public interface ServicioReserva {
 
     List<Plato> cartaClientePorGusto(Cliente cliente);
 
+    Boolean borrarReservaDeLaLista(Long idReserva);
 
     Reserva buscarReserva(Long id);
 
     List<Reserva> buscoTodasLasReservas();
 
     Long creoUnaReserva(Reserva reserva);
+
+    void agregarMesaAlaReserva(Long idMesa);
+
+
 }

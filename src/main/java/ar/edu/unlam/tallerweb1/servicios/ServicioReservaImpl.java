@@ -29,6 +29,15 @@ public class ServicioReservaImpl implements ServicioReserva{
     }
 
     @Override
+    public Boolean borrarReservaDeLaLista(Long idReserva) {
+        if(idReserva == idReserva.longValue()){
+            repositorioReserva.borrarReserva(idReserva);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public Reserva buscarReserva(Long id) {
         Reserva reserva = repositorioReserva.buscarReservaPorId(id);
         return reserva;
@@ -47,6 +56,11 @@ public class ServicioReservaImpl implements ServicioReserva{
             return repositorioReserva.crearReserva(reserva);
         }
         return null;
+    }
+
+    @Override
+    public void agregarMesaAlaReserva(Long idMesa) {
+        repositorioReserva.cargarMesaAlaReserva(idMesa);
     }
 }
 

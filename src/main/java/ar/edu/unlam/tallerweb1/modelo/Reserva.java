@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,11 +17,12 @@ public class Reserva {
     @Column(name = "id_Reserva", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;
 
@@ -33,6 +37,12 @@ public class Reserva {
 
     public Reserva(Cliente cliente, Mesa mesa, Calendar fecha) {
         this.cliente = cliente;
+        this.mesa = mesa;
+        this.fecha = fecha;
+    }
+
+    public Reserva(Long id, Mesa mesa, Calendar fecha) {
+        this.id = id;
         this.mesa = mesa;
         this.fecha = fecha;
     }
@@ -91,6 +101,12 @@ public class Reserva {
 
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;
+    }
+
+    public void setMesaId(Long idMesa){
+        Mesa mesa = new Mesa();
+        mesa.setId(idMesa);
+        setMesa(mesa);
     }
 
 }

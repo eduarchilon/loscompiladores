@@ -12,7 +12,7 @@ public class Mesa {
     @Column(name = "id_mesa", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_restaurante")
     private Restaurante restaurante;
 
@@ -29,6 +29,10 @@ public class Mesa {
     private  Integer numero;
 
     public Mesa() {
+    }
+
+    public Mesa(Long id) {
+        this.id = id;
     }
 
     public Mesa(Long id, Restaurante restaurante, Integer numero, Integer capacidad) {

@@ -22,7 +22,10 @@
             <h5 class="card-title">Numer de mesa: ${mesa.numero}</h5>
             <p class="card-text">Capacidad: ${mesa.capacidad}</p>
             <p class="card-text">Estado: No Reservada</p>
-            <a href="#" class="btn btn-primary">Selecccionar</a>
+<%--            <a href="#" class="btn btn-primary">Selecccionar</a>--%>
+            <form action="/proyecto_limpio_spring_war_exploded/agregar-reserva/${mesa.id}" method="post">
+                <button type="submit" class="btn btn-primary">Reservar mesa</button>
+            </form>
         </div>
     </div>
 </c:forEach>

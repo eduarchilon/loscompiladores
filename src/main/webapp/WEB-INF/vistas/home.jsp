@@ -20,7 +20,7 @@
             <img src="https://www.bacanal.com.ar/wp-content/uploads/2017/05/ASADO-VEGGIE-VA2.jpg" class="d-block w-100" alt="..." style="height: 550px; object-fit: cover;">
             <div class="carousel-caption-bg d-none d-md-block text-slider">
                 <h5>Los mejores locales de comida</h5>
-                <a href=""><button type="button" class="btn btn-danger px-5 fs-5 fw-bolder my-3">Filtrar reservas</button></a>
+                <a href="/proyecto_limpio_spring_war_exploded/todasLasReservas"><button type="button" class="btn btn-danger px-5 fs-5 fw-bolder my-3">Ver reservas</button></a>
                 <p>Tenemos una lista de los mejores locales de comida para que esten cerca de donde estes</p>
             </div>
         </div>
