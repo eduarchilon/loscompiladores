@@ -18,13 +18,16 @@ import static org.mockito.Mockito.when;
 public class ServicioReservaTest {
 
     private RepositorioReserva repositorioReserva;
+    private MesaService repositorioMesa;
     private RepositorioPlato repositorioPlato;
     private ServicioReservaImpl servicioReserva;
 
     Cliente cliente = new Cliente(1L);
     Restaurante resto = new Restaurante(1L,9,23);
     Calendar date = new GregorianCalendar(2023,12,12,12,00);
+    Calendar date2 = new GregorianCalendar(2023,12,12,11,00);
     Calendar dateFueraDeHora = new GregorianCalendar(2023,12,12,8,00);
+
     private Mesa mesa1 ;
     private Mesa mesa2 ;
     private Mesa mesa3 ;
@@ -45,6 +48,7 @@ public class ServicioReservaTest {
     public void init(){
         //todo: aplicar mokito
         repositorioReserva = mock(RepositorioReserva.class);
+        repositorioMesa = mock(MesaService.class);
         servicioReserva = new ServicioReservaImpl(repositorioReserva);
 
 
@@ -112,6 +116,23 @@ public class ServicioReservaTest {
         List<Reserva> reservasBuscadas = servicioReserva.buscoTodasLasReservasClientes(cliente);
         obtengoUnaListaDeReservas(reservasBuscadas);
     }
+    @Test
+    public void traigoDisponiblesReservasDelCliente(){
+        crearReservas();
+//        tengoUnaListaDeReservas(this.listReservas);
+        tengoUnaListaDeMesas(this.listMesas,resto,date);
+//        cuandoBuscoLaReservaDelCliente(this.listReservas,cliente);
+        List<Mesa> mesasBuscadas = servicioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
+        //todo: arreglar este test para poder terminar el test de controlador y ell controlador
+        obtengoUnaListaDeMesas(mesasBuscadas);
+    }
+
+
+
+    private void tengoUnaListaDeMesas(List<Mesa> mesasBuscadas, Restaurante resto, Calendar date) {
+        when(servicioReserva.buscaMesasDisponiblesSegunHorario(resto,date)).thenReturn(mesasBuscadas);
+    }
+
 
     private void cuandoBuscoLaReservaDelCliente(LinkedList<Reserva> listReservas, Cliente cliente) {
         when(servicioReserva.buscoTodasLasReservasClientes(cliente)).thenReturn(listReservas);
@@ -132,6 +153,9 @@ public class ServicioReservaTest {
 
     private void seEliminaUnaReserva(Boolean resultadoReserva) {
         assertThat(resultadoReserva).isTrue();
+    }
+    private void obtengoUnaListaDeMesas(List<Mesa> mesasBuscadas) {
+        assertThat(mesasBuscadas).hasSize(7);
     }
     public void obtengoUnaReserva(Reserva reserva) {
         assertThat(reserva).isNotNull();

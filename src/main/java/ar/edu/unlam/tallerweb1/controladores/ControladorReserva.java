@@ -3,8 +3,10 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Cliente;
 import ar.edu.unlam.tallerweb1.modelo.Mesa;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
+import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import ar.edu.unlam.tallerweb1.servicios.ClienteService;
 import ar.edu.unlam.tallerweb1.servicios.MesaService;
+import ar.edu.unlam.tallerweb1.servicios.RestauranteService;
 import ar.edu.unlam.tallerweb1.servicios.ServicioReserva;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,9 +29,12 @@ public class ControladorReserva {
     private static ServicioReserva servicioReserva;
     private static ClienteService servicioCliente;
     private static MesaService mesaServicio;
+    private static RestauranteService restauranteService;
     @Autowired
-    public ControladorReserva(ServicioReserva servicioReserva) {
+    public ControladorReserva(ServicioReserva servicioReserva,MesaService mesaServicio,RestauranteService restauranteService) {
         this.servicioReserva = servicioReserva;
+        this.mesaServicio = mesaServicio;
+        this.restauranteService = restauranteService;
     }
 
 
@@ -59,10 +64,12 @@ public class ControladorReserva {
     @RequestMapping(value = "crear-reserva/{clienteId}/{mesaId}/{date}",method = {RequestMethod.POST,RequestMethod.GET})
     public ModelAndView creaUnaReserva(@PathVariable Long clienteId, @PathVariable Long mesaId,@PathVariable Calendar date) {
         ModelMap model = new ModelMap();
+//todo: ver como hacer para que funcione como esta abajo
 
-        Mesa mesa = mesaServicio.getMesaPorId(mesaId);
-        Cliente cliente = servicioCliente.verClientePorId(clienteId);
-        Reserva reserva = new Reserva(cliente,mesa,date);
+//        Mesa mesa = mesaServicio.getMesaPorId(mesaId);
+//        Cliente cliente = servicioCliente.verClientePorId(clienteId);
+        Reserva reserva = new Reserva(date);
+        reserva.setAtributos(mesaId,clienteId);
         servicioReserva.creoUnaReserva(reserva);
         return new ModelAndView("redirect:/home",model);
     }
@@ -70,6 +77,15 @@ public class ControladorReserva {
     public static ModelAndView creaUnaReservaRedirect(@PathVariable Long clienteId, @PathVariable Long mesaId,@PathVariable Calendar date) throws IOException {
 
         return new ModelAndView("redirect:/home");
+    }
+    @RequestMapping(value = "crear-reserva/{idResto}",method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView creoUnFormularioDeReserva(@PathVariable long idResto) {
+        ModelMap modelo = new ModelMap();
+        List<Mesa> mesas = mesaServicio.getMesasDelRestaurante(idResto);
+        Restaurante resto = restauranteService.buscarRestaurantePorId(idResto);
+        modelo.put("mesas",mesas);
+        modelo.put("restaurante",resto);
+        return new ModelAndView("crear-reserva",modelo);
     }
 //@RequestMapping(value = "todasLasReservas/{idReserva}", method ={ RequestMethod.POST, RequestMethod.GET })
 //public ModelAndView borrarReservaDeLaLista(@PathVariable("idReserva")  Long idRserva, HttpServletResponse response, HttpServletRequest request) throws IOException {

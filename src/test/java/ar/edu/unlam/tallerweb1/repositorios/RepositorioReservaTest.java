@@ -78,6 +78,7 @@ public class RepositorioReservaTest extends SpringTest {
 //        LocalDateTime fechaReserva = LocalDateTime.of(2022,06,18,12,0,0);
 System.out.println(resto.getId());
         List<Mesa> mesas = repositorioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
+        System.out.println(mesas);
         entoncesMesasEncontrados(mesas);
     }
     @Test @Transactional @Rollback

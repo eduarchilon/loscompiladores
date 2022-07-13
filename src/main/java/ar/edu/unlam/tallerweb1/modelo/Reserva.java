@@ -60,6 +60,10 @@ public class Reserva {
         this.fecha=date;
     }
 
+    public Reserva(Calendar date) {
+        this.fecha = date;
+    }
+
     public Long getId() {
         return id;
     }
@@ -93,6 +97,14 @@ public class Reserva {
 
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;
+    }
+    public void setAtributos(Long idMesa, Long idCliente){
+        Mesa mesa = new Mesa();
+        mesa.setId(idMesa);
+        setMesa(mesa);
+        Cliente cliente = new Cliente();
+        cliente.setId(idCliente);
+        setCliente(cliente);
     }
 
 }

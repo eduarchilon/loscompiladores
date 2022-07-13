@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.Calendar;
 import java.util.List;
 
 @Service @Transactional
@@ -59,6 +60,16 @@ public class ServicioReservaImpl implements ServicioReserva{
     public List<Reserva> buscoTodasLasReservasClientes(Cliente cliente) {
 
         return repositorioReserva.buscarReservasCliente(cliente);
+    }
+
+    @Override
+    public List<Mesa> buscaMesasDisponiblesSegunHorario() {
+        return null;
+    }
+
+    @Override
+    public List<Mesa> buscaMesasDisponiblesSegunHorario(Restaurante resto, Calendar date) {
+        return repositorioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
     }
 }
 
