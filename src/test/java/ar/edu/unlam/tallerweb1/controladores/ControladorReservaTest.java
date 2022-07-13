@@ -1,6 +1,9 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Cliente;
+import ar.edu.unlam.tallerweb1.modelo.Mesa;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
+import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import ar.edu.unlam.tallerweb1.servicios.ServicioReserva;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +28,10 @@ public class ControladorReservaTest {
     private ControladorReserva controladorReserva;
     HttpServletRequest request;
     HttpServletResponse response;
+    Cliente cliente = new Cliente(1L);
+    Restaurante resto = new Restaurante(1L,9,23);
+    Calendar date = new GregorianCalendar(2023,12,12,12,00);
+    private Mesa mesa1 = new Mesa(1L,resto,1,4);
 
     @Before
     public void init(){
@@ -43,6 +52,20 @@ public class ControladorReservaTest {
         ModelAndView muestra = cuandoBorroUnaReserva(1L,response,request);
         entoncesEncuentro(muestra,2);
         entoncesMeLLevaALaVista("redirect:/todasLasReservas",muestra.getViewName());
+    }
+    @Test
+    public void crearReserva(){
+        dadoQueExistenReservas(3);
+        Reserva reserva = new Reserva(cliente,mesa1,date);
+        Long Long = 0L;
+        when(servicioReserva.creoUnaReserva(reserva)).thenReturn(Long);
+        ModelAndView muestra = cuandoCreoUnaReserva(cliente,mesa1,date);
+        entoncesEncuentro(muestra,4);
+        entoncesMeLLevaALaVista("redirect:/home",muestra.getViewName());
+    }
+
+    private ModelAndView cuandoCreoUnaReserva(Cliente cliente, Mesa mesa1, Calendar date) {
+        return controladorReserva.creaUnaReserva(cliente.getId(),mesa1.getId(),date);
     }
 
     private ModelAndView cuandoBorroUnaReserva(Long reservaId, HttpServletResponse response, HttpServletRequest request) throws IOException {

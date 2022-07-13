@@ -23,4 +23,10 @@ public class MesaServiceImpl implements MesaService {
         List<Mesa> mesas = repositorioMesa.obetenerMesasDelRestaurante(idResto);
         return mesas;
     }
+
+    @Override
+    public Mesa getMesaPorId(Long mesaId) {
+        Mesa mesa = repositorioMesa.obtenerMesaPorId(mesaId);
+        return mesa;
+    }
 }
