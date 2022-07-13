@@ -59,6 +59,7 @@ public class RepositorioReservaTest extends SpringTest {
 
 
 
+
     @Test @Transactional @Rollback
     public void buscarReservasCliente(){
         crearReservas();
@@ -87,12 +88,26 @@ System.out.println(resto.getId());
         entoncesReservaEncontrada(reservaCreada,buscada);
 
     }
+    @Test @Transactional @Rollback
+    public void eliminarReserva(){
+        Reserva reservaCreada = new Reserva(1L,date);
+        session().save(reservaCreada);
+        Boolean resultado = repositorioReserva.eliminarReserva(1L);
+        entoncesReservaEliminada(resultado);
+    }
 
     private void entoncesReservaEncontrada(Reserva reservaCreada, Reserva buscada) {
         assertThat(reservaCreada.getId()).isEqualTo(buscada.getId());
     }
+    private void entoncesReservaEliminada(Boolean resultado) {
+        assertThat(resultado).isTrue();
+    }
 
     public void crearReservas(){
+
+        session().save(this.resto);
+
+        session().save(this.cliente);
 
         this.mesa1 = new Mesa(1L,resto,1,4);
         this.mesa2 = new Mesa(1L,resto,2,4);
@@ -102,12 +117,6 @@ System.out.println(resto.getId());
         this.mesa6 = new Mesa(1L,resto,6,4);
         this.mesa7 = new Mesa(1L,resto,7,4);
 
-
-        this.reserva1 = new Reserva(cliente,mesa1,date);
-        this.reserva2 = new Reserva(cliente,mesa2,date);
-        this.reserva3 = new Reserva(cliente,mesa3,date);
-        this.reserva4 = new Reserva(cliente,mesa4,date);
-
         session().save(this.mesa1);
         session().save(this.mesa2);
         session().save(this.mesa3);
@@ -116,9 +125,10 @@ System.out.println(resto.getId());
         session().save(this.mesa6);
         session().save(this.mesa7);
 
-        session().save(this.resto);
-
-        session().save(this.cliente);
+        this.reserva1 = new Reserva(cliente,mesa1,date);
+        this.reserva2 = new Reserva(cliente,mesa2,date);
+        this.reserva3 = new Reserva(cliente,mesa3,date);
+        this.reserva4 = new Reserva(cliente,mesa4,date);
 
         session().save(this.reserva1);
         session().save(this.reserva2);

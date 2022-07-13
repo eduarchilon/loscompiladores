@@ -91,9 +91,11 @@ public class RepositorioReservaImpl implements RepositorioReserva {
     @Override
     public Reserva buscarReservaPorId(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        return (Reserva) session.createCriteria(Reserva.class)
+        Reserva reserva = (Reserva) session.createCriteria(Reserva.class)
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
+        session.flush();
+        return reserva;
     }
 
     @Override
@@ -118,6 +120,24 @@ public class RepositorioReservaImpl implements RepositorioReserva {
         long id = (long) session.save(reserva1);
         session.close();
         return id;
+    }
+
+    @Override
+    public Boolean eliminarReserva(Long id) {
+        final Session session = sessionFactory.openSession();
+        try {
+            Reserva reserva = (Reserva) sessionFactory.getCurrentSession()
+                    .createCriteria(Reserva.class)
+                    .add(Restrictions.eq("id",id))
+                    .uniqueResult();
+            session.delete(reserva);
+            session.flush();
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+
     }
 
 }

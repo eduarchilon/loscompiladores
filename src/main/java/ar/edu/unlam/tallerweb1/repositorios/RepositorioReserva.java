@@ -25,4 +25,6 @@ public interface RepositorioReserva {
     List<Reserva> buscarTodasLasReservasRestaurante(Long id);
 
     Long crearReserva(Reserva reserva1);
+
+    Boolean eliminarReserva(Long id);
 }

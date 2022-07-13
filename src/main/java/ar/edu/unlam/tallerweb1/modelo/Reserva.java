@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,13 +22,12 @@ public class Reserva {
     private Cliente cliente;
 
     @OneToOne
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;
 
     private Calendar fecha;
 
-    @ManyToMany
-    private List<Plato> plato;
 
     public Reserva() {
 

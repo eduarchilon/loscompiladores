@@ -74,6 +74,17 @@ public class ServicioReservaTest {
         seCreaUnaReserva(idReserva);
 
     }
+    @Test
+    public void seEliminaUnaReservaDeLaLista(){
+        crearReservas();
+        Reserva reserva = new Reserva(cliente,mesa1,date);
+        when(servicioReserva.eliminarReserva(reserva.getId())).thenReturn(true);
+        Boolean resultadoReserva = servicioReserva.eliminarReserva(reserva.getId());
+        seEliminaUnaReserva(resultadoReserva);
+
+    }
+
+
 
 
     @Test
@@ -93,7 +104,18 @@ public class ServicioReservaTest {
         List<Reserva> reservasBuscadas = servicioReserva.buscoTodasLasReservas();
         obtengoUnaListaDeReservas(reservasBuscadas);
     }
+    @Test
+    public void traigoLasReservasDelCliente(){
+        crearReservas();
+//        tengoUnaListaDeReservas(this.listReservas);
+        cuandoBuscoLaReservaDelCliente(this.listReservas,cliente);
+        List<Reserva> reservasBuscadas = servicioReserva.buscoTodasLasReservasClientes(cliente);
+        obtengoUnaListaDeReservas(reservasBuscadas);
+    }
 
+    private void cuandoBuscoLaReservaDelCliente(LinkedList<Reserva> listReservas, Cliente cliente) {
+        when(servicioReserva.buscoTodasLasReservasClientes(cliente)).thenReturn(listReservas);
+    }
 
 
     private void tengoUnaListaDeReservas(LinkedList<Reserva> listReservas) {
@@ -108,7 +130,9 @@ public class ServicioReservaTest {
         when(servicioReserva.buscarReserva(reserva1.getId())).thenReturn(reserva1);
     }
 
-
+    private void seEliminaUnaReserva(Boolean resultadoReserva) {
+        assertThat(resultadoReserva).isTrue();
+    }
     public void obtengoUnaReserva(Reserva reserva) {
         assertThat(reserva).isNotNull();
     }
