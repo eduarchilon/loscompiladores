@@ -124,19 +124,17 @@ public class RepositorioReservaImpl implements RepositorioReserva {
 
     @Override
     public Boolean eliminarReserva(Long id) {
-        final Session session = sessionFactory.openSession();
-        try {
+        final Session session = sessionFactory.getCurrentSession();
+        if(id!=null){
             Reserva reserva = (Reserva) sessionFactory.getCurrentSession()
                     .createCriteria(Reserva.class)
-                    .add(Restrictions.eq("id",id))
+                    .add(Restrictions.eq("id", id))
                     .uniqueResult();
             session.delete(reserva);
             session.flush();
             return true;
-        }catch (Exception e){
-            System.out.println(e);
-            return false;
         }
+        return false;
 
     }
 

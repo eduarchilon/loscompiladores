@@ -47,7 +47,7 @@ public class ControladorReservaTest {
 
     private ModelAndView cuandoBorroUnaReserva(Long reservaId, HttpServletResponse response, HttpServletRequest request) throws IOException {
 //        List<Reserva> listaEncontradas = muestra.getModel().get("reservas");
-        return controladorReserva.borrarReservaDeLaLista(reservaId,response,request);
+        return controladorReserva.eliminarReserva(reservaId,response,request);
     }
 
     private void entoncesMeLLevaALaVista(String todasLasReservas, String viewName) {

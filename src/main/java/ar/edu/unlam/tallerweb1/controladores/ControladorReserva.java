@@ -36,29 +36,29 @@ public class ControladorReserva {
         return new ModelAndView("todasLasReservas",modelo);
 
     }
-//    @RequestMapping(value = "todasLasReservas/{reservaId}",method = {RequestMethod.POST,RequestMethod.GET})
-//    public static ModelAndView eliminarReserva(@PathVariable("reservaId") Long reservaId, HttpServletResponse response, HttpServletRequest request) throws IOException {
-//        ModelMap modelo = new ModelMap();
-//        Boolean eliminado = servicioReserva.eliminarReserva(reservaId);
-//        System.out.println(eliminado);
-//        return new ModelAndView("redirect:/todasLasReservas",modelo);
-//    }
-//    @RequestMapping(value = "todasLasReservas/{reservaId}",method = {RequestMethod.GET})
-//    public static ModelAndView eliminarRedirectReserva(@PathVariable Long reservaId ) throws IOException {
+    @RequestMapping(value = "todasLasReservas/{reservaId}",method = {RequestMethod.POST,RequestMethod.GET})
+    public static ModelAndView eliminarReserva(@PathVariable("reservaId") Long reservaId, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        ModelMap modelo = new ModelMap();
+        Boolean eliminado = servicioReserva.eliminarReserva(reservaId);
+        System.out.println(eliminado);
+        return new ModelAndView("redirect:/todasLasReservas",modelo);
+    }
+    @RequestMapping(value = "todasLasReservas/{reservaId}",method = {RequestMethod.GET})
+    public static ModelAndView eliminarRedirectReserva(@PathVariable Long reservaId ) throws IOException {
+
+        return new ModelAndView("redirect:/todasLasReservas");
+    }
+//@RequestMapping(value = "todasLasReservas/{idReserva}", method ={ RequestMethod.POST, RequestMethod.GET })
+//public ModelAndView borrarReservaDeLaLista(@PathVariable("idReserva")  Long idRserva, HttpServletResponse response, HttpServletRequest request) throws IOException {
+//    ModelMap modelo = new ModelMap();
 //
-//        return new ModelAndView("redirect:/todasLasReservas");
-//    }
-@RequestMapping(value = "todasLasReservas/{idReserva}", method ={ RequestMethod.POST, RequestMethod.GET })
-public ModelAndView borrarReservaDeLaLista(@PathVariable("idReserva")  Long idRserva, HttpServletResponse response, HttpServletRequest request) throws IOException {
-    ModelMap modelo = new ModelMap();
-
-    Boolean borrado = servicioReserva.eliminarReserva(idRserva);
-    modelo.put("operacion",borrado);
-    return new ModelAndView("elemento-eliminado", modelo);
-}
-
-//    @RequestMapping(value = "todasLasReservas/{idReserva}", method = RequestMethod.GET)
-//    public ModelAndView redirectReserva(@PathVariable Long idReserva) throws IOException {
-//        return new ModelAndView("redirect:/todasLasReservas");
-//    }
+//    Boolean borrado = servicioReserva.eliminarReserva(idRserva);
+//    modelo.put("operacion",borrado);
+//    return new ModelAndView("elemento-eliminado", modelo);
+//}
+//
+////    @RequestMapping(value = "todasLasReservas/{idReserva}", method = RequestMethod.GET)
+////    public ModelAndView redirectReserva(@PathVariable Long idReserva) throws IOException {
+////        return new ModelAndView("redirect:/todasLasReservas");
+////    }
 }
