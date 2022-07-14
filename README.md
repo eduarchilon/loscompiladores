@@ -6,7 +6,7 @@
 <div align="center">
    <h4 align="center">A web application that will allow you to eat whatever you want at your fingertips.</h4>
    <br />
-   <img src="">
+   <img src="https://github.com/eduarchilon/loscompiladores/blob/dev/src/main/webapp/fonts/pagina-los-compiladores.PNG">
    <br />
    <br />
    <br />
@@ -39,7 +39,7 @@
 
 ## About The Project
 
-<img src="">
+<img src="https://github.com/eduarchilon/loscompiladores/blob/dev/src/main/webapp/fonts/pagina-los-compiladores-mobile.PNG">
 
 The product consists of being able to buy a plate of food of the taste that we want.
 
@@ -83,7 +83,7 @@ This web application runs under the following technologies:
 
 ## Project link
 
-- [git@github.com:eduarchilon/loscompiladores.git](git@github.com:eduarchilon/loscompiladores.git)
+- [github.com:eduarchilon/loscompiladores.git](git@github.com:eduarchilon/loscompiladores.git)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
