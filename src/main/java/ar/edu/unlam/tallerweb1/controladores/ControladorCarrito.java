@@ -44,7 +44,7 @@ public class ControladorCarrito {
         Cupon cupon = cuponService.obetenerCupon(pSearchTerm);
         modelo.put("cupon", cupon);
 
-        Double subtotal = (Double)carritoService.getSubtotal(platosCarrito);
+        Double subtotal = (Double)carritoService.getSubtotal(platosCarrito) + (Double)carritoService.getSubtotalAdicionales(adicionalesCarrito);
         modelo.put("subtotal", subtotal);
         modelo.put("platosCarrito", platosCarrito);
         return new ModelAndView("carrito", modelo);
