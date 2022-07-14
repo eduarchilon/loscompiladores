@@ -58,7 +58,7 @@
             <li class="list-group-item">Dirección: ${valorado.direccion}</li>
             <li class="list-group-item">Telefono: ${valorado.telefono}</li>
             <li class="list-group-item">Calificacion: ${valorado.calificacion}✪</li>
-            <a href="ver-platos-mas-vendidos/${valorado.id}" class="card-link">Ver platos más vendidos</a>
+            <li class="list-group-item"><a href="ver-platos-mas-vendidos/${valorado.id}" class="card-link">Ver platos más vendidos</a></li>
         </ul>
         <div class="card-body">
             <a href="platos-del-restaurante/${valorado.id}" class="card-link">Ver platos</a>
