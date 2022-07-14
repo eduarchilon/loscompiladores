@@ -31,10 +31,6 @@ public class Mesa {
     public Mesa() {
     }
 
-    public Mesa(Long id) {
-        this.id = id;
-    }
-
     public Mesa(Long id, Restaurante restaurante, Integer numero, Integer capacidad) {
         this.id = id;
         this.restaurante = restaurante;
@@ -68,4 +64,3 @@ public class Mesa {
 
 
 }
-

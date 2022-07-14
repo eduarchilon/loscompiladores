@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 import ar.edu.unlam.tallerweb1.modelo.Mesa;
+import ar.edu.unlam.tallerweb1.modelo.Reserva;
+import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -32,5 +34,13 @@ public class RespositorioMesaImpl implements RespositorioMesa{
     @Override
     public Integer obtenerCantidadDeMesasDelResturante(Long idRestaurante) {
         return null;
+    }
+
+    @Override
+    public Mesa obtenerMesaPorId(Long mesaId) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (Mesa) session.createCriteria(Mesa.class)
+                .add(Restrictions.eq("id", mesaId))
+                .uniqueResult();
     }
 }

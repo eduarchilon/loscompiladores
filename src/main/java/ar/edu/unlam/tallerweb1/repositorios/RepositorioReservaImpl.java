@@ -81,19 +81,21 @@ public class RepositorioReservaImpl implements RepositorioReserva {
         endDate.set(endDate.MINUTE,59);
         endDate.set(endDate.SECOND,59);
         List mesas = session.createQuery(
-                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha BETWEEN :stDate AND :edDate )"
-        ).setParameter("stDate", startDate)
-         .setParameter("edDate", endDate)
-         .list();
+                        "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha BETWEEN :stDate AND :edDate )"
+                ).setParameter("stDate", startDate)
+                .setParameter("edDate", endDate)
+                .list();
         return mesas;
     }
 
     @Override
     public Reserva buscarReservaPorId(Long id) {
         Session session = sessionFactory.getCurrentSession();
-        return (Reserva) session.createCriteria(Reserva.class)
+        Reserva reserva = (Reserva) session.createCriteria(Reserva.class)
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
+        session.flush();
+        return reserva;
     }
 
     @Override
@@ -121,30 +123,19 @@ public class RepositorioReservaImpl implements RepositorioReserva {
     }
 
     @Override
-    public Boolean borrarReserva(Long idReserva) {
+    public Boolean eliminarReserva(Long id) {
         final Session session = sessionFactory.getCurrentSession();
-        if(idReserva!=null){
+        if(id!=null){
             Reserva reserva = (Reserva) sessionFactory.getCurrentSession()
                     .createCriteria(Reserva.class)
-                    .add(Restrictions.eq("id", idReserva))
+                    .add(Restrictions.eq("id", id))
                     .uniqueResult();
             session.delete(reserva);
             session.flush();
             return true;
         }
         return false;
-    }
 
-    @Override
-    public void cargarMesaAlaReserva(Long idMesa) {
-        Session session = sessionFactory.openSession();
-        Transaction trans = session.beginTransaction();
-        Reserva res = session.load(Reserva.class, idMesa);
-
-       Reserva r = new Reserva();
-        r.setMesaId(idMesa);
-        session.save(r);
     }
 
 }
-

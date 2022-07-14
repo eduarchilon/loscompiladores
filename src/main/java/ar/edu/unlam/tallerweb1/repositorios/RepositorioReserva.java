@@ -26,7 +26,5 @@ public interface RepositorioReserva {
 
     Long crearReserva(Reserva reserva1);
 
-    Boolean borrarReserva(Long idReserva);
-
-    void cargarMesaAlaReserva(Long idMesa);
+    Boolean eliminarReserva(Long id);
 }

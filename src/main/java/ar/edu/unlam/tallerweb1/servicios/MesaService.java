@@ -7,4 +7,6 @@ import java.util.List;
 public interface MesaService {
 
     List<Mesa> getMesasDelRestaurante(Long idResto);
+
+    Mesa getMesaPorId(Long mesaId);
 }

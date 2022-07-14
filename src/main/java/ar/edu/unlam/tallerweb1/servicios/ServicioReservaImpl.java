@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.Calendar;
 import java.util.List;
 
 @Service @Transactional
@@ -26,15 +27,6 @@ public class ServicioReservaImpl implements ServicioReserva{
     public List<Plato> cartaClientePorGusto(Cliente cliente) {
         List<Plato> platos = repositorioReserva.verPlatosDelCliente(cliente);
         return platos;
-    }
-
-    @Override
-    public Boolean borrarReservaDeLaLista(Long idReserva) {
-        if(idReserva == idReserva.longValue()){
-            repositorioReserva.borrarReserva(idReserva);
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -59,8 +51,24 @@ public class ServicioReservaImpl implements ServicioReserva{
     }
 
     @Override
-    public void agregarMesaAlaReserva(Long idMesa) {
-        repositorioReserva.cargarMesaAlaReserva(idMesa);
+    public Boolean eliminarReserva(Long reserva) {
+        //todo: cuando tengamos login se pueda validar el cliente
+        return repositorioReserva.eliminarReserva(reserva);
+    }
+
+    @Override
+    public List<Reserva> buscoTodasLasReservasClientes(Cliente cliente) {
+
+        return repositorioReserva.buscarReservasCliente(cliente);
+    }
+
+    @Override
+    public List<Mesa> buscaMesasDisponiblesSegunHorario() {
+        return null;
+    }
+
+    @Override
+    public List<Mesa> buscaMesasDisponiblesSegunHorario(Restaurante resto, Calendar date) {
+        return repositorioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
     }
 }
-

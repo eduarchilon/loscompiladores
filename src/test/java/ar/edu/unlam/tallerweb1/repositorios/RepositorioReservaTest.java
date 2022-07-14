@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RepositorioReservaTest extends SpringTest {
     Cliente cliente = new Cliente(1L);
     Restaurante resto = new Restaurante(1L, 9, 23);
-//    LocalDateTime fechaReserva = LocalDateTime.of(2023,03,03,12,0,0);
+    //    LocalDateTime fechaReserva = LocalDateTime.of(2023,03,03,12,0,0);
 //    Date date = new Date();
     Calendar date = new GregorianCalendar(2023,12,12,12,00);
     @Autowired
@@ -60,6 +59,7 @@ public class RepositorioReservaTest extends SpringTest {
 
 
 
+
     @Test @Transactional @Rollback
     public void buscarReservasCliente(){
         crearReservas();
@@ -76,8 +76,9 @@ public class RepositorioReservaTest extends SpringTest {
     public void muestraDisponibilidadSegunHorario(){
         crearReservas();
 //        LocalDateTime fechaReserva = LocalDateTime.of(2022,06,18,12,0,0);
-System.out.println(resto.getId());
+        System.out.println(resto.getId());
         List<Mesa> mesas = repositorioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
+        System.out.println(mesas);
         entoncesMesasEncontrados(mesas);
     }
     @Test @Transactional @Rollback
@@ -88,53 +89,26 @@ System.out.println(resto.getId());
         entoncesReservaEncontrada(reservaCreada,buscada);
 
     }
-
     @Test @Transactional @Rollback
-    public void queSePuedaBorraUnaReserva(){
-
-        daddoQueTengoservasHechasYBorrroUna();
-
-        List<Reserva> list = repositorioReserva.buscarTodasLasReservas();
-
-        assertThat(list).hasSize(3);
-    }
-
-    private void daddoQueTengoservasHechasYBorrroUna() {
-        this.mesa1 = new Mesa(1L);
-        this.mesa2 = new Mesa(2L);
-        this.mesa3 = new Mesa(3L);
-        this.mesa4 = new Mesa(4L);
-
-
-        session().save(this.mesa1);
-        session().save(this.mesa2);
-        session().save(this.mesa3);
-        session().save(this.mesa4);
-
-        List<Mesa>mesasBuscadas = new LinkedList<>();
-
-        mesasBuscadas.add(mesa1);
-        mesasBuscadas.add(mesa2);
-        mesasBuscadas.add(mesa3);
-
-        this.reserva1 = new Reserva(1L, mesa1,date);
-        this.reserva2 = new Reserva(2L, mesa2,date);
-        this.reserva3 = new Reserva(3L, mesa3,date);
-        this.reserva4 = new Reserva(4L, mesa4,date);
-
-        session().save(this.reserva1);
-        session().save(this.reserva2);
-        session().save(this.reserva3);
-        session().save(this.reserva4);
-
-        repositorioReserva.borrarReserva(1L);
+    public void eliminarReserva(){
+        Reserva reservaCreada = new Reserva(1L,date);
+        session().save(reservaCreada);
+        Boolean resultado = repositorioReserva.eliminarReserva(1L);
+        entoncesReservaEliminada(resultado);
     }
 
     private void entoncesReservaEncontrada(Reserva reservaCreada, Reserva buscada) {
         assertThat(reservaCreada.getId()).isEqualTo(buscada.getId());
     }
+    private void entoncesReservaEliminada(Boolean resultado) {
+        assertThat(resultado).isTrue();
+    }
 
     public void crearReservas(){
+
+        session().save(this.resto);
+
+        session().save(this.cliente);
 
         this.mesa1 = new Mesa(1L,resto,1,4);
         this.mesa2 = new Mesa(1L,resto,2,4);
@@ -144,12 +118,6 @@ System.out.println(resto.getId());
         this.mesa6 = new Mesa(1L,resto,6,4);
         this.mesa7 = new Mesa(1L,resto,7,4);
 
-
-        this.reserva1 = new Reserva(cliente,mesa1,date);
-        this.reserva2 = new Reserva(cliente,mesa2,date);
-        this.reserva3 = new Reserva(cliente,mesa3,date);
-        this.reserva4 = new Reserva(cliente,mesa4,date);
-
         session().save(this.mesa1);
         session().save(this.mesa2);
         session().save(this.mesa3);
@@ -158,9 +126,10 @@ System.out.println(resto.getId());
         session().save(this.mesa6);
         session().save(this.mesa7);
 
-        session().save(this.resto);
-
-        session().save(this.cliente);
+        this.reserva1 = new Reserva(cliente,mesa1,date);
+        this.reserva2 = new Reserva(cliente,mesa2,date);
+        this.reserva3 = new Reserva(cliente,mesa3,date);
+        this.reserva4 = new Reserva(cliente,mesa4,date);
 
         session().save(this.reserva1);
         session().save(this.reserva2);

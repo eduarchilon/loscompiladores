@@ -17,19 +17,17 @@ public class Reserva {
     @Column(name = "id_Reserva", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;
 
     private Calendar fecha;
 
-    @ManyToMany
-    private List<Plato> plato;
 
     public Reserva() {
 
@@ -37,12 +35,6 @@ public class Reserva {
 
     public Reserva(Cliente cliente, Mesa mesa, Calendar fecha) {
         this.cliente = cliente;
-        this.mesa = mesa;
-        this.fecha = fecha;
-    }
-
-    public Reserva(Long id, Mesa mesa, Calendar fecha) {
-        this.id = id;
         this.mesa = mesa;
         this.fecha = fecha;
     }
@@ -66,6 +58,10 @@ public class Reserva {
     public Reserva(long l, Calendar date) {
         this.id =l;
         this.fecha=date;
+    }
+
+    public Reserva(Calendar date) {
+        this.fecha = date;
     }
 
     public Long getId() {
@@ -102,11 +98,13 @@ public class Reserva {
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;
     }
-
-    public void setMesaId(Long idMesa){
+    public void setAtributos(Long idMesa, Long idCliente){
         Mesa mesa = new Mesa();
         mesa.setId(idMesa);
         setMesa(mesa);
+        Cliente cliente = new Cliente();
+        cliente.setId(idCliente);
+        setCliente(cliente);
     }
 
 }
