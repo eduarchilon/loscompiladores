@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -10,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Repository
@@ -115,5 +117,17 @@ public class RepositorioPlatoImpl implements RepositorioPlato{
         return plato.add(Restrictions.eq("restaurante.localidad", localidadRestaurante))
                 .list();
     }
+
+    @Override
+    public Plato buscarPlato(Long idPlato) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (Plato) sessionFactory.getCurrentSession()
+                .createCriteria(Plato.class)
+                .add(Restrictions.eq("id", idPlato))
+                .uniqueResult();
+    }
+
+
+
 
 }

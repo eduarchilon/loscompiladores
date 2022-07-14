@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Carrito;
+import ar.edu.unlam.tallerweb1.modelo.CarritoAdicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import org.hibernate.Session;
@@ -94,6 +95,42 @@ public class RepositorioCarritoImpl implements RepositorioCarrito{
 
         Carrito car = new Carrito();
         car.setPlatoId(plato);
+        session.save(car);
+    }
+
+
+
+//    Carrito Adicionales
+
+
+    @Override
+    public List<CarritoAdicional> verTodosLosAdicionales() {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<CarritoAdicional>) sessionFactory.getCurrentSession()
+                .createCriteria(CarritoAdicional.class)
+                .list();
+    }
+
+    @Override
+    public Boolean borrarAdicional(Long idCarritoAdicional) {
+        final Session session = sessionFactory.getCurrentSession();
+        CarritoAdicional carritoAdicional = (CarritoAdicional) sessionFactory.getCurrentSession()
+                .createCriteria(CarritoAdicional.class)
+                .add(Restrictions.eq("id", idCarritoAdicional))
+                .uniqueResult();
+        session.delete(carritoAdicional);
+        session.flush();
+        return true;
+    }
+
+    @Override
+    public void cargarAlCarritoAdicional(Long idCarritoAdicional) {
+        Session session = sessionFactory.openSession();
+        Transaction trans = session.beginTransaction();
+        CarritoAdicional c = session.load(CarritoAdicional.class, idCarritoAdicional);
+
+        CarritoAdicional car = new CarritoAdicional();
+        car.setAdicionalId(idCarritoAdicional);
         session.save(car);
     }
 }

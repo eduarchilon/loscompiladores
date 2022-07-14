@@ -78,6 +78,10 @@ public class Plato {
 
     }
 
+    public Plato(Long id) {
+        this.id = id;
+    }
+
     public Plato(String nombre) {
         this.nombre = nombre;
     }
@@ -138,19 +142,19 @@ public class Plato {
         this.restaurante = restaurante;
     }
 
-//    public TipoGusto getTipo() {
-//        return tipo;
-//    }
-//
-//    public void setTipo(TipoGusto tipo) {
-//        this.tipo = tipo;
-//    }
-//
-//    public List<Adicional> getAdicionales() {
-//        return adicionales;
-//    }
-//
-//    public void setAdicionales(List<Adicional> adicionales) {
-//        this.adicionales = adicionales;
-//    }
+    public TipoGusto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoGusto tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Adicional> getAdicionales() {
+        return adicionales;
+    }
+
+    public void setAdicionales(List<Adicional> adicionales) {
+        this.adicionales = adicionales;
+    }
 }

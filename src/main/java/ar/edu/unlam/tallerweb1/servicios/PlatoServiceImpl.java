@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPlato;
@@ -29,6 +30,11 @@ public class PlatoServiceImpl implements PlatoService{
         List<Plato> lista = repositorioPlato.buscarTodos();
         return lista;
 
+    }
+
+    @Override
+    public Plato buscarPlato(Long idPlato) {
+        return (Plato) repositorioPlato.buscarPlato(idPlato);
     }
 
 

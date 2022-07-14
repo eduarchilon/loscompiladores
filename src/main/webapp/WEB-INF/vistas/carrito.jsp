@@ -48,6 +48,32 @@
                                             </div>
                                         </div>
                                     </c:forEach>
+                                    <c:forEach items="${adicionalesCarrito}" var="adicional">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div>
+                                                            <img
+                                                                    src="https://blog.taranna.com/docs/doce-platos-populares-mundo-taranna-013-620x413.jpg"
+                                                                    class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                        </div>
+                                                        <div class="ms-3">
+                                                            <h5>${adicional.adicional.nombre}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div style="width: 80px;">
+                                                            <h5 class="mb-0">${adicional.adicional.precio}</h5>
+                                                        </div>
+                                                        <form action="/proyecto_limpio_spring_war_exploded/borrar-adicional/${adicional.id}" method="post">
+                                                            <button class="btn-danger btn-style" type="submit"  style="color: #cecece;"><i class="fas fa-trash-alt"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
 
 
