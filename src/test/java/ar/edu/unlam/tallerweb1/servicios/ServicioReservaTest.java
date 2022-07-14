@@ -119,11 +119,8 @@ public class ServicioReservaTest {
     @Test
     public void traigoDisponiblesReservasDelCliente(){
         crearReservas();
-//        tengoUnaListaDeReservas(this.listReservas);
         tengoUnaListaDeMesas(this.listMesas,resto,date);
-//        cuandoBuscoLaReservaDelCliente(this.listReservas,cliente);
         List<Mesa> mesasBuscadas = servicioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
-        //todo: arreglar este test para poder terminar el test de controlador y ell controlador
         obtengoUnaListaDeMesas(mesasBuscadas);
     }
 
@@ -183,6 +180,13 @@ public class ServicioReservaTest {
         this.mesa6 = new Mesa(1L,resto,6,4);
         this.mesa7 = new Mesa(1L,resto,7,4);
         this.listMesas = new LinkedList<Mesa>();
+        this.listMesas.add(mesa1);
+        this.listMesas.add(mesa2);
+        this.listMesas.add(mesa3);
+        this.listMesas.add(mesa4);
+        this.listMesas.add(mesa5);
+        this.listMesas.add(mesa6);
+        this.listMesas.add(mesa7);
 
         this.reserva1 = new Reserva(1L,cliente,mesa1,date);
         this.reserva2 = new Reserva(2L,cliente,mesa2,date);

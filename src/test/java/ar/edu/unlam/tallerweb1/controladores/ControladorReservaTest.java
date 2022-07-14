@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.modelo.Cliente;
 import ar.edu.unlam.tallerweb1.modelo.Mesa;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
+import ar.edu.unlam.tallerweb1.servicios.ClienteService;
 import ar.edu.unlam.tallerweb1.servicios.MesaService;
 import ar.edu.unlam.tallerweb1.servicios.RestauranteService;
 import ar.edu.unlam.tallerweb1.servicios.ServicioReserva;
@@ -30,19 +31,23 @@ public class ControladorReservaTest {
     private RestauranteService servicioRestaurante;
     private MesaService servicioMesa;
     private ControladorReserva controladorReserva;
+    private ClienteService servicioCliente;
     HttpServletRequest request;
     HttpServletResponse response;
     Cliente cliente = new Cliente(1L);
     Restaurante resto = new Restaurante(1L,9,23);
     Calendar date = new GregorianCalendar(2023,12,12,12,00);
+    String dateString = "2022-07-18T11:30";
     private Mesa mesa1 = new Mesa(1L,resto,1,4);
+
 
     @Before
     public void init(){
         servicioReserva= mock(ServicioReserva.class);
         servicioRestaurante = mock(RestauranteService.class);
         servicioMesa = mock(MesaService.class);
-        controladorReserva = new ControladorReserva(servicioReserva,servicioMesa,servicioRestaurante);
+        servicioCliente = mock(ClienteService.class);
+        controladorReserva = new ControladorReserva(servicioReserva,servicioMesa,servicioRestaurante,servicioCliente);
 
     }
     @Test
@@ -62,27 +67,21 @@ public class ControladorReservaTest {
     }
     @Test
     public void formularioCrearReserva() throws IOException {
-        dadoQueExistaUnRestaurante(1L);
-        dadoQueExistaUnRestauranteConMesas(1L,3);
+        dadoQueExistanMesasDisponiblesEnUnRestaurante(1L,3);
         ModelAndView muestra = cuandocreoUnFormularioDeReserva(1L);
-//todo: arreglar este test para poder terminar el controlador previo terminar el todo del servicio
         entoncesMeLLevaALaVista("crear-reserva",muestra.getViewName());
     }
 
-    private void dadoQueExistaUnRestaurante(Long i) {
-
-        when(servicioRestaurante.buscarRestaurantePorId(i)).thenReturn(new Restaurante());
-    }
-    private void dadoQueExistaUnRestauranteConMesas(long l, int i) {
+    private void dadoQueExistanMesasDisponiblesEnUnRestaurante(long l, int i) {
         List<Mesa> mesaList = new LinkedList<Mesa>();
         for (int j = 0; j < i; j++) {
             mesaList.add(new Mesa());
         }
-        when(servicioMesa.getMesasDelRestaurante(l)).thenReturn(mesaList);
+        when(servicioReserva.buscaMesasDisponiblesSegunHorario(resto,date)).thenReturn(mesaList);
     }
 
     private ModelAndView cuandocreoUnFormularioDeReserva(long l) {
-        return controladorReserva.creoUnFormularioDeReserva(l);
+        return controladorReserva.creoUnFormularioDeReservaBuscar(l);
     }
 
     @Test
@@ -91,13 +90,13 @@ public class ControladorReservaTest {
 //        Reserva reserva = new Reserva(cliente,mesa1,date);
 //        Long Long = 0L;
 //        when(servicioReserva.creoUnaReserva(reserva)).thenReturn(Long);
-        ModelAndView muestra = cuandoCreoUnaReserva(cliente,mesa1,date);
+        ModelAndView muestra = cuandoCreoUnaReserva(cliente,mesa1,dateString);
         entoncesEncuentro(muestra,4);
         entoncesMeLLevaALaVista("redirect:/home",muestra.getViewName());
     }
 
-    private ModelAndView cuandoCreoUnaReserva(Cliente cliente, Mesa mesa1, Calendar date) {
-        return controladorReserva.creaUnaReserva(cliente.getId(),mesa1.getId(),date);
+    private ModelAndView cuandoCreoUnaReserva(Cliente cliente, Mesa mesa1, String dateString) {
+        return controladorReserva.creaUnaReserva(cliente.getId(),mesa1.getId(),dateString);
     }
 
     private ModelAndView cuandoBorroUnaReserva(Long reservaId, HttpServletResponse response, HttpServletRequest request) throws IOException {

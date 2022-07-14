@@ -19,7 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -31,8 +34,9 @@ public class ControladorReserva {
     private static MesaService mesaServicio;
     private static RestauranteService restauranteService;
     @Autowired
-    public ControladorReserva(ServicioReserva servicioReserva,MesaService mesaServicio,RestauranteService restauranteService) {
+    public ControladorReserva(ServicioReserva servicioReserva,MesaService mesaServicio,RestauranteService restauranteService,ClienteService servicioCliente) {
         this.servicioReserva = servicioReserva;
+        this.servicioCliente = servicioCliente;
         this.mesaServicio = mesaServicio;
         this.restauranteService = restauranteService;
     }
@@ -61,28 +65,60 @@ public class ControladorReserva {
         return new ModelAndView("redirect:/todasLasReservas");
     }
 
-    @RequestMapping(value = "crear-reserva/{clienteId}/{mesaId}/{date}",method = {RequestMethod.POST,RequestMethod.GET})
-    public ModelAndView creaUnaReserva(@PathVariable Long clienteId, @PathVariable Long mesaId,@PathVariable Calendar date) {
+    @RequestMapping(value = "crear-reserva/red/{clienteId}/{mesaId}/{fechaDate}",method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView creaUnaReserva(@PathVariable Long clienteId, @PathVariable Long mesaId,@PathVariable String fechaDate) {
         ModelMap model = new ModelMap();
-//todo: ver como hacer para que funcione como esta abajo
-
-//        Mesa mesa = mesaServicio.getMesaPorId(mesaId);
-//        Cliente cliente = servicioCliente.verClientePorId(clienteId);
-        Reserva reserva = new Reserva(date);
-        reserva.setAtributos(mesaId,clienteId);
+        Date fecha = null;
+        try {
+            String inputDate = fechaDate.replace("T", " ");
+            fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(inputDate);
+        } catch (ParseException e) {
+            System.out.println("error Fecha");
+            throw new RuntimeException(e);
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        System.out.println(fecha);
+        Mesa mesa = mesaServicio.getMesaPorId(mesaId);
+        Cliente cliente = servicioCliente.verClientePorId(clienteId);
+        Reserva reserva = new Reserva(cliente,mesa,calendar);
+//        Reserva reserva = new Reserva(calendar);
+//        reserva.setAtributos(mesaId,clienteId);
         servicioReserva.creoUnaReserva(reserva);
         return new ModelAndView("redirect:/home",model);
     }
     @RequestMapping(value = "crear-reserva/{clienteId}/{mesaId}/{date}",method = {RequestMethod.GET})
-    public static ModelAndView creaUnaReservaRedirect(@PathVariable Long clienteId, @PathVariable Long mesaId,@PathVariable Calendar date) throws IOException {
+    public static ModelAndView creaUnaReservaRedirect(@PathVariable Long clienteId, @PathVariable Long mesaId,@PathVariable String fechaDate){
 
         return new ModelAndView("redirect:/home");
     }
     @RequestMapping(value = "crear-reserva/{idResto}",method = {RequestMethod.POST,RequestMethod.GET})
-    public ModelAndView creoUnFormularioDeReserva(@PathVariable long idResto) {
+    public ModelAndView creoUnFormularioDeReservaBuscar(@PathVariable long idResto) {
         ModelMap modelo = new ModelMap();
-        List<Mesa> mesas = mesaServicio.getMesasDelRestaurante(idResto);
+
         Restaurante resto = restauranteService.buscarRestaurantePorId(idResto);
+//        List<Mesa> mesas = mesaServicio.getMesasDelRestaurante(idResto);
+//        modelo.put("mesas",mesas);
+        modelo.put("restaurante",resto);
+        return new ModelAndView("crear-reserva",modelo);
+    }
+    @RequestMapping(value = "crear-reserva/{idResto}/{date}",method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView creoUnFormularioDeReserva(@PathVariable long idResto, @PathVariable String date) {
+        ModelMap modelo = new ModelMap();
+        Date fecha = null;
+        try {
+            String inputDate = date.replace("T", " ");
+            fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(inputDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        System.out.println(fecha);
+
+        Restaurante resto = restauranteService.buscarRestaurantePorId(idResto);
+        List<Mesa> mesas = servicioReserva.buscaMesasDisponiblesSegunHorario(resto,cal);
+        modelo.put("fecha",date);
         modelo.put("mesas",mesas);
         modelo.put("restaurante",resto);
         return new ModelAndView("crear-reserva",modelo);
