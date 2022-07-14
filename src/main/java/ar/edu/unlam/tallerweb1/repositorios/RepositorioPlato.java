@@ -27,4 +27,9 @@ public interface RepositorioPlato {
     List<Plato> buscarPlatoPorLocalidadRestaurante(String localidadRestaurante);
 
     Plato buscarPlato(Long idPlato);
+
+    Boolean agregarAdicionalAlPlato(Long idAdicional, Long idPlato);
+
+    List<Adicional> verAdicionalesDelPlato(Long idPlato);
+
 }

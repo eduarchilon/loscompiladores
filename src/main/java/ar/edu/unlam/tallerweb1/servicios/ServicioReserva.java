@@ -1,10 +1,8 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import ar.edu.unlam.tallerweb1.modelo.Cliente;
-import ar.edu.unlam.tallerweb1.modelo.Plato;
-import ar.edu.unlam.tallerweb1.modelo.Reserva;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioReserva;
+import ar.edu.unlam.tallerweb1.modelo.*;
 
+import java.util.Calendar;
 import java.util.List;
 
 public interface ServicioReserva {
@@ -17,4 +15,12 @@ public interface ServicioReserva {
     List<Reserva> buscoTodasLasReservas();
 
     Long creoUnaReserva(Reserva reserva);
+
+    Boolean eliminarReserva(Long reserva);
+
+    List<Reserva> buscoTodasLasReservasClientes(Cliente cliente);
+
+    List<Mesa> buscaMesasDisponiblesSegunHorario();
+
+    List<Mesa> buscaMesasDisponiblesSegunHorario(Restaurante resto, Calendar date);
 }

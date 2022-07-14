@@ -18,13 +18,16 @@ import static org.mockito.Mockito.when;
 public class ServicioReservaTest {
 
     private RepositorioReserva repositorioReserva;
+    private MesaService repositorioMesa;
     private RepositorioPlato repositorioPlato;
     private ServicioReservaImpl servicioReserva;
 
     Cliente cliente = new Cliente(1L);
     Restaurante resto = new Restaurante(1L,9,23);
     Calendar date = new GregorianCalendar(2023,12,12,12,00);
+    Calendar date2 = new GregorianCalendar(2023,12,12,11,00);
     Calendar dateFueraDeHora = new GregorianCalendar(2023,12,12,8,00);
+
     private Mesa mesa1 ;
     private Mesa mesa2 ;
     private Mesa mesa3 ;
@@ -45,6 +48,7 @@ public class ServicioReservaTest {
     public void init(){
         //todo: aplicar mokito
         repositorioReserva = mock(RepositorioReserva.class);
+        repositorioMesa = mock(MesaService.class);
         servicioReserva = new ServicioReservaImpl(repositorioReserva);
 
 
@@ -74,6 +78,17 @@ public class ServicioReservaTest {
         seCreaUnaReserva(idReserva);
 
     }
+    @Test
+    public void seEliminaUnaReservaDeLaLista(){
+        crearReservas();
+        Reserva reserva = new Reserva(cliente,mesa1,date);
+        when(servicioReserva.eliminarReserva(reserva.getId())).thenReturn(true);
+        Boolean resultadoReserva = servicioReserva.eliminarReserva(reserva.getId());
+        seEliminaUnaReserva(resultadoReserva);
+
+    }
+
+
 
 
     @Test
@@ -93,7 +108,32 @@ public class ServicioReservaTest {
         List<Reserva> reservasBuscadas = servicioReserva.buscoTodasLasReservas();
         obtengoUnaListaDeReservas(reservasBuscadas);
     }
+    @Test
+    public void traigoLasReservasDelCliente(){
+        crearReservas();
+//        tengoUnaListaDeReservas(this.listReservas);
+        cuandoBuscoLaReservaDelCliente(this.listReservas,cliente);
+        List<Reserva> reservasBuscadas = servicioReserva.buscoTodasLasReservasClientes(cliente);
+        obtengoUnaListaDeReservas(reservasBuscadas);
+    }
+    @Test
+    public void traigoDisponiblesReservasDelCliente(){
+        crearReservas();
+        tengoUnaListaDeMesas(this.listMesas,resto,date);
+        List<Mesa> mesasBuscadas = servicioReserva.buscaMesasDisponiblesSegunHorario(resto,date);
+        obtengoUnaListaDeMesas(mesasBuscadas);
+    }
 
+
+
+    private void tengoUnaListaDeMesas(List<Mesa> mesasBuscadas, Restaurante resto, Calendar date) {
+        when(servicioReserva.buscaMesasDisponiblesSegunHorario(resto,date)).thenReturn(mesasBuscadas);
+    }
+
+
+    private void cuandoBuscoLaReservaDelCliente(LinkedList<Reserva> listReservas, Cliente cliente) {
+        when(servicioReserva.buscoTodasLasReservasClientes(cliente)).thenReturn(listReservas);
+    }
 
 
     private void tengoUnaListaDeReservas(LinkedList<Reserva> listReservas) {
@@ -108,7 +148,12 @@ public class ServicioReservaTest {
         when(servicioReserva.buscarReserva(reserva1.getId())).thenReturn(reserva1);
     }
 
-
+    private void seEliminaUnaReserva(Boolean resultadoReserva) {
+        assertThat(resultadoReserva).isTrue();
+    }
+    private void obtengoUnaListaDeMesas(List<Mesa> mesasBuscadas) {
+        assertThat(mesasBuscadas).hasSize(7);
+    }
     public void obtengoUnaReserva(Reserva reserva) {
         assertThat(reserva).isNotNull();
     }
@@ -135,6 +180,13 @@ public class ServicioReservaTest {
         this.mesa6 = new Mesa(1L,resto,6,4);
         this.mesa7 = new Mesa(1L,resto,7,4);
         this.listMesas = new LinkedList<Mesa>();
+        this.listMesas.add(mesa1);
+        this.listMesas.add(mesa2);
+        this.listMesas.add(mesa3);
+        this.listMesas.add(mesa4);
+        this.listMesas.add(mesa5);
+        this.listMesas.add(mesa6);
+        this.listMesas.add(mesa7);
 
         this.reserva1 = new Reserva(1L,cliente,mesa1,date);
         this.reserva2 = new Reserva(2L,cliente,mesa2,date);

@@ -38,9 +38,6 @@ public class CarritoServicioTest {
         carritoService = new CarritoServiceImpl(repositorioCarrito);
 
     }
-
-
-
     @Test
     public void queMeMuestreInformacionDelCarrito(){
 

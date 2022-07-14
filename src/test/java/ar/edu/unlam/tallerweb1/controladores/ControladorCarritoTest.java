@@ -31,8 +31,6 @@ public class ControladorCarritoTest {
     String pSearchTerm = "";
     private HttpServletRequest request;
     private HttpServletResponse response;
-
-
     @Before
     public void init(){
         this.carritoService = mock(CarritoService.class);
@@ -51,8 +49,6 @@ public class ControladorCarritoTest {
 
         entoncesMeLLevaALaVista(VISTA_CARRITO, mav.getViewName());
     }
-
-
 
     //    Carrito Adicionales
 

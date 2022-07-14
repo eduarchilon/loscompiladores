@@ -62,7 +62,13 @@ public class Plato {
         this.cantVentas=cantVentas;
     }
 
-    public Plato( Enum TIPO_PLATO, String nombre, Integer cantVentas) {
+    public Plato(Long id, Double precio, Integer cantVentas) {
+        this.id = id;
+        this.precio = precio;
+        this.cantVentas = cantVentas;
+    }
+
+    public Plato(Enum TIPO_PLATO, String nombre, Integer cantVentas) {
         this.nombre = nombre;
         this.TIPO_PLATO = TIPO_PLATO;
         this.cantVentas = cantVentas;

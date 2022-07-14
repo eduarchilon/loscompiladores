@@ -57,5 +57,4 @@ public class ControladorPlatos {
         return new ModelAndView("vista-plato", modelo);
     }
 
-
 }
