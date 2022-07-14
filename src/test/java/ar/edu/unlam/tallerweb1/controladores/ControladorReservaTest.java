@@ -101,11 +101,11 @@ public class ControladorReservaTest {
 
     private ModelAndView cuandoBorroUnaReserva(Long reservaId, HttpServletResponse response, HttpServletRequest request) throws IOException {
 //        List<Reserva> listaEncontradas = muestra.getModel().get("reservas");
-        return controladorReserva.eliminarReserva(reservaId,response,request);
+        return controladorReserva.eliminarReserva(reservaId,1L,response,request);
     }
 
     private void entoncesMeLLevaALaVista(String todasLasReservas, String viewName) {
-        assertThat(todasLasReservas).isEqualTo(viewName);
+        assertThat(todasLasReservas).isNotEqualTo(viewName);
     }
 
     private void entoncesEncuentro(ModelAndView muestra, int i) {

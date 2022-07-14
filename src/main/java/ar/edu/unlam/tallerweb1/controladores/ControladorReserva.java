@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,17 +53,29 @@ public class ControladorReserva {
         return new ModelAndView("todasLasReservas",modelo);
 
     }
-    @RequestMapping(value = "todasLasReservas/{reservaId}",method = {RequestMethod.POST,RequestMethod.GET})
-    public static ModelAndView eliminarReserva(@PathVariable("reservaId") Long reservaId, HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+    @RequestMapping(method = RequestMethod.GET, value ="misReservas")
+    public ModelAndView getTodasLasReservasDeUnUsuario(@RequestParam(value = "idCiente", required = false)Long idCiente) {
+        ModelMap modelo = new ModelMap();
+        Cliente cliente = servicioCliente.verClientePorId(idCiente);
+        System.out.println(cliente.getId());
+        List<Reserva> listaReserva = servicioReserva.buscoTodasLasReservasClientes(cliente);
+        modelo.put("reservas",listaReserva);
+        modelo.put("clienteId",idCiente);
+        return new ModelAndView("misReservas",modelo);
+
+    }
+    @RequestMapping(value = "misReservas/{reservaId}/{clienteId}",method = {RequestMethod.POST,RequestMethod.GET})
+    public static ModelAndView eliminarReserva(@PathVariable("reservaId") Long reservaId,@PathVariable("clienteId") Long clienteId, HttpServletResponse response, HttpServletRequest request) throws IOException {
         ModelMap modelo = new ModelMap();
         Boolean eliminado = servicioReserva.eliminarReserva(reservaId);
         System.out.println(eliminado);
-        return new ModelAndView("redirect:/todasLasReservas",modelo);
+        return new ModelAndView("redirect:/misReservas").addObject("idCiente",clienteId);
     }
-    @RequestMapping(value = "todasLasReservas/{reservaId}",method = {RequestMethod.GET})
-    public static ModelAndView eliminarRedirectReserva(@PathVariable Long reservaId ) throws IOException {
+    @RequestMapping(value = "misReservas/{reservaId}/{clienteId}",method = {RequestMethod.GET})
+    public static ModelAndView eliminarRedirectReserva(@PathVariable Long reservaId ,@PathVariable("clienteId") Long clienteId) throws IOException {
 
-        return new ModelAndView("redirect:/todasLasReservas");
+        return new ModelAndView("redirect:/misReservas").addObject("idCiente",clienteId);
     }
 
     @RequestMapping(value = "crear-reserva/red/{clienteId}/{mesaId}/{fechaDate}",method = {RequestMethod.POST,RequestMethod.GET})
@@ -82,33 +95,32 @@ public class ControladorReserva {
         Mesa mesa = mesaServicio.getMesaPorId(mesaId);
         Cliente cliente = servicioCliente.verClientePorId(clienteId);
         Reserva reserva = new Reserva(cliente,mesa,calendar);
-//        Reserva reserva = new Reserva(calendar);
-//        reserva.setAtributos(mesaId,clienteId);
         servicioReserva.creoUnaReserva(reserva);
-        return new ModelAndView("redirect:/home",model);
+        return new ModelAndView("redirect:/misReservas").addObject("idCiente",clienteId);
+//        return new ModelAndView("redirect:/crear-reserva");
     }
     @RequestMapping(value = "crear-reserva/{clienteId}/{mesaId}/{date}",method = {RequestMethod.GET})
     public static ModelAndView creaUnaReservaRedirect(@PathVariable Long clienteId, @PathVariable Long mesaId,@PathVariable String fechaDate){
 
-        return new ModelAndView("redirect:/home");
+        return new ModelAndView("redirect:/misReservas").addObject("idCiente",clienteId);
     }
     @RequestMapping(value = "crear-reserva/{idResto}",method = {RequestMethod.POST,RequestMethod.GET})
     public ModelAndView creoUnFormularioDeReservaBuscar(@PathVariable long idResto) {
         ModelMap modelo = new ModelMap();
 
         Restaurante resto = restauranteService.buscarRestaurantePorId(idResto);
-//        List<Mesa> mesas = mesaServicio.getMesasDelRestaurante(idResto);
-//        modelo.put("mesas",mesas);
+
         modelo.put("restaurante",resto);
         return new ModelAndView("crear-reserva",modelo);
     }
     @RequestMapping(value = "crear-reserva/{idResto}/{date}",method = {RequestMethod.POST,RequestMethod.GET})
-    public ModelAndView creoUnFormularioDeReserva(@PathVariable long idResto, @PathVariable String date) {
+    public ModelAndView creoUnFormularioDeReserva(@PathVariable Long idResto, @PathVariable String date) {
         ModelMap modelo = new ModelMap();
         Date fecha = null;
         try {
             String inputDate = date.replace("T", " ");
             fecha = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(inputDate);
+
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -123,17 +135,5 @@ public class ControladorReserva {
         modelo.put("restaurante",resto);
         return new ModelAndView("crear-reserva",modelo);
     }
-//@RequestMapping(value = "todasLasReservas/{idReserva}", method ={ RequestMethod.POST, RequestMethod.GET })
-//public ModelAndView borrarReservaDeLaLista(@PathVariable("idReserva")  Long idRserva, HttpServletResponse response, HttpServletRequest request) throws IOException {
-//    ModelMap modelo = new ModelMap();
-//
-//    Boolean borrado = servicioReserva.eliminarReserva(idRserva);
-//    modelo.put("operacion",borrado);
-//    return new ModelAndView("elemento-eliminado", modelo);
-//}
-//
-////    @RequestMapping(value = "todasLasReservas/{idReserva}", method = RequestMethod.GET)
-////    public ModelAndView redirectReserva(@PathVariable Long idReserva) throws IOException {
-////        return new ModelAndView("redirect:/todasLasReservas");
-////    }
+
 }

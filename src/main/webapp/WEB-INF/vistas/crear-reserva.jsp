@@ -2,7 +2,7 @@
 
 
 <style>
-    <%@include file="/css/style.css"%>
+<%--    <%@include file="/css/style.css"%>--%>
 </style>
 
 <h1>Crear Reserva</h1>

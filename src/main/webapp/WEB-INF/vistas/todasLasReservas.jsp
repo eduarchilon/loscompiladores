@@ -5,7 +5,7 @@
     <%@include file="/css/style.css"%>
 </style>
 <div class="container-general resto-container mt-1">
-    <h3 class="title-valorado">Mis reservas</h3>
+    <h3 class="title-valorado">Reservas de todos los Clientes</h3>
     <c:forEach items="${reservas}" var="reserva">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
