@@ -83,7 +83,7 @@ This web application runs under the following technologies:
 
 ## Project link
 
-- [github.com:eduarchilon/loscompiladores.git](git@github.com:eduarchilon/loscompiladores.git)
+- [github.com/eduarchilon/loscompiladores.git](github.com/eduarchilon/loscompiladores.git)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
