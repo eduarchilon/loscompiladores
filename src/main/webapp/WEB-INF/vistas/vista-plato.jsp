@@ -44,15 +44,18 @@
                                 <div class="mt-4 mb-3">
                                     <h5 class="text-uppercase">${platoBuscado.nombre}</h5>
                                     <div class="price d-flex flex-row align-items-center"> <span class="act-price">$${platoBuscado.precio}</span>
-<%--                                        <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div>--%>
+                                        <%--                                        <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div>--%>
                                     </div>
                                 </div>
                                 <p class="about">${platoBuscado.descripcion}</p>
+                                <p class="about">${platoBuscado.tipo.nombre}</p>
                                 <h6 class="about">Restaurante: ${platoBuscado.restaurante.nombre}</h6>
                                 <div class="cart mt-4 align-items-center">
                                     <form  action="/proyecto_limpio_spring_war_exploded/agregar-plato/${platoBuscado.id}" method="post">
                                         <button type="submit" class="btn btn-primary">Agregar al pedido</button>
                                     </form>
+                                    </br>
+
                                 </div>
                             </div>
                         </div>
@@ -62,19 +65,27 @@
         </div>
     </div>
 
+    <h4>Adicionales:</h4>
+    <c:forEach items="${adicionales}" var="adicional">
+        <span>${adicional.nombre}</span> <span>$${adicional.precio}</span> </br>
+        <form  action="/proyecto_limpio_spring_war_exploded/agregar-adicional/${adicional.id}" method="post">
+            <button type="submit" class="btn btn-primary">Agregar adicional</button>
+        </form>
+    </c:forEach>
+    </br> <span>Precio final: $${PrecioFinal}</span> </br>
 </div>
 
-    <script>
-        function change_image(image){
+<script>
+    function change_image(image){
 
-            var container = document.getElementById("main-image");
+        var container = document.getElementById("main-image");
 
-            container.src = image.src;
-        }
+        container.src = image.src;
+    }
 
-        document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("DOMContentLoaded", function(event) {
 
-        });
-    </script>
+    });
+</script>
 
 <%@ include file="footer.jsp"%>

@@ -31,7 +31,7 @@ public class Plato {
     @Column(name ="cantVentas")
     private Integer cantVentas;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="id_tipo")
     private TipoGusto tipo;
 
@@ -44,15 +44,15 @@ public class Plato {
     @JoinColumn(name ="id_restaurante")
     private Restaurante restaurante;
 
+    public Plato(Long id, TipoGusto tipo) {
+        this.id = id;
+        this.tipo = tipo;
+    }
 
     public Plato(Long id, TipoGusto tipo, List<Adicional> adicionales) {
         this.id = id;
         this.tipo = tipo;
         this.adicionales = adicionales;
-    }
-
-    public Plato(Long id) {
-        this.id = id;
     }
 
     public Plato(Long id, Enum TIPO_PLATO, String descripcion, Integer cantVentas) {
@@ -82,6 +82,10 @@ public class Plato {
     }
     public Plato(){
 
+    }
+
+    public Plato(Long id) {
+        this.id = id;
     }
 
     public Plato(String nombre) {

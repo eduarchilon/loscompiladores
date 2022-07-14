@@ -1,13 +1,18 @@
 package ar.edu.unlam.tallerweb1.persistencia;
 import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
+import ar.edu.unlam.tallerweb1.modelo.TipoGusto;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,7 +39,7 @@ public class PlatoTest extends SpringTest {
         assertThat(plato1.getId()).isNull();
     }
 
-    @Test @Transactional @Rollback()
+    @Test @Transactional @Rollback
     public void modificaUnPlatoYLaBuscaPorNombrePlato(){
         Plato plato = new Plato();
         plato.setNombre("arroz");
@@ -47,6 +52,25 @@ public class PlatoTest extends SpringTest {
 
         Plato buscado = session.get(Plato.class, plato.getId());
         assertThat(buscado.getPrecio()).isEqualTo(100.00);
+    }
+
+    @Test @Transactional @Rollback
+    public void queSePuedaAgregarUnAdicionalAlPlato(){
+        final Session session = session();
+        TipoGusto vegetariano = new TipoGusto(1L, "Vegetariano");
+        Adicional ad1 = new Adicional(1L, "Pan integral", 200.00, vegetariano);
+        Adicional ad2 = new Adicional(2L, "Agua", 150.00, vegetariano);
+        List<Adicional> adicionales = new LinkedList();
+        adicionales.add(ad1);
+        adicionales.add(ad2);
+
+        Plato plato = new Plato();
+        plato.setNombre("arroz");
+        plato.setAdicionales(adicionales);
+        session.save(plato);
+
+        Plato buscado = session.get(Plato.class, plato.getId());
+        assertThat(buscado.getAdicionales()).isNotEmpty();
     }
 
 

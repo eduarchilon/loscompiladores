@@ -1,10 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
-import ar.edu.unlam.tallerweb1.modelo.Carrito;
-import ar.edu.unlam.tallerweb1.modelo.Cliente;
-import ar.edu.unlam.tallerweb1.modelo.Plato;
-import ar.edu.unlam.tallerweb1.modelo.Restaurante;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +31,10 @@ public class RepositorioCarritoTest extends SpringTest {
     private Carrito carrito1;
     private Carrito carrito3;
     private Carrito carrito4;
+    private CarritoAdicional carritoA1;
+    private CarritoAdicional carritoA2;
+    private Adicional ad1;
+    private Adicional ad2;
 
 
     @Before
@@ -57,46 +58,37 @@ public class RepositorioCarritoTest extends SpringTest {
 
     }
 
-//    @Test
-//    @Transactional
-//    @Rollback
-//    public void queMeMuestreLosPlatosDelCarrito(){
-//
-//        dadoQueExistenPlatos();
-//
-//        List<Plato> listaPlatosDelCarrito = (List<Plato>)repositorioCarrito.verTodosLoaPlatos(carrito.getId());
-//
-//        assertThat(listaPlatosDelCarrito).hasSize(3);
-//
-//        System.out.println("***************************************");
-//        System.out.println("Tamano: " + listaPlatosDelCarrito.size());
-//        System.out.println("NOMBRE PLATO: "+plato1.getId());
-//        System.out.println("NOMBRE PLATO: "+ plato2.getId());
-//
-//        for (int i = 0; i < listaPlatosDelCarrito.size(); i++) {
-//            System.out.println("NOMBRE PLATO: "+ listaPlatosDelCarrito.get(i));
-//        }
-//        System.out.println("***************************************");
-//
-//    }
-//
-//    @Test
-//    @Transactional
-//    @Rollback
-//    public void queMuestreElCarrito(){
-//
-//        dadoQueExistenPlatos();
-//
-//        Carrito buscado = (Carrito)repositorioCarrito.verCarrito(carrito.getId());
-//
-//        System.out.println("***************************************");
-//        System.out.println("Carrito: " + buscado.getId());
-//        for (int i = 0; i < buscado.getPlatos().size(); i++) {
-//            System.out.println("NOMBRE PLATO: "+ buscado.getPlatos().get(i).getId());
-//        }
-//        System.out.println("***************************************");
-//
-//    }
+    @Test
+    @Transactional
+    @Rollback(false)
+    public void queMeMuestreLosAdicionalesDelCarrito() {
+        dadoQueExistenAdicionales();
+
+        List<CarritoAdicional> adicionalesBuscados = repositorioCarrito.verTodosLosAdicionales();
+
+        System.out.println("***************************************");
+        for (int i = 0; i < adicionalesBuscados.size(); i++) {
+            System.out.println("ADICIONAL: "+ adicionalesBuscados.get(i));
+        }
+        System.out.println("***************************************");
+
+    }
+
+    private void dadoQueExistenAdicionales() {
+
+         ad1 = new Adicional(1L, "a", 100.00);
+         ad2 = new Adicional(2L, "b", 100.00);
+
+        session().save(ad1);
+        session().save(ad2);
+
+        carritoA1 = new CarritoAdicional(1L, ad1);
+        carritoA2 = new CarritoAdicional(2L, ad2);
+
+        session().save(carritoA1);
+        session().save(carritoA2);
+    }
+
 
 
     private void dadoQueExistenPlatos() {

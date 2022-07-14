@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 
 import ar.edu.unlam.tallerweb1.modelo.Carrito;
+import ar.edu.unlam.tallerweb1.modelo.CarritoAdicional;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCarrito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,37 @@ public class CarritoServiceImpl implements CarritoService{
     @Override
     public Double getTotal(Double subtotal, Double descuento) {
         Double total = subtotal - descuento;
+        return total;
+    }
+
+
+
+
+//    Carrito Adicionales
+
+
+    @Override
+    public List<CarritoAdicional> verListDeAdicionalesDelCarrito() {
+        List<CarritoAdicional> adicionales = (List<CarritoAdicional>) repositorioCarrito.verTodosLosAdicionales();
+        return adicionales;
+    }
+
+    @Override
+    public Boolean borrarAdicionalDelCarrito(Long idAdicionalCarrito) {
+        return repositorioCarrito.borrarAdicional(idAdicionalCarrito);
+    }
+
+    @Override
+    public void agregarAdicionalAlCarrito(Long adicional) {
+        repositorioCarrito.cargarAlCarritoAdicional(adicional);
+    }
+
+    @Override
+    public Double getSubtotalAdicionales(List<CarritoAdicional> adicionales) {
+        Double total = 0.0;
+        for (int i = 0; i <adicionales.size() ; i++) {
+            total += adicionales.get(i).getAdicional().getPrecio();
+        }
         return total;
     }
 

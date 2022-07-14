@@ -13,10 +13,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Root;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +20,6 @@ import java.util.List;
 public class RepositorioPlatoImpl implements RepositorioPlato{
 
     private SessionFactory sessionFactory;
-    private EntityManager em;
 
     @Autowired
     public RepositorioPlatoImpl(SessionFactory sessionFactory) {
@@ -163,5 +158,4 @@ public class RepositorioPlatoImpl implements RepositorioPlato{
                 .add(Restrictions.eq("id", idPlato))
                 .list();
     }
-
 }

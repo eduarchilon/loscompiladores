@@ -12,7 +12,7 @@
             <img src="https://imagekit.androidphoria.com/wp-content/uploads/platos-veganos.jpg" class="d-block w-100" alt="..." style="height: 550px; object-fit: cover;">
             <div class="carousel-caption-bg d-none d-md-block text-slider">
                 <h5>Los mejores platos</h5>
-                <a href=""><button type="button" class="btn btn-success px-5 fs-5 fw-bolder my-3">Ver platos de mi gusto</button></a>
+                <a href="/proyecto_limpio_spring_war_exploded/ver-platos"><button type="button" class="btn btn-success px-5 fs-5 fw-bolder my-3">Ver platos de mi gusto</button></a>
                 <p>Tenemos los mejores platos para ofrecerte sin importar el gusto que tengas. Vos sos libre de elegir.</p>
             </div>
         </div>

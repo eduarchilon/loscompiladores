@@ -3,14 +3,13 @@ package ar.edu.unlam.tallerweb1.servicios;
 import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.DetallePedido;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
+import ar.edu.unlam.tallerweb1.modelo.TipoGusto;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCliente;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioDetallePedido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPedido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPlato;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
@@ -23,102 +22,61 @@ import static org.mockito.Mockito.when;
 
 public class ServicioPlatoTest {
 
-    private RepositorioPedido repositorioPedido;
     private RepositorioDetallePedido repositorioDetallePedido;
     private RepositorioCliente repositorioCliente;
     private RepositorioPlato repositorioPlato;
-    private PedidoService pedidoService;
-    private PlatoService platoService;
+    private List<Plato> listaPlatos;
     private ServicioDetallePedido servicioDetallePedido;
-    private HttpServletRequest request;
-    private Plato platoSinventa;
+    private PlatoService servicioPlato;
+    private Plato plato1;
+    private Plato plato2;
+
 
 
     @Before
     public void init() {
-        repositorioPedido = mock(RepositorioPedido.class);
         repositorioCliente = mock(RepositorioCliente.class);
         repositorioDetallePedido = mock(RepositorioDetallePedido.class);
         repositorioPlato = mock(RepositorioPlato.class);
-        pedidoService = new PedidoServiceImpl(repositorioPedido, repositorioDetallePedido, repositorioCliente);
         servicioDetallePedido = new ServicioDetallePedidoImpl(repositorioDetallePedido, repositorioPlato, repositorioCliente);
-        platoSinventa = new Plato();
-        platoService = new PlatoServiceImpl(repositorioPlato);
+        servicioPlato = new PlatoServiceImpl(repositorioPlato);
+        listaPlatos = new LinkedList();
     }
 
-
-   /* @Test
-    public void queSePuedaActualizarLaCantidadDeVentasDelPlato(){
-        dadoQueExistaUnPlatoSinVentasNuevas();
-
-        cuandoRealizoUnPedidoSeModificaLaCantidadVentasDelPlato();
-
-        obtengoPlatoConNuevaVenta();
-
-    }
-
-
-
-    private void obtengoPlatoConNuevaVenta() {
-    }
-
-    private void dadoQueExistaUnPlatoSinVentasNuevas() {
-        Plato platoSinVenta = new Plato();
-        platoSinVenta.setCantVentas(0);
-    }
-
-
-    private void cuandoRealizoUnPedidoSeModificaLaCantidadVentasDelPlato() {
-        pedidoService.realizarPedido(request);
-    }
-    */
-
-    @Test @Transactional
-    @Rollback
-    public void buscarUnPlatoDeLaLista(){
-
-        Plato plato1 = new Plato(1L,VEGANO,"Milanesa con pure",1);
-        Plato plato2 = new Plato(2L, VEGANO,"Milanesa con papas fritas",2);
-        Plato plato3 = new Plato(3L, VEGANO,"Milanesa de berenjena con pure",3);
-        Plato plato4 = new Plato(4L, VEGANO,"Arroz al wok con verduras",10);
-
-        List<Plato> platos = new LinkedList<>();
-        platos.add(plato1);
-        platos.add(plato2);
-        platos.add(plato3);
-        platos.add(plato4);
-
-        when(platoService.buscarPlato(plato1.getId())).thenReturn(plato1);
-
-        Plato platoBuscado = platoService.buscarPlato(1L);
-
-        assertThat(platoBuscado.getId()).isEqualTo(1L);
-    }
 
     @Test
-    public void verEltotalPrecioPorAgregacionDeAdicionales(){
-        Adicional a = new Adicional(1L, "a", 200.0);
-        Adicional b = new Adicional(2L, "b", 200.0);
-        Adicional c = new Adicional(3L, "c", 200.0);
+    public void queSePuedaEncontrarPlatosConAdicionales(){
+        dadoQueExistanPlatosConAdicionales();
 
-        Plato plato1 = new Plato(1L,VEGANO,"Milanesa con pure",1);
+        when(servicioPlato.verPlatos()).thenReturn(listaPlatos);
 
-        List<Adicional> aa = new LinkedList<>();
-        aa.add(a);
-        aa.add(b);
-        aa.add(c);
+        List <Plato> listaBuscada = servicioPlato.verPlatos();
 
-        when(platoService.buscarPlato(1L)).thenReturn(plato1);
-        Plato platoBuscado = platoService.buscarPlato(1L);
-
-        when(platoService.verAdicionalesDeLPlato(platoBuscado.getId())).thenReturn(aa);
-
-        List<Adicional> adiconales = platoService.verAdicionalesDeLPlato(platoBuscado.getId());
-
-        platoBuscado.setAdicionales(adiconales);
-
-        System.out.println(platoBuscado.getAdicionales());
+        obtengoListaDePlatosConAdicionales(listaBuscada);
 
     }
+
+    private void obtengoListaDePlatosConAdicionales(List<Plato> listaBuscada) {
+        for (Plato plato : listaBuscada) {
+            assertThat(plato.getAdicionales()).isNotEmpty();
+        }
+    }
+
+    private void dadoQueExistanPlatosConAdicionales() {
+        TipoGusto vegetariano = new TipoGusto(1L, "Vegetariano");
+        Adicional ad1 = new Adicional(1L, "Pan integral", 200.00, vegetariano);
+        Adicional ad2 = new Adicional(2L, "Agua", 150.00, vegetariano);
+        List<Adicional> adicionales = new LinkedList();
+        adicionales.add(ad1);
+        adicionales.add(ad2);
+        plato1 = new Plato(1L, vegetariano);
+        plato2 = new Plato(2L, vegetariano);
+
+        plato1.setAdicionales(adicionales);
+        plato2.setAdicionales(adicionales);
+        listaPlatos.add(plato1);
+        listaPlatos.add(plato2);
+    }
+
 
 }

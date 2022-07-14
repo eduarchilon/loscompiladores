@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.Carrito;
+import ar.edu.unlam.tallerweb1.modelo.CarritoAdicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCarrito;
@@ -23,7 +25,12 @@ public class CarritoServicioTest {
     private Plato plato2;
     private Carrito carrito1;
     private Carrito carrito2;
-   private List<Carrito> carritos;
+    private List<Carrito> carritos;
+    private List<CarritoAdicional> carritosAdicionales;
+    private CarritoAdicional carritoA1;
+    private CarritoAdicional carritoA2;
+    private Adicional ad1;
+    private Adicional ad2;
 
     @Before
     public void init() {
@@ -31,9 +38,6 @@ public class CarritoServicioTest {
         carritoService = new CarritoServiceImpl(repositorioCarrito);
 
     }
-
-
-
     @Test
     public void queMeMuestreInformacionDelCarrito(){
 
@@ -50,6 +54,28 @@ public class CarritoServicioTest {
 
     }
 
+    @Test
+    public void queMeMuestreInformacionDelCarritoAdicional(){
+
+        dadoQueExistenAdicionales();
+
+        carritosAdicionales = new LinkedList<>();
+        carritosAdicionales.add(carritoA1);
+        carritosAdicionales.add(carritoA2);
+
+        when(carritoService.verListDeAdicionalesDelCarrito()).thenReturn(carritosAdicionales);
+        List<CarritoAdicional> cars = carritoService.verListDeAdicionalesDelCarrito();
+
+        assertThat(carritosAdicionales).hasSize(2);
+
+    }
+
+    private void dadoQueExistenAdicionales() {
+        ad1 = new Adicional(1L, "Pan", 10.00);
+        ad2 = new Adicional(2L, "Agua", 10.00);
+        carritoA1 = new CarritoAdicional(1L, ad1);
+        carritoA2 = new CarritoAdicional(2L, ad2);
+    }
 
 
     private void dadoQueExistenPlatos() {

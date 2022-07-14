@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 
 import ar.edu.unlam.tallerweb1.modelo.Carrito;
+import ar.edu.unlam.tallerweb1.modelo.CarritoAdicional;
 import ar.edu.unlam.tallerweb1.modelo.Cupon;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.servicios.CarritoService;
@@ -35,6 +36,9 @@ public class ControladorCarrito {
     public ModelAndView verCarritoModal(@RequestParam(value ="searchString", required = false)String pSearchTerm, HttpServletRequest request, HttpServletResponse response)throws IOException {
         ModelMap modelo = new ModelMap();
         List<Carrito> platosCarrito = (List<Carrito>) carritoService.verListDePlatosDelCarrito();
+        List<CarritoAdicional> adicionalesCarrito = (List<CarritoAdicional>) carritoService.verListDeAdicionalesDelCarrito();
+        modelo.put("adicionalesCarrito", adicionalesCarrito);
+
 
         modelo.put("searchTerm", pSearchTerm);
         Cupon cupon = cuponService.obetenerCupon(pSearchTerm);
@@ -64,6 +68,21 @@ public class ControladorCarrito {
         carritoService.agregarPlatoAlCarrito(plato);
         return new ModelAndView("redirect:/cart", modelo);
     }
+
+    @RequestMapping(value = "/agregar-adicional/{idAdicional}", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView agregarAdicional(@PathVariable("idAdicional") Long idAdicional) {
+        ModelMap modelo = new ModelMap();
+        carritoService.agregarAdicionalAlCarrito(idAdicional);
+        return new ModelAndView("redirect:/cart", modelo);
+    }
+
+    @RequestMapping(value = "borrar-adicional/{idAdicionalCarrito}", method = RequestMethod.POST)
+    public ModelAndView borrarAdicionalModall(@PathVariable("idAdicionalCarrito")  Long idAdicionalCarrito, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        ModelMap modelo = new ModelMap();
+        Boolean resultado = carritoService.borrarAdicionalDelCarrito(idAdicionalCarrito);
+        return new ModelAndView("redirect:/cart", modelo);
+    }
+
 
 //    @RequestMapping(value="/cart/{searchString}")
 //    public ModelAndView Search(@RequestParam(value ="searchString", required = false) String pSearchTerm, HttpServletRequest request, HttpServletResponse response) {
