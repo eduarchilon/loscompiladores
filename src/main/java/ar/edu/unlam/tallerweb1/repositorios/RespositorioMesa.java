@@ -10,4 +10,6 @@ public interface RespositorioMesa {
     Integer obtenerCantidadDeMesasDelResturante(Long idRestaurante);
 
     Mesa obtenerMesaPorId(Long mesaId);
+
 }
+

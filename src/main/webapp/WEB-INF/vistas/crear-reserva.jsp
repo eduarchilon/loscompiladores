@@ -2,32 +2,37 @@
 
 
 <style>
-    <%@include file="/css/style.css"%>
-</style>
 
-<h1>Crear Reserva</h1>
-<%-- necesito traer los horarios del restaurante y las mesas, y devolverlos al controlador --%>
-<form>
-    <div class="row">
-        <div class="col">
-            <input type="datetime-local" class="form-control" placeholder="First name" id="fecha" value="${date}">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" id="idResto" style="display: none" value="${restaurante.id}">
-        </div>
+<%--    <%@include file="/css/style.css"%>--%>
+</style>
+<div style="margin: 5px">
+    <h1>Crear Reserva</h1>
+    <%-- necesito traer los horarios del restaurante y las mesas, y devolverlos al controlador --%>
+    <div class="container-general">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <input type="datetime-local" class="form-control" placeholder="First name" id="fecha" value="${date}">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="idResto" style="display: none" value="${restaurante.id}">
+                </div>
+            </div>
+            <a class="btn" href="/crear-reserva/" id="buscarMesas" disabled="true">buscar mesas</a>
+        </form>
     </div>
-    <a class="btn" href="/crear-reserva/" id="buscarMesas" disabled="true">buscar mesas</a>
-</form>
-<div class="container">
-    <c:forEach items="${mesas}" var="mesa">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">mesa numero ${mesa.numero}</h5>
-            <p class="card-text">Capacidad: ${mesa.capacidad}</p>
-            <a href="/proyecto_limpio_spring_war_exploded/crear-reserva/red/1/${mesa.id}/${date}" class="btn btn-primary">Reservar</a>
+    <div class="container-general resto-container mt-1">
+        <c:forEach items="${mesas}" var="mesa">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">mesa numero ${mesa.numero}</h5>
+                <p class="card-text">Capacidad: ${mesa.capacidad}</p>
+                <a href="/proyecto_limpio_spring_war_exploded/crear-reserva/red/1/${mesa.id}/${date}" class="btn btn-primary">Reservar</a>
+            </div>
         </div>
+        </c:forEach>
     </div>
-    </c:forEach>
+
 </div>
 <script>
     document.getElementById("fecha").addEventListener("change", myFunction);

@@ -27,4 +27,6 @@ public interface RepositorioReserva {
     Long crearReserva(Reserva reserva1);
 
     Boolean eliminarReserva(Long id);
+
 }
+

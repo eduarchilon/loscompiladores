@@ -62,7 +62,7 @@
         </ul>
         <div class="card-body">
             <a href="platos-del-restaurante/${valorado.id}" class="card-link">Ver platos</a>
-            <a href="${valorado.id}/mesas" class="card-link">Reservar mesas</a>
+            <a href="crear-reserva/${valorado.id}" class="card-link">Reservar mesas</a>
         </div>
     </div>
 

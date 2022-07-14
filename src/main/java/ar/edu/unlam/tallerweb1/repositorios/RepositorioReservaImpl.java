@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -75,11 +76,15 @@ public class RepositorioReservaImpl implements RepositorioReserva {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar startDate = fechaReserva;
+
         startDate.set(startDate.MINUTE,00);
         startDate.set(startDate.SECOND,00);
+
         Calendar endDate = fechaReserva;
         endDate.set(endDate.MINUTE,59);
         endDate.set(endDate.SECOND,59);
+        Date algo = null;
+
         List mesas = session.createQuery(
                         "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha BETWEEN :stDate AND :edDate )"
                 ).setParameter("stDate", startDate)
@@ -136,6 +141,9 @@ public class RepositorioReservaImpl implements RepositorioReserva {
         }
         return false;
 
+
     }
 
 }
+
+

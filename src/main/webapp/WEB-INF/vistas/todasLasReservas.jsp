@@ -6,16 +6,17 @@
     <%@include file="/css/style.css"%>
 </style>
 
-
 <div class="container-general resto-container mt-1">
-    <h3 class="title-valorado">Mis reservas</h3>
+    <h3 class="title-valorado">Reservas de todos los Clientes</h3>
 
     <c:forEach items="${reservas}" var="reserva">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Reserva: N°${reserva.id}</h5>
                 <p class="card-text">Mesa: ${reserva.mesa.id} - ${reserva.mesa.restaurante.nombre}</p>
-<%--                <a href="#" class="btn btn-danger">Eliminar</a>--%>
+
+                    <%--                <a href="#" class="btn btn-danger">Eliminar</a>--%>
+
                 <form action="/proyecto_limpio_spring_war_exploded/todasLasReservas/${reserva.id}" method="post">
                     <button class="btn btn-danger" type="submit"  style="color: #cecece;">Eliminar</button>
                 </form>
@@ -23,7 +24,10 @@
         </div>
     </c:forEach>
 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> S01F02
 <section class="testimonials text-center bg-light" style="margin-top: 50px;">
     <div class="container">
         <h2 class="mb-5">What people are saying...</h2>
@@ -52,5 +56,8 @@
         </div>
     </div>
 </section>
+<<<<<<< HEAD
 
+=======
+>>>>>>> S01F02
 <%@ include file="footer.jsp"%>

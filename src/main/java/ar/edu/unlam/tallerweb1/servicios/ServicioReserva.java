@@ -23,4 +23,6 @@ public interface ServicioReserva {
     List<Mesa> buscaMesasDisponiblesSegunHorario();
 
     List<Mesa> buscaMesasDisponiblesSegunHorario(Restaurante resto, Calendar date);
+
 }
+
