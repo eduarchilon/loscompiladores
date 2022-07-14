@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.Cliente;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import org.junit.Before;
@@ -72,6 +73,55 @@ public class RepositorioPlatoTest extends SpringTest{
         entoncesNoTraePlatos(platos);
 
     }
+
+    @Test @Transactional @Rollback
+    public void buscarUnPlato(){
+
+        Plato plato1 = new Plato(1L,VEGANO,"Milanesa con pure",1);
+        Plato plato2 = new Plato(2L, VEGANO,"Milanesa con papas fritas",2);
+        Plato plato3 = new Plato(3L, VEGANO,"Milanesa de berenjena con pure",3);
+        Plato plato4 = new Plato(4L, VEGANO,"Arroz al wok con verduras",10);
+
+        session().save(plato1);
+        session().save(plato2);
+        session().save(plato3);
+        session().save(plato4);
+
+        List<Plato> platos = repositorioPlato.buscarTodos();
+
+        Plato platoBuscado = repositorioPlato.buscarPlato(1L);
+
+        assertThat(platoBuscado.getId()).isEqualTo(1L);
+    }
+
+
+    @Test @Transactional @Rollback
+    public void queAgregueAdicionalesAlPlato(){
+        Adicional a = new Adicional(1L, "a", 200.0);
+        Adicional b = new Adicional(2L, "b", 200.0);
+        Adicional c = new Adicional(3L, "c", 200.0);
+
+        session().save(a);
+        session().save(b);
+        session().save(c);
+
+        Plato plato1 = new Plato(1L,VEGANO,"Milanesa con pure",1);
+
+        session().save(plato1);
+
+        Boolean resultado = (Boolean) repositorioPlato.agregarAdicionalAlPlato(1L, 1L);
+        Boolean resultadoA = (Boolean) repositorioPlato.agregarAdicionalAlPlato(2L, 1L);
+
+        assertThat(resultado).isTrue();
+//        System.out.println(plato1.getAdicionales().get(0).getNombre());
+//        System.out.println(plato1.getAdicionales().get(1).getNombre());
+
+        for (int i = 0; i <plato1.getAdicionales().size() ; i++) {
+            System.out.println(plato1.getAdicionales().get(i).getNombre());
+        }
+
+    }
+
 
     private void entoncesPlatosEncontrados(List<Plato> platos) {
         assertThat(platos).isNotEmpty();

@@ -115,4 +115,15 @@ public class ControladorRestaurante {
         return new ModelAndView("por-localidad", modelo);
     }
 
+
+    @RequestMapping(path = "/ver-platos-mas-vendidos/{idRestaurante}", method = RequestMethod.GET)
+    public ModelAndView verPlatosMasVendidosDelRestaurante(@PathVariable("idRestaurante")  Long idRestaurante) {
+        ModelMap modelo = new ModelMap();
+        Restaurante resto = restauranteService.buscarRestaurantePorId(idRestaurante);
+        List<Plato> platosMasVendidos = restauranteService.verPlatosMasVendidosDelRestaurante(idRestaurante);
+        modelo.put("resto", resto);
+        modelo.put("platosMas", platosMasVendidos);
+        return new ModelAndView("platosMasVendidosDelRestaurante", modelo);
+    }
+
 }

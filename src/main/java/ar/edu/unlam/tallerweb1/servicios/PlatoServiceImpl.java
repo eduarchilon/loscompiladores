@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPlato;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -39,6 +41,21 @@ public class PlatoServiceImpl implements PlatoService{
     @Override
     public Integer verCantidadDePlatos() {
         return platos.size();
+    }
+
+    @Override
+    public Plato buscarPlato(Long idPlato) {
+        return (Plato) repositorioPlato.buscarPlato(idPlato);
+    }
+
+    @Override
+    public Boolean agregarAdcionalesAlPlato(Long idAdicional, Long idPlato) {
+        return repositorioPlato.agregarAdicionalAlPlato(idAdicional, idPlato);
+    }
+
+    @Override
+    public List<Adicional> verAdicionalesDeLPlato(Long idPlato) {
+        return repositorioPlato.verAdicionalesDelPlato(idPlato);
     }
 
 

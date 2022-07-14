@@ -16,6 +16,10 @@ public class Adicional {
     @Column(name = "precio")
     private Double precio;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_tipo")
+    private TipoGusto tipo;
+
 
     public Adicional(Long id, String nombre, Double precio) {
         this.id = id;

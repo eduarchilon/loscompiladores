@@ -51,6 +51,10 @@ public class Plato {
         this.adicionales = adicionales;
     }
 
+    public Plato(Long id) {
+        this.id = id;
+    }
+
     public Plato(Long id, Enum TIPO_PLATO, String descripcion, Integer cantVentas) {
         this.id = id;
         this.descripcion = descripcion;
@@ -58,7 +62,13 @@ public class Plato {
         this.cantVentas=cantVentas;
     }
 
-    public Plato( Enum TIPO_PLATO, String nombre, Integer cantVentas) {
+    public Plato(Long id, Double precio, Integer cantVentas) {
+        this.id = id;
+        this.precio = precio;
+        this.cantVentas = cantVentas;
+    }
+
+    public Plato(Enum TIPO_PLATO, String nombre, Integer cantVentas) {
         this.nombre = nombre;
         this.TIPO_PLATO = TIPO_PLATO;
         this.cantVentas = cantVentas;
@@ -134,19 +144,19 @@ public class Plato {
         this.restaurante = restaurante;
     }
 
-//    public TipoGusto getTipo() {
-//        return tipo;
-//    }
-//
-//    public void setTipo(TipoGusto tipo) {
-//        this.tipo = tipo;
-//    }
-//
-//    public List<Adicional> getAdicionales() {
-//        return adicionales;
-//    }
-//
-//    public void setAdicionales(List<Adicional> adicionales) {
-//        this.adicionales = adicionales;
-//    }
+    public TipoGusto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoGusto tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Adicional> getAdicionales() {
+        return adicionales;
+    }
+
+    public void setAdicionales(List<Adicional> adicionales) {
+        this.adicionales = adicionales;
+    }
 }

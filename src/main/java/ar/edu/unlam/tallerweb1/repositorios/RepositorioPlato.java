@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 
 import java.util.List;
@@ -24,5 +25,11 @@ public interface RepositorioPlato {
     Plato buscarPlatoAAgregarEnDetalle(String nombrePlato, String descripcionPlato, String nombreRestaurante, String localidadRestaurante, Double precio);
 
     List<Plato> buscarPlatoPorLocalidadRestaurante(String localidadRestaurante);
+
+    Plato buscarPlato(Long idPlato);
+
+    Boolean agregarAdicionalAlPlato(Long idAdicional, Long idPlato);
+
+    List<Adicional> verAdicionalesDelPlato(Long idPlato);
 
 }

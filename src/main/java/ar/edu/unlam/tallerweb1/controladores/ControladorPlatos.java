@@ -1,9 +1,11 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.servicios.PlatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +33,14 @@ public class ControladorPlatos {
         ModelMap modelo = new ModelMap();
         modelo.put("cantidadPlatos", platoService.verCantidadDePlatos());
         return new ModelAndView("platos", modelo);
+    }
+
+    @RequestMapping(path = "/ver-plato/{idPlato}", method = RequestMethod.GET)
+    public ModelAndView verPlatoEnVistya(@PathVariable("idPlato") Long idPlato){
+        ModelMap modelo = new ModelMap();
+        Plato plato = platoService.buscarPlato(idPlato);
+        modelo.put("platoBuscado", plato);
+        return new ModelAndView("vista-plato", modelo);
     }
 
 

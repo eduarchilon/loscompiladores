@@ -138,6 +138,30 @@ public class RestauranteServiceTest {
 
     }
 
+
+    @Test
+    public void queMuestreLosPlatosMsaVendidosDelRestaurante(){
+        Plato a = new Plato(1L, 100.0, 5);
+        Plato b = new Plato(2L, 200.0, 2);
+        Plato c = new Plato(3L, 300.0, 6);
+
+        List<Plato> platos = new LinkedList<>();
+
+        Restaurante restoA = new Restaurante(1L, "RestoYa");
+
+        platos.add(a);
+        platos.add(b);
+        platos.add(c);
+
+        when(restauranteService.verPlatosDelRestaurante(restoA.getId())).thenReturn(platos);
+
+        List<Plato> platoMaVendidos = restauranteService.verPlatosMasVendidosDelRestaurante(restoA.getId());
+
+        System.out.println(platoMaVendidos);
+
+        assertThat(platoMaVendidos.size()).isEqualTo(2);
+    }
+
     private void cuandoBuscoAlRestaurante(Restaurante restaurante, List<Plato> platos) {
         /*Al mockear no importa el resturante que le asigne al plato ya que le di al servicio la lista*/
         when(restauranteService.verPlatosDelRestaurante(restaurante.getId())).thenReturn(platos);

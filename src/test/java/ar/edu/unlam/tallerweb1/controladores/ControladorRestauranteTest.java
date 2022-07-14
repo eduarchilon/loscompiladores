@@ -28,6 +28,9 @@ public class ControladorRestauranteTest {
 
     private static final String VISTA_HOME = "home";
     private static final String VISTA_MENU = "menu-restaurante";
+    private static final String VISTA_LOCALIDAD = "por-localidad";
+
+
 
     @Before
     public void init(){
@@ -39,6 +42,16 @@ public class ControladorRestauranteTest {
         controladorRestaurante = new ControladorRestaurante(servicioBusqueda, clienteService, pedidoService, restauranteService, localidadService);
 
         controladorMenu = new  ControladorMenu(restauranteService);
+    }
+
+
+    @Test
+    public void QUEfILTREeNeLCONTROLADORpORlOCALIDAD(){
+        dadoQueExistenResturantes();
+    }
+
+    private void dadoQueExistenResturantes() {
+
     }
 
     @Test
