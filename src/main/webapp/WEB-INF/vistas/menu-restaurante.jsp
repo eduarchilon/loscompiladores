@@ -16,6 +16,7 @@
             <h5 class="card-title">${plato.nombre}</h5>
             <p class="card-text">${plato.descripcion}</p>
             <p class="card-text">Precio: $${plato.precio}</p>
+            <a href="/proyecto_limpio_spring_war_exploded/ver-plato/${plato.id}" class="card-link">Ver plato</a>
             <form action="/proyecto_limpio_spring_war_exploded/agregar-plato/${plato.id}" method="post">
                 <button type="submit" class="btn btn-primary">Agregar al pedido</button>
             </form>

@@ -31,7 +31,7 @@ public class Plato {
     @Column(name ="cantVentas")
     private Integer cantVentas;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="id_tipo")
     private TipoGusto tipo;
 
@@ -44,6 +44,10 @@ public class Plato {
     @JoinColumn(name ="id_restaurante")
     private Restaurante restaurante;
 
+    public Plato(Long id, TipoGusto tipo) {
+        this.id = id;
+        this.tipo = tipo;
+    }
 
     public Plato(Long id, TipoGusto tipo, List<Adicional> adicionales) {
         this.id = id;
@@ -72,6 +76,10 @@ public class Plato {
     }
     public Plato(){
 
+    }
+
+    public Plato(Long id) {
+        this.id = id;
     }
 
     public Plato(String nombre) {
@@ -134,19 +142,19 @@ public class Plato {
         this.restaurante = restaurante;
     }
 
-//    public TipoGusto getTipo() {
-//        return tipo;
-//    }
-//
-//    public void setTipo(TipoGusto tipo) {
-//        this.tipo = tipo;
-//    }
-//
-//    public List<Adicional> getAdicionales() {
-//        return adicionales;
-//    }
-//
-//    public void setAdicionales(List<Adicional> adicionales) {
-//        this.adicionales = adicionales;
-//    }
+    public TipoGusto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoGusto tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Adicional> getAdicionales() {
+        return adicionales;
+    }
+
+    public void setAdicionales(List<Adicional> adicionales) {
+        this.adicionales = adicionales;
+    }
 }

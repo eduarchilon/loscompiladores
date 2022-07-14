@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Adicional {
@@ -16,16 +17,27 @@ public class Adicional {
     @Column(name = "precio")
     private Double precio;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name ="id_tipo")
+    private TipoGusto tipo;
+
+    public Adicional(Long id, String nombre, Double precio, TipoGusto tipoGusto) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.tipo = tipoGusto;
+    }
+
+
+
+    public Adicional() {
+
+    }
 
     public Adicional(Long id, String nombre, Double precio) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
-    }
-
-
-    public Adicional() {
-
     }
 
     public Long getId() {
@@ -50,5 +62,13 @@ public class Adicional {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    public TipoGusto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoGusto tipo) {
+        this.tipo = tipo;
     }
 }

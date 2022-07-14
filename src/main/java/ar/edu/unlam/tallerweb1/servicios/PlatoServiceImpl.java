@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPlato;
@@ -15,11 +16,6 @@ import java.util.List;
 @Service
 @Transactional
 public class PlatoServiceImpl implements PlatoService{
-
-
-
-
-    private List<Plato> platos = new ArrayList<>();
 
     private RepositorioPlato repositorioPlato ;
 
@@ -37,8 +33,8 @@ public class PlatoServiceImpl implements PlatoService{
     }
 
     @Override
-    public Integer verCantidadDePlatos() {
-        return platos.size();
+    public Plato buscarPlato(Long idPlato) {
+        return (Plato) repositorioPlato.buscarPlato(idPlato);
     }
 
 

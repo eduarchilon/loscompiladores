@@ -17,6 +17,7 @@
             <p class="card-text">${plato.descripcion}</p>
             <p class="card-text">Restaurante: ${plato.restaurante.nombre}</p>
             <p class="card-text">Precio: ${plato.precio}</p>
+            <a href="/proyecto_limpio_spring_war_exploded/ver-plato/${plato.id}" class="card-link">Ver plato</a>
             <a href="#" class="btn btn-primary">Agregar al pedido</a>
         </div>
     </div>

@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.DetallePedido;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
+import ar.edu.unlam.tallerweb1.modelo.TipoGusto;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCliente;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioDetallePedido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPedido;
@@ -13,57 +15,67 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.List;
 
+import static ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato.VEGANO;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ServicioPlatoTest {
 
-    private RepositorioPedido repositorioPedido;
     private RepositorioDetallePedido repositorioDetallePedido;
     private RepositorioCliente repositorioCliente;
     private RepositorioPlato repositorioPlato;
-    private PedidoService pedidoService;
+    private List<Plato> listaPlatos;
     private ServicioDetallePedido servicioDetallePedido;
-    private HttpServletRequest request;
-    private Plato platoSinventa;
+    private PlatoService servicioPlato;
+    private Plato plato1;
+    private Plato plato2;
 
 
     @Before
     public void init() {
-        repositorioPedido = mock(RepositorioPedido.class);
         repositorioCliente = mock(RepositorioCliente.class);
         repositorioDetallePedido = mock(RepositorioDetallePedido.class);
         repositorioPlato = mock(RepositorioPlato.class);
-        pedidoService = new PedidoServiceImpl(repositorioPedido, repositorioDetallePedido, repositorioCliente);
         servicioDetallePedido = new ServicioDetallePedidoImpl(repositorioDetallePedido, repositorioPlato, repositorioCliente);
-        platoSinventa = new Plato();
+        servicioPlato = new PlatoServiceImpl(repositorioPlato);
+        listaPlatos = new LinkedList();
     }
 
 
-   /* @Test
-    public void queSePuedaActualizarLaCantidadDeVentasDelPlato(){
-        dadoQueExistaUnPlatoSinVentasNuevas();
+    @Test
+    public void queSePuedaEncontrarPlatosConAdicionales(){
+        dadoQueExistanPlatosConAdicionales();
 
-        cuandoRealizoUnPedidoSeModificaLaCantidadVentasDelPlato();
+        when(servicioPlato.verPlatos()).thenReturn(listaPlatos);
 
-        obtengoPlatoConNuevaVenta();
+        List <Plato> listaBuscada = servicioPlato.verPlatos();
+
+        obtengoListaDePlatosConAdicionales(listaBuscada);
 
     }
 
-
-
-    private void obtengoPlatoConNuevaVenta() {
+    private void obtengoListaDePlatosConAdicionales(List<Plato> listaBuscada) {
+        for (Plato plato : listaBuscada) {
+            assertThat(plato.getAdicionales()).isNotEmpty();
+        }
     }
 
-    private void dadoQueExistaUnPlatoSinVentasNuevas() {
-        Plato platoSinVenta = new Plato();
-        platoSinVenta.setCantVentas(0);
+    private void dadoQueExistanPlatosConAdicionales() {
+        TipoGusto vegetariano = new TipoGusto(1L, "Vegetariano");
+        Adicional ad1 = new Adicional(1L, "Pan integral", 200.00, vegetariano);
+        Adicional ad2 = new Adicional(2L, "Agua", 150.00, vegetariano);
+        List<Adicional> adicionales = new LinkedList();
+        adicionales.add(ad1);
+        adicionales.add(ad2);
+        plato1 = new Plato(1L, vegetariano);
+        plato2 = new Plato(2L, vegetariano);
+
+        plato1.setAdicionales(adicionales);
+        plato2.setAdicionales(adicionales);
+        listaPlatos.add(plato1);
+        listaPlatos.add(plato2);
     }
 
-
-    private void cuandoRealizoUnPedidoSeModificaLaCantidadVentasDelPlato() {
-        pedidoService.realizarPedido(request);
-    }
-    */
 
 }

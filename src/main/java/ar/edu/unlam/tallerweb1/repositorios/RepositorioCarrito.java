@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Carrito;
+import ar.edu.unlam.tallerweb1.modelo.CarritoAdicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 
@@ -24,4 +25,10 @@ public interface RepositorioCarrito {
     Boolean borrarPlato(Long idPlatoCarrito);
 
     void cargarAlCarrito(Long plato);
+
+    List<CarritoAdicional> verTodosLosAdicionales();
+
+    Boolean borrarAdicional(Long idCarritoAdicional);
+
+    void cargarAlCarritoAdicional(Long idCarritoAdicional);
 }
