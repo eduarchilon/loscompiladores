@@ -35,18 +35,59 @@ public class Restaurante {
 
     @Column(name = "Localidad")
     private String localidad;
+    @Column(name = "HorarioApertura")
+    private Integer horarioApertura;
 
-    @OneToMany
+    public Restaurante(int horarioApertura, int horarioCierre) {
+        this.horarioApertura = horarioApertura;
+        this.horarioCierre = horarioCierre;
+    }
+
+    public Restaurante() {
+
+    }
+
+    public Integer getHorarioApertura() {
+        return horarioApertura;
+    }
+
+    public void setHorarioApertura(Integer horarioApertura) {
+        this.horarioApertura = horarioApertura;
+    }
+
+    public Integer getHorarioCierre() {
+        return horarioCierre;
+    }
+
+    public void setHorarioCierre(Integer horarioCierre) {
+        this.horarioCierre = horarioCierre;
+    }
+
+    @Column(name = "HorarioCierre")
+    private Integer horarioCierre;
+
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_mesas")
     private List<Mesa> listMesa;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_localidad")
+    private Localidad locacion;
 
     public Restaurante(Long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
-    public Restaurante(){
+    public Restaurante(Long id, Localidad locacion) {
+        this.id = id;
+        this.locacion = locacion;
+    }
 
+    public Restaurante(long l, int i, int i1){
+        this.id = l;
+        this.horarioApertura = i;
+        this.horarioCierre = i1;
     }
 
     public List<Mesa> getListMesa() {

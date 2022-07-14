@@ -8,4 +8,8 @@ public interface RespositorioMesa {
 
     List<Mesa> obetenerMesasDelRestaurante(Long idRestaurante);
     Integer obtenerCantidadDeMesasDelResturante(Long idRestaurante);
+
+    Mesa obtenerMesaPorId(Long mesaId);
+
 }
+

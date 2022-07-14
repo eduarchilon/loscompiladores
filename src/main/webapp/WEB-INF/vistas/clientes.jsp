@@ -15,6 +15,7 @@
       <h5 class="card-title">${cliente.nombre} ${cliente.apellido}</h5>
       <p class="card-text">Localidad: Buenos Aires</p>
       <a href="ver-pedido-cliente/${cliente.nombre}" class="btn btn-primary">Ver pedidos</a>
+      <a href="misReservas?idCiente=${cliente.id}" class="btn btn-primary">Ver reservas</a>
     </div>
   </div>
 </c:forEach>

@@ -48,6 +48,32 @@
                                             </div>
                                         </div>
                                     </c:forEach>
+                                    <c:forEach items="${adicionalesCarrito}" var="adicional">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div>
+                                                            <img
+                                                                    src="https://blog.taranna.com/docs/doce-platos-populares-mundo-taranna-013-620x413.jpg"
+                                                                    class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                        </div>
+                                                        <div class="ms-3">
+                                                            <h5>${adicional.adicional.nombre}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div style="width: 80px;">
+                                                            <h5 class="mb-0">${adicional.adicional.precio}</h5>
+                                                        </div>
+                                                        <form action="/proyecto_limpio_spring_war_exploded/borrar-adicional/${adicional.id}" method="post">
+                                                            <button class="btn-danger btn-style" type="submit"  style="color: #cecece;"><i class="fas fa-trash-alt"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
 
 
@@ -75,8 +101,20 @@
                                             </button>
 
                                             </form:form>
-                                        <p>${mensajeCupon}</p>
-                                        <hr class="my-4">
+<%--                                        <c:if test="${not empty cupon.nombre}">--%>
+<%--                                            <p style="color: #000000;">Cupon ${searchTerm} aplicado.</p>--%>
+<%--                                        </c:if>--%>
+                                        <hr class="my-2">
+                                        <c:choose>
+                                            <c:when test="${not empty cupon.nombre}">
+                                                <h5 style="color: #ffffff;">Cupon ${searchTerm} aplicado.</h5>
+                                            </c:when>
+                                            <c:otherwise>
+<%--                                                <p style="color: #000000;">El cupon ${searchTerm} no existe.</p>--%>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                        <hr class="my-2">
 
                                         <div class="d-flex justify-content-between">
                                             <p class="mb-2">Subtotal</p>
@@ -85,12 +123,12 @@
 
                                         <div class="d-flex justify-content-between">
                                             <p class="mb-2">Desuento</p>
-                                            <p class="mb-2">-${subtotal * cupon.descuento} (${cupon.descuento*100}%)</p>
+                                            <p class="mb-2">-$${subtotal * (cupon.descuento/100)} (${cupon.descuento}%)</p>
                                         </div>
 
                                         <div class="d-flex justify-content-between mb-4">
                                             <p class="mb-2">Total(Incl. taxes)</p>
-                                            <p class="mb-2">$${(subtotal) + (subtotal * searchResult.descuento)}</p>
+                                            <p class="mb-2">$${subtotal - (subtotal * (cupon.descuento/100))}</p>
                                         </div>
 
                                         <button type="button" class="btn btn-info btn-block btn-lg">

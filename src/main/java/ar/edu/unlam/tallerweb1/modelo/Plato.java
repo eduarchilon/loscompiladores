@@ -31,12 +31,29 @@ public class Plato {
     @Column(name ="cantVentas")
     private Integer cantVentas;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name ="id_tipo")
+    private TipoGusto tipo;
+
+    @ManyToMany
+    @JoinColumn(name ="id_adicional")
+    private List<Adicional> adicionales;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name ="id_restaurante")
     private Restaurante restaurante;
 
+    public Plato(Long id, TipoGusto tipo) {
+        this.id = id;
+        this.tipo = tipo;
+    }
 
+    public Plato(Long id, TipoGusto tipo, List<Adicional> adicionales) {
+        this.id = id;
+        this.tipo = tipo;
+        this.adicionales = adicionales;
+    }
 
     public Plato(Long id, Enum TIPO_PLATO, String descripcion, Integer cantVentas) {
         this.id = id;
@@ -44,7 +61,14 @@ public class Plato {
         this.TIPO_PLATO = TIPO_PLATO;
         this.cantVentas=cantVentas;
     }
-    public Plato( Enum TIPO_PLATO, String nombre, Integer cantVentas) {
+
+    public Plato(Long id, Double precio, Integer cantVentas) {
+        this.id = id;
+        this.precio = precio;
+        this.cantVentas = cantVentas;
+    }
+
+    public Plato(Enum TIPO_PLATO, String nombre, Integer cantVentas) {
         this.nombre = nombre;
         this.TIPO_PLATO = TIPO_PLATO;
         this.cantVentas = cantVentas;
@@ -58,6 +82,10 @@ public class Plato {
     }
     public Plato(){
 
+    }
+
+    public Plato(Long id) {
+        this.id = id;
     }
 
     public Plato(String nombre) {
@@ -118,5 +146,21 @@ public class Plato {
 
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
+    }
+
+    public TipoGusto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoGusto tipo) {
+        this.tipo = tipo;
+    }
+
+    public List<Adicional> getAdicionales() {
+        return adicionales;
+    }
+
+    public void setAdicionales(List<Adicional> adicionales) {
+        this.adicionales = adicionales;
     }
 }

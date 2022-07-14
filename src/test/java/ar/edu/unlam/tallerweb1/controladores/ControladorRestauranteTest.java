@@ -2,10 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
-import ar.edu.unlam.tallerweb1.servicios.ClienteService;
-import ar.edu.unlam.tallerweb1.servicios.PedidoService;
-import ar.edu.unlam.tallerweb1.servicios.RestauranteService;
-import ar.edu.unlam.tallerweb1.servicios.ServicioBusqueda;
+import ar.edu.unlam.tallerweb1.servicios.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,11 +22,15 @@ public class ControladorRestauranteTest {
     private PedidoService pedidoService;
     private RestauranteService restauranteService;
     private ControladorMenu controladorMenu;
+    private LocalidadService localidadService;
 
 
 
     private static final String VISTA_HOME = "home";
     private static final String VISTA_MENU = "menu-restaurante";
+    private static final String VISTA_LOCALIDAD = "por-localidad";
+
+
 
     @Before
     public void init(){
@@ -37,9 +38,20 @@ public class ControladorRestauranteTest {
         clienteService = mock(ClienteService.class);
         pedidoService = mock(PedidoService.class);
         restauranteService = mock(RestauranteService.class);
-        controladorRestaurante = new ControladorRestaurante(servicioBusqueda, clienteService, pedidoService, restauranteService);
+        localidadService = mock(LocalidadService.class);
+        controladorRestaurante = new ControladorRestaurante(servicioBusqueda, clienteService, pedidoService, restauranteService, localidadService);
 
         controladorMenu = new  ControladorMenu(restauranteService);
+    }
+
+
+    @Test
+    public void QUEfILTREeNeLCONTROLADORpORlOCALIDAD(){
+        dadoQueExistenResturantes();
+    }
+
+    private void dadoQueExistenResturantes() {
+
     }
 
     @Test
@@ -137,7 +149,7 @@ public class ControladorRestauranteTest {
     private void dadoQueExistanRestaurantesMasValorados(int cantidad) {
         List<Restaurante> valorados = new LinkedList<>();
         for (int i = 0; i < cantidad; i++) {
-            valorados.add(new Restaurante());
+            valorados.add(new Restaurante(1L, 9, 23));
         }
         when(restauranteService.getRestaurantesMasCalificados()).thenReturn(valorados);
     }

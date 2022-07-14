@@ -110,7 +110,9 @@
                                        value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm">Agregar al pedido</button></br></br>
+                                <form action="/proyecto_limpio_spring_war_exploded/agregar-plato/${plato.id}" method="post">
+                                    <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+                                </form>
                             </div>
                             </br>
                         </article>
@@ -137,7 +139,9 @@
                                        value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
+                                <form action="/proyecto_limpio_spring_war_exploded/agregar-plato/${plato.id}" method="post">
+                                    <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+                                </form>
                             </div>
                         </article>
                     </form:form>
@@ -163,7 +167,9 @@
                                        value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
+                                <form action="/proyecto_limpio_spring_war_exploded/agregar-plato/${plato.id}" method="post">
+                                    <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+                                </form>
                             </div>
                         </article>
                     </form:form>
@@ -189,7 +195,9 @@
                                        value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
+                                <form action="/proyecto_limpio_spring_war_exploded/agregar-plato/${plato.id}" method="post">
+                                    <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+                                </form>
                             </div>
                         </article>
                     </form:form>
@@ -215,7 +223,9 @@
                                        value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
+                                <form action="/proyecto_limpio_spring_war_exploded/agregar-plato/${plato.id}" method="post">
+                                    <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+                                </form>
                             </div>
                         </article>
                     </form:form>
@@ -241,7 +251,9 @@
                                        value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
+                                <form action="/proyecto_limpio_spring_war_exploded/agregar-plato/${plato.id}" method="post">
+                                    <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+                                </form>
                             </div>
                         </article>
                     </form:form>
@@ -267,7 +279,9 @@
                                        value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
+                                <form action="/proyecto_limpio_spring_war_exploded/agregar-plato/${plato.id}" method="post">
+                                    <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+                                </form>
                             </div>
                         </article>
                     </form:form>
@@ -293,7 +307,9 @@
                                        value="${plato.restaurante.localidad}">
                                 <input type="text" hidden name="precioPlatoELegido" value="${plato.precio}">
                                 <input type="text" hidden name="idCliente" value="1">
-                                <button type="submit" class="btn btn-secondary btn-sm ">Agregar al pedido</button></br></br>
+                                <form action="/proyecto_limpio_spring_war_exploded/agregar-plato/${plato.id}" method="post">
+                                    <button type="submit" class="btn btn-primary">Agregar al pedido</button>
+                                </form>
                             </div>
                         </article>
                     </form:form>

@@ -1,15 +1,19 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 
+import ar.edu.unlam.tallerweb1.modelo.Adicional;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
+import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Repository
@@ -116,4 +120,42 @@ public class RepositorioPlatoImpl implements RepositorioPlato{
                 .list();
     }
 
+    @Override
+    public Plato buscarPlato(Long idPlato) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (Plato) sessionFactory.getCurrentSession()
+                .createCriteria(Plato.class)
+                .add(Restrictions.eq("id", idPlato))
+                .uniqueResult();
+    }
+
+    @Override
+    public Boolean agregarAdicionalAlPlato(Long idAdicional, Long idPlato) {
+        final Session session = sessionFactory.getCurrentSession();
+        if(idPlato!=null){
+            Adicional adicional = (Adicional) sessionFactory.getCurrentSession()
+                    .createCriteria(Adicional.class)
+                    .add(Restrictions.eq("id", idAdicional))
+                    .uniqueResult();
+            Plato plato = (Plato) sessionFactory.getCurrentSession()
+                    .createCriteria(Plato.class)
+                    .add(Restrictions.eq("id", idPlato))
+                    .uniqueResult();
+            List<Adicional> otro = new LinkedList<>();
+            otro.add(adicional);
+            plato.setAdicionales(otro);
+            session.saveOrUpdate(plato);
+            session.flush();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Adicional> verAdicionalesDelPlato(Long idPlato) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Adicional>)session.createCriteria(Plato.class)
+                .add(Restrictions.eq("id", idPlato))
+                .list();
+    }
 }

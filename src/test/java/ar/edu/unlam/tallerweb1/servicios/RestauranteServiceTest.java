@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Plato;
 import ar.edu.unlam.tallerweb1.modelo.Restaurante;
 import ar.edu.unlam.tallerweb1.modelo.enums.TipoPlato;
@@ -29,11 +30,55 @@ public class RestauranteServiceTest {
     private Plato plato5;
     private Plato plato6;
 
+    List<Restaurante> listaRestos;
+
     @Before
     public void init(){
         repositorioRestaurante = mock(RepositorioRestaurante.class);
         restauranteService = new RestauranteServiceImpl(repositorioRestaurante);
     }
+
+    @Test
+    public void queMuestreLaLocalidadDeLosResturantes(){
+        dadoQueTengoRestaurantesConLocalidad();
+
+        Localidad localidad = new Localidad(1L, "Ciudadela");
+        List<Restaurante> listaRestos = new LinkedList<>();
+
+        cuandoBuscoLosLocalesConRestos(localidad, listaRestos);
+
+        List<Restaurante> buscado = restauranteService.buscarPorLocalidad(localidad.getId());
+
+        System.out.println("-------------------------------");
+        for (int i = 0; i <buscado.size() ; i++) {
+            System.out.println(buscado.get(i).getNombre());
+        }
+        System.out.println("-------------------------------");
+
+    }
+
+    private void cuandoBuscoLosLocalesConRestos(Localidad localidad, List<Restaurante> listaRestos) {
+        listaRestos.add(resto1);
+        listaRestos.add(resto2);
+        listaRestos.add(resto3);
+//        when(repositorioRestaurante.verTodosLosRestaurantes()).thenReturn(listaRestos);
+        when(restauranteService.buscarPorLocalidad(localidad.getId())).thenReturn(listaRestos);
+    }
+
+    private void dadoQueTengoRestaurantesConLocalidad() {
+        Localidad localidad1 = new Localidad(1L, "Ciudadela");
+        Localidad localidad2 = new Localidad(2L, "Moron");
+
+        resto1 = new Restaurante(1L, localidad1);
+        resto1.setNombre("Uno");
+
+        resto2 = new Restaurante(2L, localidad2);
+        resto2.setNombre("Dos");
+
+        resto3 = new Restaurante(3L, localidad1);
+        resto3.setNombre("Tres");
+    }
+
 
     @Test
     public void queMuestreLosRestaurantesMasValorados(){
@@ -93,6 +138,30 @@ public class RestauranteServiceTest {
 
     }
 
+
+    @Test
+    public void queMuestreLosPlatosMsaVendidosDelRestaurante(){
+        Plato a = new Plato(1L, 100.0, 5);
+        Plato b = new Plato(2L, 200.0, 2);
+        Plato c = new Plato(3L, 300.0, 6);
+
+        List<Plato> platos = new LinkedList<>();
+
+        Restaurante restoA = new Restaurante(1L, "RestoYa");
+
+        platos.add(a);
+        platos.add(b);
+        platos.add(c);
+
+        when(restauranteService.verPlatosDelRestaurante(restoA.getId())).thenReturn(platos);
+
+        List<Plato> platoMaVendidos = restauranteService.verPlatosMasVendidosDelRestaurante(restoA.getId());
+
+        System.out.println(platoMaVendidos);
+
+        assertThat(platoMaVendidos.size()).isEqualTo(2);
+    }
+
     private void cuandoBuscoAlRestaurante(Restaurante restaurante, List<Plato> platos) {
         /*Al mockear no importa el resturante que le asigne al plato ya que le di al servicio la lista*/
         when(restauranteService.verPlatosDelRestaurante(restaurante.getId())).thenReturn(platos);
@@ -104,15 +173,15 @@ public class RestauranteServiceTest {
 
     private void dadoQueExistenRestaurantes() {
 
-        resto1 = new Restaurante();
+        resto1 = new Restaurante(1L, 9, 23);
         resto1.setNombre("Lo de carlitos");
         resto1.setCalificacion(5);;
 
-        resto2 = new Restaurante();
+        resto2 = new Restaurante(1L, 9, 23);
         resto2.setNombre("El noble");
         resto2.setCalificacion(4);
 
-        resto3 = new Restaurante();
+        resto3 = new Restaurante(1L, 9, 23);
         resto3.setNombre("Morita");
         resto3.setCalificacion(3);
     }

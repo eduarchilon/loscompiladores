@@ -51,4 +51,21 @@ public class RestauranteServiceImpl implements RestauranteService{
         Restaurante buscado = repositorioRestaurante.verRestaurante(idRestaurante);
         return buscado;
     }
+
+    @Override
+    public List<Restaurante> buscarPorLocalidad(Long idLocacion) {
+        return (List<Restaurante>) repositorioRestaurante.buscarRestuarntesPorLocalidad(idLocacion);
+    }
+
+    @Override
+    public List<Plato> verPlatosMasVendidosDelRestaurante(Long idRestaurante) {
+        List<Plato> platos = repositorioRestaurante.verPlatosDelRestaurante(idRestaurante);
+        List<Plato> platosMasVendidos = new LinkedList<>();
+        for (int i = 0; i < platos.size(); i++) {
+            if(platos.get(i).getCantVentas()>=5){
+                platosMasVendidos.add(platos.get(i));
+            }
+        }
+        return platosMasVendidos;
+    }
 }

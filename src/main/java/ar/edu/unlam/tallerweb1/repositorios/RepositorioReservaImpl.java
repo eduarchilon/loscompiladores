@@ -3,10 +3,12 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -74,18 +76,74 @@ public class RepositorioReservaImpl implements RepositorioReserva {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar startDate = fechaReserva;
+
         startDate.set(startDate.MINUTE,00);
         startDate.set(startDate.SECOND,00);
+
         Calendar endDate = fechaReserva;
         endDate.set(endDate.MINUTE,59);
         endDate.set(endDate.SECOND,59);
+        Date algo = null;
+
         List mesas = session.createQuery(
-                "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha BETWEEN :stDate AND :edDate )"
-        ).setParameter("stDate", startDate)
-         .setParameter("edDate", endDate)
-         .list();
+                        "from Mesa where restaurante.id = "+resto.getId()+" and id NOT IN (select mesa.id from Reserva where fecha BETWEEN :stDate AND :edDate )"
+                ).setParameter("stDate", startDate)
+                .setParameter("edDate", endDate)
+                .list();
         return mesas;
     }
 
+    @Override
+    public Reserva buscarReservaPorId(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Reserva reserva = (Reserva) session.createCriteria(Reserva.class)
+                .add(Restrictions.eq("id", id))
+                .uniqueResult();
+        session.flush();
+        return reserva;
+    }
+
+    @Override
+    public List<Reserva> buscarTodasLasReservasRestaurante(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+//        List reserva = session.createQuery(
+//                        "from Reserva R where R.mesa IN  (select mesa from Mesa M where M.restaurante.id = :idResto) "
+//                ).setParameter("idResto", id)
+//                .list();
+
+        return (List<Reserva>) session.createCriteria(Reserva.class,"mesa")
+                .createAlias("mesa","M")
+                .createAlias("M.restaurante","resto")
+                .add(Restrictions.eq("resto.id",id))
+                .list();
+    }
+
+    @Override
+    public Long crearReserva(Reserva reserva1) {
+        final Session session = sessionFactory.openSession();
+        Transaction tx = session.getTransaction();
+        long id = (long) session.save(reserva1);
+        session.close();
+        return id;
+    }
+
+    @Override
+    public Boolean eliminarReserva(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+        if(id!=null){
+            Reserva reserva = (Reserva) sessionFactory.getCurrentSession()
+                    .createCriteria(Reserva.class)
+                    .add(Restrictions.eq("id", id))
+                    .uniqueResult();
+            session.delete(reserva);
+            session.flush();
+            return true;
+        }
+        return false;
+
+
+    }
+
 }
+
 
