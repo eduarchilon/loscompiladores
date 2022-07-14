@@ -14,7 +14,8 @@
             <div class="card-body">
                 <h5 class="card-title">Reserva: N°${reserva.id}</h5>
                 <p class="card-text">Mesa: ${reserva.mesa.id} - ${reserva.mesa.restaurante.nombre}</p>
-
+                <p class="card-text">Restaurante: ${reserva.mesa.restaurante.nombre} - ${reserva.mesa.restaurante.direccion}</p>
+                <p class="card-text">Direccion: ${reserva.mesa.restaurante.direccion} - ${reserva.mesa.restaurante.localidad}</p>
                     <%--                <a href="#" class="btn btn-danger">Eliminar</a>--%>
 
                 <form action="/proyecto_limpio_spring_war_exploded/todasLasReservas/${reserva.id}" method="post">
@@ -24,10 +25,7 @@
         </div>
     </c:forEach>
 </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> S01F02
 <section class="testimonials text-center bg-light" style="margin-top: 50px;">
     <div class="container">
         <h2 class="mb-5">What people are saying...</h2>
@@ -56,8 +54,5 @@
         </div>
     </div>
 </section>
-<<<<<<< HEAD
 
-=======
->>>>>>> S01F02
 <%@ include file="footer.jsp"%>

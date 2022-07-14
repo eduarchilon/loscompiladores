@@ -12,6 +12,8 @@
                 <h5 class="card-title">Reserva: N ${reserva.id}</h5>
                 <p class="card-text">Mesa: ${reserva.mesa.id} - ${reserva.mesa.restaurante.nombre}</p>
                 <p class="card-text">Fecha: ${reserva.fecha.time} </p>
+                <p class="card-text">Restaurante: ${reserva.mesa.restaurante.nombre} - ${reserva.mesa.restaurante.direccion}</p>
+                <p class="card-text">Direccion: ${reserva.mesa.restaurante.direccion} - ${reserva.mesa.restaurante.localidad}</p>
                     <%--                <a href="#" class="btn btn-danger">Eliminar</a>--%>
                 <form action="/proyecto_limpio_spring_war_exploded/misReservas/${reserva.id}/${clienteId}" method="post">
                     <button class="btn btn-danger" type="submit"  style="color: #cecece;">Eliminar</button>
